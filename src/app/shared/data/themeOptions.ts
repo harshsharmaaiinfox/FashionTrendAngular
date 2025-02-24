@@ -143,7 +143,7 @@ export const themeOptionsfashionTrends = {
         "collection": {
             "collection_layout": "collection_right_sidebar",
             "collection_categories_ids": [],
-            "collection_banner_image_url":"../assets/images/cat-banner.png"
+            "collection_banner_image_url":"/cat-banner.png"
         },
         "product": {
             "product_layout": "product_images",

@@ -33,8 +33,21 @@ export const content: Routes = [
     },
 
     {
+        path: 'Refund-and-Cancellation-Policy',
+        loadChildren: () =>
+            import('../../refund-and-cancellation-policy/refund-and-cancellation-policy.module').then(
+                (m) => m.RefundAndCancellationPolicyModule
+            ),
+    },
+
+    {
         path: "shipping-delivery",
         loadChildren: () => import("../../shipping-delevary/shipping-delevary.module").then((m) => m.ShippingDelevaryModule)
+    },
+
+    {
+        path: "Contact-Us",
+        loadChildren: () => import("../../contact-us/contact-us.module").then((m) => m.ContactUsModule)
     },
 
     {
