@@ -2,7 +2,10 @@
     <div class="main-footer section-b-space">
         <div class="row g-md-4 g-3">
 
-
+            <div class="col-xl-3 col-lg-2 col-sm-3">
+                <app-footer-logo [data]="data" [footer]="footer"></app-footer-logo>
+                <h4 class="pr-3 mt-3"> Bringing you the latest in trendy and stylish clothing. Shop the best fashion picks and elevate your wardrobe with confidence. Stay trendy, stay stylish!</h4>
+            </div>
             <div class="col-xl-2 col-lg-2 col-sm-3"
             (click)="toggle('useful_link')">
             <div class="footer-title" [class.show]="active['useful_link']">
@@ -35,23 +38,21 @@
             </div>
         </div>
        
-        <div class="col-xl-4 col-lg-4 col-sm-6">
+        <div class="col-xl-5 col-lg-4 col-sm-6">
             <div class="footer-logo">
                 <!-- <app-footer-logo [data]="data" [footer]="footer"></app-footer-logo> -->
                 <app-footer-about [data]="data"></app-footer-about>
-            </div>
-        </div>
-
-            <div class="col-xl-3 col-lg-4 col-sm-6"
+                <div class="col-xl-12 col-lg-4 col-sm-6"
                 *ngIf="data?.footer?.support_email ||
                     data?.footer?.support_number ||
                     data?.footer?.play_store_url ||
                     data?.footer?.app_store_url">
-                <div class="footer-title contact-title">
-                    <h4>{{ 'Contact Us' | translate }}</h4>
-                </div>
                 <app-footer-contact [data]="data"></app-footer-contact>
             </div>
+            </div>
+        </div>
+
+            
             
           
           

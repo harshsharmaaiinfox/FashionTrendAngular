@@ -1,4 +1,4 @@
- <div class="product-theme-box">
+ <div class="product-theme-box" [class]="class">
     <div class="label-tag" *ngIf="product.is_trending || product.is_sale_enable || product.is_featured " >
         <span>{{ (product.is_sale_enable ? 'sale' : product.is_featured ? 'featured' : product.is_trending ? 'trending' : '' ) | translate }} </span>
         <i class="ri-flashlight-line"></i>

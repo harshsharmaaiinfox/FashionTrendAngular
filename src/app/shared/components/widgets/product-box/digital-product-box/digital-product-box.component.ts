@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { Product } from '../../../../interface/product.interface';
@@ -11,7 +11,7 @@ import { ThemeOptionService } from '../../../../services/theme-option.service';
   templateUrl: './digital-product-box.component.html',
   styleUrl: './digital-product-box.component.scss'
 })
-export class DigitalProductBoxComponent {
+export class DigitalProductBoxComponent implements OnInit {
   
   @Input() class: string;
   @Input() close: boolean;
@@ -24,6 +24,9 @@ export class DigitalProductBoxComponent {
   constructor(private store: Store, public themeOptionService: ThemeOptionService){}
 
   ngOnInit(){
+    if (!this.product.rating_count || this.product.rating_count < 3) {
+      this.product.rating_count = parseFloat((Math.random() * (5 - 3) + 3).toFixed(1));
+    }
   }
 
   addToWishlist(product: Product){

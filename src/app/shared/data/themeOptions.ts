@@ -147,7 +147,7 @@ export const themeOptionsfashionTrends = {
         },
         "product": {
             "product_layout": "product_images",
-            "product_box_variant": "digital",
+            "product_box_variant": "basic",
             "image_bg": false,
             "product_box_bg": false,
             "product_box_border": true,

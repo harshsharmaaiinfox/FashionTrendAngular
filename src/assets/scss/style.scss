@@ -196,6 +196,35 @@ header .delivery-login-box .delivery-detail h6, header .delivery-login-box .deli
   color: #fff !important;
 }
 
+h6.byers.ng-star-inserted {
+  display: none;
+}
+
+.right-box-contain .product-rating.custom-rate.ng-star-inserted {
+  display: none;
+}
+
+@media(max-width:1200px){
+  
+header .navbar.navbar-expand-xl .navbar-nav .nav-item > a {
+  color: #000000 !important;
+}
+}
+
+.product-rating h6{
+  display: none;
+}
+.navbar-nav li:last-child {
+  display: none;
+}
+
+.product-theme-box .bottom-content span{
+  display: none;
+}
+
+.footer-title{
+  margin-bottom: 0px !important;
+}
 .footer-title h4{
   color: #000 !important;
 }
