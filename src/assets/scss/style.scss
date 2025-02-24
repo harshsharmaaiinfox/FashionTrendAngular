@@ -142,19 +142,19 @@ header .top-nav {
 
 
 
-@media(min-width:1200px){
-  header .top-nav .navbar-top .rightside-box .right-side-menu .right-side:last-child {
-    padding-right: 15px;
-  }
+// @media(min-width:1200px){
+//   header .top-nav .navbar-top .rightside-box .right-side-menu .right-side:last-child {
+//     padding-right: 15px;
+//   }
   
-  header .top-nav .navbar-top {
-    flex-direction: row-reverse  !important;
-  }
+//   header .top-nav .navbar-top {
+//     flex-direction: row-reverse  !important;
+//   }
   
-  header .top-nav .navbar-top .rightside-box .right-side-menu {
-    flex-direction: row-reverse  !important;
-  }
-}
+//   header .top-nav .navbar-top .rightside-box .right-side-menu {
+//     flex-direction: row-reverse  !important;
+//   }
+// }
 footer .main-footer .address {
   margin-top:0px !important;
 }
