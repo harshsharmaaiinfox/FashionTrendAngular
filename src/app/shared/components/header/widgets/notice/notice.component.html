@@ -1,0 +1,19 @@
+<swiper
+  [direction]="'vertical'"
+  [loop]="true"
+  [autoHeight]="true"
+  [allowTouchMove]="false"
+  [autoplay]="{ delay: 1000, disableOnInteraction: false }"
+  [pagination]="false" [navigation]="false">
+  <ng-container *ngFor="let item of content; let i = index" >
+    <ng-container *ngIf="item.content">
+      <ng-template attr.data-swiper-autoplay="{{2000 * (i+1)}}" swiperSlide>
+          <div class="d-flex notification-slider justify-content-xxl-center">
+            <div class="timer-notification">
+              <h6 [innerHtml]="item.content"></h6>
+            </div>
+          </div>
+      </ng-template>
+    </ng-container>
+  </ng-container>
+</swiper>

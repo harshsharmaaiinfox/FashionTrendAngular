@@ -1,0 +1,97 @@
+<!-- Home Section Start -->
+<section class="home-section-2 home-section-bg pt-md-0 pt-3 overflow-hidden" *ngIf="data?.content?.home_banner">
+    <app-theme-home-banner [theme]="'denver'" [data]="data?.content?.home_banner"></app-theme-home-banner>
+</section>
+<!-- Home Section End -->
+
+<!-- Category Section Start -->
+<section *ngIf="data?.content?.categories_icon_list?.status" class="book-category">
+    <div class="container-fluid-lg">
+        <app-theme-categories [style]="'horizontal'" [theme]="'moscow'" [sliderOption]="categorySlider"
+            [categoryIds]="data?.content?.categories_icon_list?.category_ids || []"
+            [title]="data?.content?.categories_icon_list?.title">
+        </app-theme-categories>
+    </div>
+</section>
+<!-- Category Section End -->
+
+<!-- Product Section Start -->
+<section class="product-section">
+    <div class="container-fluid-lg">
+        <app-title [title]="data?.content?.products_list_1?.title" [style]="'simple'">
+        </app-title>
+        <app-theme-product
+            [productIds]="data?.content?.products_list_1?.product_ids || []"
+            [slider]="true"
+            [style]="'horizontal'"
+            [sliderOption]="productSlider6Item">
+        </app-theme-product>
+    </div>
+</section>
+<!-- Product Section End -->
+
+<!-- Discount Section Start -->
+<section *ngIf="data?.content?.coupons?.status">
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div class="col-12 sale-banner">
+                <app-theme-banner [banners]="data?.content?.coupons" [class]="'banner-contain hover-effect'"
+                    [style]="'full_width'">
+                </app-theme-banner>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Discount Section End -->
+
+<!-- Top Selling Section Start -->
+<section class="top-selling-section no-bg-category">
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div [ngClass]="data?.content?.slider_product_with_banner?.left_side_banners?.status ? 'col-xl-9 col-lg-8' : 'col-xxl-12 col-lg-12'">
+                <app-four-column-product [data]="data?.content?.slider_product_with_banner?.slider_products"
+                    [col]="'col-xl-4 col-lg-6 col-md-4 col-sm-6'"></app-four-column-product>
+            </div>
+            <div class="col-xl-3 col-lg-4 d-lg-block d-none"
+                *ngIf="data?.content?.slider_product_with_banner?.left_side_banners?.status">
+                <div class="ratio_156">
+                <app-image-link [image]="data?.content?.slider_product_with_banner?.left_side_banners?.banner_1"
+                    [class]="'banner-contain-2 hover-effect'" [bgImage]="false">
+                </app-image-link>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Top Selling Section End -->
+
+<!-- Product Section Start -->
+<section class="product-section">
+    <div class="container-fluid-lg">
+        <app-title [title]="data?.content?.products_list_2?.title" [style]="'simple'">
+        </app-title>
+        <app-theme-product 
+            [productIds]="data?.content?.products_list_2?.product_ids || []" 
+            [slider]="true"
+            [style]="'horizontal'"
+            [sliderOption]="productSlider6Item">
+        </app-theme-product>
+    </div>
+</section>
+<!-- Product Section End -->
+
+<!-- Brand Section start -->
+<section class="brand-effect" *ngIf="data?.content?.brands?.brand_ids && data?.content?.brands?.status">
+    <div class="container-fluid-lg">
+        <app-brand [brandIds]="data?.content?.brands?.brand_ids || []"></app-brand>
+    </div>
+</section>
+<!-- Brand Section end -->
+
+<!-- Newsletter Section Start -->
+<ng-container *ngIf="data?.content?.news_letter?.status">
+    <section class="newsletter-section section-b-space">
+        <app-newsletter [data]="data?.content?.news_letter || null"></app-newsletter>
+    </section>
+</ng-container>
+<!-- Newsletter Section End -->

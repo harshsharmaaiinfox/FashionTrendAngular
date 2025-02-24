@@ -1,0 +1,69 @@
+<div class="container-fluid-lg" >
+  <div class="row"  *ngIf="style == 'classic' else basic">
+      <div class="col-12">
+          <div class="newsletter-box hover-effect bg-size"  [ngStyle]="{'background-image': 'url(' + storageURL + data?.image_url + ')'}">
+              <div class="row">
+                  <div class="col-xxl-8 col-xl-7">
+                      <div class="newsletter-detail p-center-left text-white">
+                          <div>
+                            <h2>{{ data?.title }}</h2>
+                            <h4>{{ data?.sub_title }}</h4>
+                            <form class="row g-2">
+                                <div class="col-sm-10 col-12">
+                                    <div class="newsletter-form">
+                                        <input type="email" class="form-control" id="email" placeholder="{{'enter_your_email' | translate}}">
+                                        <app-button
+                                          [type]="'submit'"
+                                          [class]="'btn bg-white theme-color btn-md fw-500 submit-button'"
+                                          [spinner]="true"
+                                          [id]="'subscribe_btn'">
+                                          {{ 'subscribe' | translate }}
+                                        </app-button>
+                                    </div>
+                                </div>
+                            </form>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-xxl-4 col-xl-5 d-xl-block d-none">
+                      <div class="shape-box">
+                          <img src="assets/images/basket.png" alt="basket" class="img-fluid image-1">
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <ng-template #basic>
+    <div class="newsletter-box newsletter-box-2"
+    [ngStyle]="{'background-image': 'url(' + storageURL + data?.image_url + ')'}">
+        <div class="newsletter-contain py-5">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xxl-4 col-lg-5 col-md-7 col-sm-9 offset-xxl-2 offset-md-1">
+                        <div class="newsletter-detail">
+                            <h2>{{ data?.title }}</h2>
+                            <h5>{{ data?.sub_title }}</h5>
+                            <div class="input-box">
+                                <input type="email" class="form-control" placeholder="{{'enter_your_email' | translate}}" [formControl]="email">
+                                <i class="ri-mail-line arrow"></i>
+                                <app-button [class]="'sub-btn btn-animation'" [id]="'subscribe'" [spinner]="true"
+                                (click)="submit()">
+                                    <span class="d-sm-inline-block d-none">{{ 'subscribe' | translate }}</span>
+                                    <i class="ri-arrow-right-line icon"></i>
+                                </app-button>
+                            </div>
+                            <div class="input-box mt-1">
+                                <div class="invalid-feedback mt-1" *ngIf="isSubmit && email.errors?.['email']">
+                                    {{ 'invalid_email' | translate }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </ng-template>
+</div>

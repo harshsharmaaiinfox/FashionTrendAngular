@@ -1,0 +1,28 @@
+<!-- Banner Horizontal Style-->
+<div class="container-fluid-lg" *ngIf="banners?.length && style == 'horizontal'">
+    <div class="banner-slider">
+        <owl-carousel-o [options]="bannerSlider">
+            <ng-container carouselSlide *ngFor="let banner of banners">
+                <ng-container *ngIf="banner?.status">
+                    <ng-template carouselSlide>
+                        <a href="#">
+                            <div class="banner-contain hover-effect">
+                                <app-image-link [class]="'banner-contain'" [image]="banner" [bgImage]="false"></app-image-link>
+                            </div>
+                        </a>
+                    </ng-template>
+                </ng-container>
+            </ng-container>
+        </owl-carousel-o>
+    </div>
+</div>
+<!-- Banner Vertical Style-->
+<div [class]="class" *ngIf="banners?.image_url && style == 'vertical'">
+    <div class="home-contain hover-effect">
+        <app-image-link [class]="'banner-contain'" [image]="banners" [bgImage]="false"></app-image-link>
+    </div>
+</div>
+<!-- Banner Full Width Style-->
+<div *ngIf="banners?.image_url && style == 'full_width'">
+    <app-image-link [class]="'banner-contain'" [image]="banners" [bgImage]="false"></app-image-link>
+</div>

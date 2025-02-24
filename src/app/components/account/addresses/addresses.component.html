@@ -1,0 +1,80 @@
+<div class="dashboard-address">
+    <div class="title-header">
+        <div class="d-flex align-items-center w-100 justify-content-between">
+            <h5>{{ 'Saved Address' | translate }}</h5>
+            <app-button
+                [class]="'btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 ms-auto'"
+                [type]="'button'"
+                [spinner]="false"
+                [id]="'add_address'"
+                (click)="AddressModal.openModal()">
+                <i class="ri-add-line"></i> {{ 'Add Address' | translate }}
+            </app-button>        </div>
+    </div>
+    <div class="row g-sm-4 g-3" *ngIf="(user$ | async)?.address?.length">
+        <div class="col-xxl-4 col-xl-6 col-lg-12 col-md-6" *ngFor="let address of (user$ | async)?.address; let i = index;">
+            <div class="address-box">
+                <div>
+                    <div class="label">
+                        <label>{{ address?.title }}</label>
+                    </div>
+                    <div class="table-responsive address-table">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">{{ (user$ | async)?.name | titleCase }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'Address' | translate }} :</td>
+                                    <td>
+                                        <p>
+                                            {{ address?.street }}, {{ address?.city }}, {{ address?.state?.name }},
+                                            {{ address?.country?.name }}
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'Pin Code' | translate }} :</td>
+                                    <td>{{ address?.pincode }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'Phone' | translate }} :</td>
+                                    <td>+{{ address?.country_code }} {{ address?.phone }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <app-button
+                        [class]="'btn btn-sm add-button'"
+                        [type]="'button'"
+                        [spinner]="false"
+                        [id]="'edit_address'+address.id"
+                        (click)="AddressModal.openModal(address)">
+                        <i class="ri-edit-box-line"></i> {{ 'Edit' | translate }}
+                    </app-button>
+                    <app-button
+                        [class]="'btn btn-sm add-button'"
+                        [type]="'button'"
+                        [spinner]="false"
+                        [id]="'remove_address'+address.id"
+                        (click)="DeleteModal.openModal('delete', address)">
+                        <i class="ri-delete-bin-line"></i> {{ 'Remove' | translate }}
+                    </app-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-no-data [class]="'no-data-added'"
+    [image]="'assets/svg/empty-items.svg'"
+    [text]="'No Address Found'"
+    [description]="'You Have Not Address yet'"
+    *ngIf="!(user$ | async)?.address?.length">
+</app-no-data>
+<address-modal #addressModal></address-modal>
+<app-delete-modal
+    #deleteModal
+    (deleteItem)="delete($event.actionToPerform,$event.data)">
+</app-delete-modal>

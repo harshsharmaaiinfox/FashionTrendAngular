@@ -1,0 +1,9 @@
+<button [class]="class" [id]="id" [type]="type"
+        [class.disabled]="disabled || ((spinnerStatus$ | async) && buttonId == id)"
+        [disabled]="disabled || ((spinnerStatus$ | async) && buttonId == id)"
+        (click)="!disabled && onClick(id)">
+        <div [ngClass]="{ 'position-relative spinning' : spinner && (spinnerStatus$ | async) && buttonId && buttonId == id }">
+            <ng-content></ng-content>
+            <i *ngIf="iconClass" class="{{ iconClass }}"></i> 
+    </div>
+</button>

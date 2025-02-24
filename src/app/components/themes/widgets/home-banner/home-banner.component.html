@@ -1,0 +1,228 @@
+<!-- Paris Theme-->
+<div class="container-fluid-lg" *ngIf="theme && theme == 'paris'">
+  <div class="row g-4">
+    <div class="col-xl-8 ratio_65" *ngIf="data?.main_banner?.image_url">
+      <div class="home-contain h-100 skeleton-banner-xl">
+        <div class="skeleton-text-wrap">
+          <span class="placeholder col-7"></span>
+          <span class="placeholder col-5"></span>
+          <span class="placeholder col-4"></span>
+          <span class="placeholder col-6"></span>
+        </div>
+        <app-image-link class="b-cl" [image]="data?.main_banner" [bgImage]="true"></app-image-link>
+      </div>
+    </div>
+    <div class="col-xl-4 ratio_65" *ngIf="data?.sub_banner_1?.image_url && data?.sub_banner_2?.image_url">
+      <div class="row g-4">
+        <div class="col-xl-12 col-md-6 skeleton-banner-sm" *ngIf="data?.sub_banner_1?.image_url">
+          <div class="home-contain">
+            <div class="skeleton-text-wrap">
+              <span class="placeholder col-7"></span>
+              <span class="placeholder col-5"></span>
+              <span class="placeholder col-4"></span>
+              <span class="placeholder col-6"></span>
+            </div>
+            <app-image-link class="b-cl" [image]="data?.sub_banner_1" [bgImage]="true"></app-image-link>
+          </div>
+        </div>
+        <div class="col-xl-12 col-md-6 skeleton-banner-sm" *ngIf="data?.sub_banner_2?.image_url">
+          <div class="home-contain">
+            <div class="skeleton-text-wrap">
+              <span class="placeholder col-7"></span>
+              <span class="placeholder col-5"></span>
+              <span class="placeholder col-4"></span>
+              <span class="placeholder col-6"></span>
+            </div>
+            <app-image-link class="b-cl" [image]="data?.sub_banner_2" [bgImage]="true"></app-image-link>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tokyo Theme-->
+<div class="container-fluid-lg" *ngIf="theme && theme == 'tokyo'">
+  <div class="row g-4">
+    <div class="col-xxl-3 col-lg-4 col-sm-6 ratio_180 d-sm-block d-none b-top">
+      <div class="home-contain rounded skeleton-banner-vertical">
+        <div class="skeleton-text-wrap">
+          <span class="placeholder col-7"></span>
+          <span class="placeholder col-5"></span>
+          <span class="placeholder col-4"></span>
+          <span class="placeholder col-6"></span>
+        </div>
+        <div class="h-100">
+          <app-image-link [image]="data?.sub_banner_1" [bgImage]="true"></app-image-link>
+        </div>
+      </div>
+    </div>
+    <div class="col-xxl-6 col-lg-8 order-xxl-0 ratio_87">
+      <div class="home-contain rounded skeleton-banner-xl">
+        <div class="skeleton-text-wrap">
+          <span class="placeholder col-7"></span>
+          <span class="placeholder col-5"></span>
+          <span class="placeholder col-4"></span>
+          <span class="placeholder col-6"></span>
+        </div>
+        <div class="h-100">
+          <app-image-link [image]="data?.main_banner" [bgImage]="true"></app-image-link>
+        </div>
+      </div>
+    </div>
+    <div class="col-xxl-3 col-xl-4 col-sm-6 ratio_180 custom-ratio d-xxl-block d-lg-none d-sm-block d-none b-top">
+      <div class="home-contain rounded skeleton-banner-vertical">
+        <div class="skeleton-text-wrap">
+          <span class="placeholder col-7"></span>
+          <span class="placeholder col-5"></span>
+          <span class="placeholder col-4"></span>
+          <span class="placeholder col-6"></span>
+        </div>
+        <app-image-link [image]="data?.sub_banner_2" [bgImage]="true"></app-image-link>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Osaka Theme-->
+<div class="container-fluid-lg" *ngIf="theme && theme == 'osaka'">
+  <div class="row g-4">
+    <div class="col-xl-9 col-lg-8">
+      <div class="home-contain h-100 skeleton-banner-xl ratio_52">
+        <div class="skeleton-text-wrap">
+          <span class="placeholder col-7"></span>
+          <span class="placeholder col-5"></span>
+          <span class="placeholder col-4"></span>
+          <span class="placeholder col-6"></span>
+        </div>
+        <app-image-link [image]="data?.main_banner" [bgImage]="true"></app-image-link>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-4 d-lg-inline-block d-none ratio_156">
+      <div class="home-contain h-100 skeleton-banner-vertical">
+        <div class="skeleton-text-wrap">
+          <span class="placeholder col-7"></span>
+          <span class="placeholder col-5"></span>
+          <span class="placeholder col-4"></span>
+          <span class="placeholder col-6"></span>
+        </div>
+        <app-image-link [image]="data?.sub_banner_1" [bgImage]="true"></app-image-link>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Rome Theme-->
+<div class="container-fluid-lg" *ngIf="theme && theme == 'rome'">
+  <div class="row g-4">
+    <div class="col-xxl-6 col-md-8">
+      <div class="home-contain ratio_65 h-100 skeleton-banner-xl">
+        <div class="skeleton-text-wrap">
+          <span class="placeholder col-7"></span>
+          <span class="placeholder col-5"></span>
+          <span class="placeholder col-4"></span>
+          <span class="placeholder col-6"></span>
+        </div>
+        <app-image-link [image]="data?.main_banner" [bgImage]="true"></app-image-link>
+      </div>
+    </div>
+    <div class="col-xxl-3 col-md-4 ratio_medium d-md-block d-none">
+      <div class="home-contain home-small h-100 skeleton-banner-vertical">
+        <div class="h-100">
+          <div class="skeleton-text-wrap">
+            <span class="placeholder col-7"></span>
+            <span class="placeholder col-5"></span>
+            <span class="placeholder col-4"></span>
+            <span class="placeholder col-6"></span>
+          </div>
+          <app-image-link [image]="data?.sub_banner_1" [bgImage]="true"></app-image-link>
+        </div>
+      </div>
+    </div>
+    <div class="col-xxl-3 ratio_65 d-xxl-block d-none">
+      <div class="row g-3">
+        <div class="col-xxl-12 col-sm-6">
+          <div class="home-contain skeleton-banner-sm">
+            <div class="skeleton-text-wrap">
+              <span class="placeholder col-7"></span>
+              <span class="placeholder col-5"></span>
+              <span class="placeholder col-4"></span>
+              <span class="placeholder col-6"></span>
+            </div>
+            <app-image-link [image]="data?.sub_banner_2" [bgImage]="true"></app-image-link>
+          </div>
+        </div>
+        <div class="col-xxl-12 col-sm-6">
+          <div class="home-contain skeleton-banner-sm">
+            <div class="skeleton-text-wrap">
+              <span class="placeholder col-7"></span>
+              <span class="placeholder col-5"></span>
+              <span class="placeholder col-4"></span>
+              <span class="placeholder col-6"></span>
+            </div>
+            <app-image-link [image]="data?.sub_banner_3" [bgImage]="true"></app-image-link>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Madrid Theme-->
+<div class="container-fluid p-0 ratio_30" *ngIf="theme && theme == 'madrid'">
+  <div class="row">
+    <div class="col-12">
+      <div class="slider-animate skeleton-banner-xl">
+        <div>
+          <app-image-link [image]="data?.main_banner" [bgImage]="true"></app-image-link>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Berlin Theme-->
+<div class="container-fluid-lg" *ngIf="theme && theme == 'berlin'">
+  <div class="row g-4">
+    <div class="col-xl-9 col-lg-8 ratio_50_1 skeleton-banner-xl b-left">
+      <div class="skeleton-text-wrap">
+        <span class="placeholder col-7"></span>
+        <span class="placeholder col-5"></span>
+        <span class="placeholder col-4"></span>
+        <span class="placeholder col-6"></span>
+      </div>
+      <app-image-link [image]="data?.main_banner" [bgImage]="true" [class]="'home-contain furniture-contain-2'">
+      </app-image-link>
+    </div>
+    <div class="col-xl-3 col-lg-4 d-lg-inline-block d-none skeleton-banner-vertical">
+      <div class="skeleton-text-wrap">
+        <span class="placeholder col-7"></span>
+        <span class="placeholder col-5"></span>
+        <span class="placeholder col-4"></span>
+        <span class="placeholder col-6"></span>
+      </div>
+      <app-image-link [image]="data?.sub_banner_1" [bgImage]="true" [class]="'home-contain h-100 home-furniture'">
+      </app-image-link>
+    </div>
+  </div>
+</div>
+
+<!-- Denver Theme-->
+<div class="container-fluid p-0 ratio_30" *ngIf="theme && theme == 'denver'">
+  <div class="row g-4">
+    <div class="col-12 slider-animate">
+      <div class="home-contain h-100 skeleton-banner-xl">
+        <div class="container-fluid-lg">
+          <div class="skeleton-text-wrap">
+            <span class="placeholder col-7"></span>
+            <span class="placeholder col-5"></span>
+            <span class="placeholder col-4"></span>
+            <span class="placeholder col-6"></span>
+          </div>
+        </div>
+        <app-image-link [image]="data?.main_banner" [bgImage]="true" [class]="'home-contain rounded-0 p-0'">
+        </app-image-link>
+      </div>
+    </div>
+  </div>
+</div>

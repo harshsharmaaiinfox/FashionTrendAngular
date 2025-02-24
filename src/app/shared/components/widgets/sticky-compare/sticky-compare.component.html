@@ -1,0 +1,5 @@
+<div class="compare-fix" *ngIf="!!(compareTotal$ | async)">
+  <a [routerLink]="['/compare']">
+      <h5>{{ 'compare' | translate }} <span>({{ (compareTotal$ | async) }})</span></h5>
+  </a>
+</div>

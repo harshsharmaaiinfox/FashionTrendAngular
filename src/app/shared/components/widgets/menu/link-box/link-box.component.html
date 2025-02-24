@@ -1,0 +1,17 @@
+<h5 class="dropdown-header " *ngIf="menu.link_type === 'sub'; else links">{{ menu.title }}</h5>
+<ng-template #links>
+    <a class="dropdown-item" *ngIf="menu.link_type === 'link' && menu.is_target_blank === 0" (click)="redirect(menu.path)" >
+        {{ menu.title}}
+        <label class="menu-label {{ menu.badge_color }}" *ngIf="menu.badge_text">{{ menu.badge_text | translate }}</label>
+    </a>
+    <a href="{{ menu.path }}" class="dropdown-item" *ngIf="menu.is_target_blank === 1" target="_blank">
+        {{ menu.title }}
+        <label class="menu-label {{ menu.badge_color }}" *ngIf="menu.badge_text">{{ menu.badge_text | translate }}</label>
+    </a>
+</ng-template>
+<ng-container *ngIf="menu.child" >
+    <ul>
+        <app-link-box [menu]="link" *ngFor="let link of menu.child"></app-link-box>
+    </ul>
+</ng-container>
+

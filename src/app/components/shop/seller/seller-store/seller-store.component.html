@@ -1,0 +1,14 @@
+<app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+<section class="seller-grid-section section-b-space">
+    <app-seller-store-basic [stores]="(store$ | async)?.data!" [skeletonItems]="skeletonItems"  *ngIf="layout === 'basic_store'"></app-seller-store-basic>
+    <app-seller-store-classic [stores]="(store$ | async)?.data!" [skeletonItems]="skeletonItems" *ngIf="layout === 'classic_store'"></app-seller-store-classic>
+</section>
+<nav class="custome-pagination section-b-space" 
+    *ngIf="(store$ | async)?.data?.length && !storeService.skeletonLoader">
+    <app-pagination
+        [total]="totalItems"
+        [currentPage]="filter['page']"
+        [pageSize]="filter['paginate']"
+        (setPage)="setPaginate($event)">
+    </app-pagination>
+</nav>

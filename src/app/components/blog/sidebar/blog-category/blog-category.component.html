@@ -1,0 +1,26 @@
+<div class="category-list-box" *ngIf="data?.length || 0 > 5">
+    <ul>
+        <div *ngTemplateOutlet="recursiveCategory; context: { $implicit: data }"></div>
+        <ng-template #recursiveCategory let-categories>
+            <ng-container *ngFor="let category of categories">
+                <li *ngIf="category?.type == 'post'">
+                    <a [routerLink]="['/blogs']" [queryParams]="{category: category?.slug}">
+                        <div class="category-name">
+                            <h5>{{ category.name }}</h5>
+                            <span *ngIf="category?.blogs_count">({{ category?.blogs_count }})</span>
+                        </div>
+                    </a>
+                    <a class="dropdown-menu" *ngIf="category?.subcategories">
+                        <ng-container *ngTemplateOutlet="recursiveCategory; context: { $implicit: category?.subcategories }"></ng-container>
+                    </a>
+                </li>
+            </ng-container>
+        </ng-template>
+    </ul>
+</div>
+<!-- No Data -->
+<app-no-data
+  [class]="'no-data-added bg-light'"
+  [text]="'no_category_found'"
+  *ngIf="!data?.length">
+</app-no-data>

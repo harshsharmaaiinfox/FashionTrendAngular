@@ -1,0 +1,64 @@
+<header class="header-3" [class.active]="stick && sticky" class="{{!stick && sticky ? class : ''}}">
+  <div class="top-nav sticky-header sticky-header-2">
+    <div class="container-fluid-lg">
+      <div class="row">
+        <div class="col-12">
+          <div class="navbar-top">
+            <app-navbar-menu-button (activeMenu)="toggle($event)" [show]="active"></app-navbar-menu-button>
+            <app-logo [data]="data" [logo]="logo"></app-logo>
+            <div class="middle-box">
+              <div class="center-box">
+                <app-box-search [style]="'classic'"></app-box-search>
+              </div>
+            </div>
+            <div class="rightside-menu support-sidemenu">
+              <app-call [style]="'classic'" [data]="data"></app-call>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid-lg">
+    <div class="row">
+      <div class="col-12 position-relative">
+        <div class="main-nav nav-left-align">
+          <div class="main-nav navbar navbar-expand-xl navbar-light navbar-sticky p-0">
+            <div class="offcanvas offcanvas-collapse order-xl-2" [class.show]="active" id="primaryMenu">
+              <div class="offcanvas-header navbar-shadow">
+                <h5>{{ 'menu' | translate }}</h5>
+                <app-button [class]="'btn-close lead'" [type]="'button'" [spinner]="false" [id]="'close_btn'"
+                  (click)="toggle(false)">
+                  <i class="ri-close-fill"></i>
+                </app-button>
+              </div>
+              <div class="offcanvas-body">
+                <app-menu></app-menu>
+              </div>
+            </div>
+            <div class="offcanvas-backdrop fade" *ngIf="active" [class.show]="active" (click)="toggle(false)"></div>
+          </div>
+          <div class="rightside-menu">
+            <ul class="option-list-2">
+              <li>
+                <app-search-box [style]="'classic'"></app-search-box>
+              </li>
+              <li>
+                <app-header-compare></app-header-compare>
+              </li>
+              <li>
+                <app-header-wishlist [style]="'classic'"></app-header-wishlist>
+              </li>
+              <li class="onhover-dropdown">
+                <app-header-cart [style]="'classic'"></app-header-cart>
+              </li>
+              <li class="onhover-dropdown">
+                <app-my-account [style]="'basic'"></app-my-account>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

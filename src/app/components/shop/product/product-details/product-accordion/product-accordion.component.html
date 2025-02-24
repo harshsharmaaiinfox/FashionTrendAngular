@@ -1,0 +1,133 @@
+<div class="container-fluid-lg">
+    <div class="row">
+        <div class="col-xxl-9 col-xl-8 col-lg-7">
+            <div class="row g-4">
+                <div class="col-xl-6">
+                    <div class="product-left-box">
+                        <div class="row g-2">
+                            <div class="col-12">
+                                <div class="product-main-1 no-arrow">
+                                    <div class="product-label-group">
+                                        <div class="product-label-tag" *ngIf="product?.is_sale_enable else featured">
+                                            <span>{{ 'sale' | translate }}</span></div>
+                                        <ng-template #featured>
+                                            <div class="product-label-tag warning-label-tag"
+                                                *ngIf="product?.is_featured"><span>{{ 'featured' | translate }}</span>
+                                            </div>
+                                        </ng-template>
+                                    </div>
+                                    <owl-carousel-o [options]="productMainThumbSlider" #owlCar>
+                                        <ng-container *ngFor="let image of product?.product_galleries; index as i">
+                                            <ng-template carouselSlide [id]="image.id.toString()">
+                                                <div>
+                                                    <div class="slider-image">
+                                                        <ng-container
+                                                            *ngIf="videType.includes(image.mime_type); else audio">
+                                                            <video class="w-100" controls>
+                                                                <source [src]="image ? image.original_url : ''"
+                                                                    [type]="image.mime_type">
+                                                            </video>
+                                                        </ng-container>
+                                                        <ng-template #audio>
+                                                            <ng-container
+                                                                *ngIf="audioType.includes(image.mime_type); else img">
+                                                                <audio controls>
+                                                                    <source [src]="image ? image.original_url : ''"
+                                                                        [type]="image.mime_type">
+                                                                </audio>
+                                                            </ng-container>
+                                                        </ng-template>
+                                                        <ng-template #img>
+                                                            <lib-ngx-image-zoom [zoomMode]="'click'"
+                                                                [thumbImage]=image.original_url
+                                                                [fullImage]=image.original_url [magnification]="3"
+                                                                [enableScrollZoom]="true" [enableLens]="true"
+                                                                [lensWidth]="350" [lensHeight]="350">
+                                                            </lib-ngx-image-zoom>
+                                                        </ng-template>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </ng-container>
+                                        <ng-container *ngIf="!product?.product_galleries?.length">
+                                            <ng-template carouselSlide [id]="'1'">
+                                                <div>
+                                                    <div class="slider-image">
+                                                        <img [src]="product.product_thumbnail ?
+                                                        product.product_thumbnail.original_url :
+                                                        'assets/images/product.png'" class="img-fluid"
+                                                            [alt]="product.name">
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </ng-container>
+                                    </owl-carousel-o>
+                                </div>
+                            </div>
+                            <div class="col-12" *ngIf="product?.product_galleries?.length">
+                                <div class="bottom-slider-image left-slider no-arrow slick-top">
+                                    <owl-carousel-o [options]="productThumbSlider">
+                                        <ng-container *ngFor="let image of product?.product_galleries;">
+                                            <ng-template carouselSlide [id]="image.id.toString()">
+                                                <div>
+                                                    <div class="slider-image"
+                                                        [class.active]="image.id.toString() == activeSlide.toString()">
+                                                        <ng-container
+                                                            *ngIf="videType.includes(image.mime_type); else audio">
+                                                            <i class="ri-video-line"></i>
+                                                            <video width="130" height="130"
+                                                                (click)="owlCar.to(activeSlide = image.id.toString())">
+                                                                <source [src]="image ? image.original_url : ''"
+                                                                    [type]="image.mime_type">
+                                                            </video>
+                                                        </ng-container>
+                                                        <ng-template #audio>
+                                                            <ng-container
+                                                                *ngIf="audioType.includes(image.mime_type); else img">
+                                                                <button
+                                                                    (click)="owlCar.to(activeSlide = image.id.toString())">
+                                                                    <i class="ri-music-2-line"></i>
+                                                                </button>
+                                                            </ng-container>
+                                                        </ng-template>
+                                                        <ng-template #img>
+                                                            <img [src]="image ? image.original_url
+                                                                : 'assets/images/product.png'" class="img-fluid"
+                                                                [alt]="product.name"
+                                                                (click)="owlCar.to(activeSlide = image.id.toString())">
+                                                        </ng-template>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </ng-container>
+                                    </owl-carousel-o>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="right-box-contain">
+                        <app-product-contain [product]="product" [option]="option" [owlCar]="owlCar">
+                        </app-product-contain>
+                        <app-product-action [product]="product"></app-product-action>
+                        <app-product-information [product]="product"></app-product-information>
+                        <app-product-delivery-information [product]="product"></app-product-delivery-information>
+                        <app-payment-option [product]="product" [option]="option"></app-payment-option>
+                        <app-product-social-share [product]="product" [option]="option"></app-product-social-share>
+                    </div>
+                </div>
+                <div class="col-12 related-product-2"
+                    *ngIf="product?.cross_sell_products && product?.cross_sell_products?.length">
+                    <app-product-bundle [product]="product"></app-product-bundle>
+                </div>
+                <div class="col-12">
+                    <app-product-details-accordion [product]="product"></app-product-details-accordion>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxl-3 col-xl-4 col-lg-5 d-none d-lg-block">
+            <app-product-details-sidebar [product]="product"></app-product-details-sidebar>
+        </div>
+    </div>
+</div>

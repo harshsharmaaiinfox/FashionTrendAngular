@@ -1,0 +1,36 @@
+<div class="product-box product-white-bg">
+    <div class="product-image">
+        <div class="label-tag" [ngClass]="product.is_sale_enable ? 'sale-tag' : product.is_featured ? 'featured-tag' : product.is_trending
+            ? 'trending-tag' : '' " *ngIf="product.is_trending || product.is_sale_enable || product.is_featured">
+            <span>{{ (product.is_sale_enable ? 'sale' : product.is_featured ? 'featured' : product.is_trending ? 'trending' : '' ) | translate }}</span>
+        </div>
+        <a [routerLink]="['/product/', product.slug]">
+            <img [src]="product.product_thumbnail ?
+                 product.product_thumbnail.original_url :
+                 'assets/images/product.png'" class="img-fluid" [alt]="product.name">
+        </a>
+        <app-product-hover-action [product]="product" *ngIf="!close"></app-product-hover-action>
+        <div class="product-header-top" *ngIf="close">
+            <app-button
+              [class]="'btn wishlist-button close_button'"
+              [spinner]="false"
+              [id]="'close_btn'"
+              (click)="removeWishlist(product.id)">
+                <i class="ri-close-line"></i>
+            </app-button>
+        </div>
+    </div>
+    <div class="product-detail position-relative">
+        <a [routerLink]="['/product/', product.slug]">
+            <h6 class="name">{{ product.name }}</h6>
+        </a>
+        <p>{{ product.short_description }}</p>
+        <h6 class="sold weight mb-0 text-content fw-normal" *ngIf="product.unit">{{ product.unit }}</h6>
+        <div class="bottom-content">
+            <h6 class="price theme-color m-0">{{ product.sale_price | currencySymbol }}</h6>
+            <div class="add-to-cart-btn-2 addtocart_btn">
+                <app-product-cart-button [product]="product" [iconClass]="'ri-add-line'"></app-product-cart-button>
+            </div>
+        </div>  
+    </div>
+</div>

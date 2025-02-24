@@ -1,0 +1,24 @@
+<!-- Currency Basic Style -->
+<div *ngIf="selectedCurrency && style == 'basic'" (clickOutside)="hideDropdown()">
+    <div class="dropdown theme-form-select">
+        <app-button [class]="'btn dropdown-toggle'" [type]="'button'" [id]="'open_dropdown_basic_btn'" [spinner]="false" (click)="openDropDown()">
+            <span *ngIf="selectedCurrency.code">{{ selectedCurrency.code }}</span>
+        </app-button>
+        <ul class="dropdown-menu dropdown-menu-end sm-dropdown-menu" [class.show]="open" >
+            <li *ngFor="let currency of (currency$ | async)?.data">
+                <a class="dropdown-item" href="javascript:void(0)" (click)="selectCurrency(currency)">{{ currency.code }}</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- Currency Standard Style -->
+<div *ngIf="selectedCurrency && style == 'standard'" (clickOutside)="hideDropdown()">
+    <app-button [class]="'dropdown-toggle m-0'" [type]="'button'" [id]="'open_dropdown_standard_btn'" [spinner]="false" (click)="openDropDown()">
+      <span *ngIf="selectedCurrency.code">{{ selectedCurrency.code }} <i class="ri-arrow-down-s-line"></i></span>
+    </app-button>
+    <ul class="dropdown-menu" [class.show]="open">
+        <li *ngFor="let currency of (currency$ | async)?.data">
+            <a id="usd" class="dropdown-item" href="javascript:void(0)" (click)="selectCurrency(currency)">{{ currency.code }}</a>
+        </li>
+    </ul>
+</div>

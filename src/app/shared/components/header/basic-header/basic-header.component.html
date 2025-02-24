@@ -1,0 +1,74 @@
+<header class="pb-md-4 pb-0" [class.active]="stick && sticky" class="{{!stick && sticky ? class : ''}}">
+  <app-topbar [data]="data" *ngIf="data?.header?.page_top_bar_enable"></app-topbar>
+  <div class="top-nav top-header sticky-header">
+      <div class="container-fluid-lg">
+          <div class="row">
+              <div class="col-12">
+                  <div class="navbar-top">
+                      <div class="d-xl-none d-inline">
+                          <app-navbar-menu-button (activeMenu)="toggle($event)" [show]="active"></app-navbar-menu-button>
+                      </div>
+                      <app-logo [textClass]="'txt-theme f-w-600'" [data]="data" [logo]="logo"></app-logo>
+                      <div class="middle-box">
+                          <div class="search-box">
+                              <app-box-search></app-box-search>
+                          </div>
+                      </div>
+                      <div class="rightside-box">
+                          <ul class="right-side-menu">
+                            <li class="right-side mobile-search d-xl-none d-inline-block">
+                                <app-box-search [style]="'berlin'"></app-box-search>
+                            </li>
+                            <li class="right-side" *ngIf="data?.header?.support_number">
+                                <app-call [data]="data"></app-call>
+                            </li>
+                            <li class="right-side d-md-inline-block d-none">
+                                <app-header-wishlist></app-header-wishlist>
+                            </li>
+                            <li class="right-side p-md-custom d-inline-block">
+                                <div class="onhover-dropdown header-badge">
+                                    <app-header-cart></app-header-cart>
+                                </div>
+                            </li>
+                            <li class="right-side onhover-dropdown">
+                                <app-my-account></app-my-account>
+                            </li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="container-fluid-lg">
+      <div class="row">
+          <div class="col-12">
+              <div class="header-nav">
+                  <div class="header-nav-left">
+                    <app-header-categories [data]="data"></app-header-categories>
+                  </div>
+                  <div class="header-nav-middle">
+                    <div class="main-nav navbar navbar-expand-xl navbar-light navbar-sticky">
+                        <div class="offcanvas offcanvas-collapse order-xl-2" [class.show]="active">
+                            <div class="offcanvas-header navbar-shadow">
+                                <h5>{{ 'Menu' | translate }}</h5>
+                                <app-button [type]="'button'" [class]="'btn-close lead'" [id]="'toggle_menu_btn'" [spinner]="false" (click)="toggle(false)">
+                                    <i class="ri-close-fill"></i>
+                                </app-button>
+                            </div>
+                            <div class="offcanvas-body">
+                                <app-menu></app-menu>
+                            </div>
+                        </div>
+                        <div class="offcanvas-backdrop fade" *ngIf="active" [class.show]="active" (click)="toggle(false)"></div>
+                    </div>
+                  </div>
+                  <div class="header-nav-right">
+                      <app-deal [data]="data"></app-deal>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</header>
+

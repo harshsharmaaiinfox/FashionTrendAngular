@@ -1,0 +1,10 @@
+<!-- Wishlist Basic -->
+<a [routerLink]="['/wishlist']" class="btn p-0 position-relative header-wishlist" *ngIf="style == 'basic'">
+    <i class="ri-heart-line"></i>
+</a>
+
+<!-- Wishlist Classic -->
+<a [routerLink]="['/wishlist']" class="header-icon bag-icon" *ngIf="style == 'classic'">
+    <small class="badge-number badge-light" *ngIf="(wishlist$ | async)?.total">{{ (wishlist$ | async)?.total }}</small>
+    <i class="ri-heart-line"></i>
+</a>

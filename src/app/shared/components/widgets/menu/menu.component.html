@@ -1,0 +1,111 @@
+<ul class="skeleton-menu navbar-nav" *ngIf="menuService.skeletonLoader">
+  <li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+</ul>
+<ul class="navbar-nav">
+  <div *ngTemplateOutlet="recursiveMenu; context: { $implicit: (menu$ |async)?.data }"></div>
+  <ng-template #recursiveMenu let-menus>
+    <ng-container *ngFor="let menu of menus">
+      <li
+        [ngClass]="[menu.link_type == 'sub' && menu.child ? 'nav-item dropdown' : 'nav-item', menu.mega_menu ? 'dropdown-mega' : '']"
+        [class.new-nav-item]="menu.badge_text">
+        <a class="nav-link dropdown-toggle" *ngIf="menu.link_type === 'sub'" (click)="toggle(menu)">
+          {{ menu.title | translate }}
+          <label *ngIf="menu.badge_text" class="new-dropdown">{{ menu.badge_text | translate }}</label>
+        </a>
+        <a class="dropdown-item" [class.show]="menu.active"  [class.nav-link]="!menu?.child?.length" (click)="redirect(menu.path)"
+          *ngIf="menu.link_type === 'link' && menu.is_target_blank === 0" >
+          {{ menu.title | translate }}
+          <label class="menu-label {{ menu.badge_color }}"
+            *ngIf="menu.badge_text">{{ menu.badge_text | translate }}</label>
+        </a>
+        <a class="dropdown-item" [class.show]="menu.active" href="{{ menu.path }}" *ngIf="menu.is_target_blank === 1">
+          {{ menu.title | translate }}
+          <label class="menu-label {{ menu.badge_color }}"
+            *ngIf="menu.badge_text">{{ menu.badge_text | translate }}</label>
+        </a>
+        <div class="dropdown-menu dropdown-menu-2" [class.show]="menu.active"
+          *ngIf="menu.mega_menu === 1 && menu?.child?.length && menu.mega_menu_type !== 'link_with_image'">
+          <div class="row">
+            <div class="col-9" *ngIf="menu.mega_menu_type === 'side_banner'; else other">
+              <div class="row">
+                <div class="dropdown-column col-xl-4 mb-4" *ngFor="let megaMenu of menu.child">
+                  <app-link-box [menu]="megaMenu"></app-link-box>
+                </div>
+              </div>
+            </div>
+            <ng-template #other>
+              <div class="dropdown-column col-xl-3 mb-4" *ngFor="let megaMenu of menu.child">
+                <app-link-box [menu]="megaMenu"></app-link-box>
+              </div>
+            </ng-template>
+            <div class="dropdown-column col-xl-6 d-xl-block d-none" *ngIf="menu.mega_menu_type === 'product_box'">
+              <div class="menu-product-slider" *ngIf="menu.product_ids.length">
+                <div [ngClass]="{ 'full_border': (themeOption$ | async)?.product?.full_border,
+                'product_img_bg': (themeOption$ | async)?.product?.image_bg,
+                'full_bg': (themeOption$ | async)?.product?.product_box_bg,
+                'product_border': (themeOption$ | async)?.product?.product_box_border }">
+                  <div class="row">
+                    <div class="col-6" *ngFor="let product of products">
+                      <app-product-box [product]="product" [class]="'product-box-3'" [style]="'horizontal'">
+                      </app-product-box>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <app-no-data [class]="'menu-no-data'" [text]="'no_product_found'" *ngIf="!products?.length"></app-no-data>
+            </div>
+            <div class="dropdown-column col-xl-3 d-xl-block d-none" *ngIf="menu.mega_menu_type === 'side_banner'">
+              <div class="menu-img-banner">
+                <a routerLink="javascript:void(0)" class="text-title">
+                  <img [src]="menu?.banner_image ? menu?.banner_image?.original_url : 'assets/images/menu_banner.jpg'"
+                    alt="banner" class="img-fluid">
+                </a>
+              </div>
+            </div>
+            <div class="dropdown-column col-xl-12 d-xl-block d-none" *ngIf="menu.mega_menu_type === 'bottom_banner'">
+              <div class="menu-img-banner rounded overflow-hidden mx-0 mt-3 mb-0">
+                <img [src]="menu?.banner_image ? menu?.banner_image?.original_url :'assets/images/menu_banner_2.jpg'"
+                  class="img-fluid">
+              </div>
+            </div>
+            <div class="dropdown-column col-xl-9 d-xl-block d-none" *ngIf="menu.mega_menu_type === 'blog_box'">
+              <div class="row">
+                <div class="col-6" *ngFor="let blog of blogs">
+                  <div class="blog-box sticky-blog">
+                    <div class="blog-box-image">
+                      <a [routerLink]="['/blog/', blog?.slug]" class="blog-image">
+                        <img
+                          [src]="blog.blog_thumbnail ? blog?.blog_thumbnail?.original_url : 'assets/images/product.png'"
+                          class="img-fluid" [alt]="blog.title">
+                      </a>
+                    </div>
+
+                    <a [routerLink]="['/blog/', blog?.slug]" class="blog-detail" tabindex="0">
+                      <h6>{{ blog.created_at | date: 'dd MMM yyyy hh:mm:a' }}</h6>
+                      <h5>{{ blog.title }}</h5>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <app-no-data [class]="'menu-no-data'" [text]="'No Blog Found'" *ngIf="!blogs?.length"></app-no-data>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown-menu dropdown-menu-2 dropdown-image" [class.show]="menu.active"
+          *ngIf="menu.mega_menu === 1 && menu.mega_menu_type === 'link_with_image' && menu?.child?.length">
+          <div class="dropdown-column">
+            <a href="javascript:void(0)" class="dropdown-item text-center" *ngFor="let imageMenu of menu.child"
+              (click)="redirect(imageMenu.path)">
+              <img [src]="imageMenu.item_image ? imageMenu.item_image.original_url : 'assets/images/menu_banner_3.jpg'"
+                class="img-fluid" [alt]="imageMenu.title">
+              <span>{{ imageMenu.title }}</span>
+            </a>
+          </div>
+        </div>
+        <ul class="dropdown-menu" *ngIf="menu.child && !menu.mega_menu" [class.show]="menu.active">
+          <ng-container *ngTemplateOutlet="recursiveMenu; context: { $implicit: menu.child }"></ng-container>
+        </ul>
+      </li>
+    </ng-container>
+  </ng-template>
+</ul>

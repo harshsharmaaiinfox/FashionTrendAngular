@@ -1,0 +1,21 @@
+<div class="brand-section">
+    <div class="brand-row">
+        <div class="row g-sm-4 g-3 row-cols-xxl-6 row-cols-lg-5 row-cols-md-3 row-cols-2">
+            <div class="col" *ngFor="let store of sellers">
+                <a [routerLink]="['/seller/store/', store.slug]">
+                    <img *ngIf="store.store_logo" [src]="store.store_logo.original_url" alt="{{ store.store_name }}" class="img-fluid">
+                    <h5>{{ store.store_name }}</h5>
+                    <div class="product-rating">
+                        <ngb-rating [rate]="store.rating_count"></ngb-rating>
+                        <span>({{ store.reviews_count }})</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <app-no-data
+            [class]="'no-data-added bg-light justify-content-center'"
+            [text]="'no_store_found'"
+            *ngIf="!sellers?.length">
+        </app-no-data>
+    </div>
+</div>

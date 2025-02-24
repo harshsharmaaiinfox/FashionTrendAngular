@@ -1,0 +1,62 @@
+<div class="question-answer skeleton-qa" *ngIf="questionAnswersService.skeletonLoader else content">
+  <ul>
+    <li *ngFor="let item of skeletonItems">
+      <div class="question-box">
+        <h5></h5>
+        <h6 class="font-weight-bold que"></h6>
+      </div>
+      <div class="answer-box">
+        <h5></h5>
+        <div>
+          <p class="ans"></p>
+          <p class="ans"></p>
+        </div>
+      </div>
+    </li> 
+  </ul>
+</div>
+<ng-template #content>
+  <div class="post-question-box">
+    <h4>{{ 'have_doubts_regarding_this_product' | translate }} ? <a href="javascript:void(0)" (click)="QuestionModal.openModal(product)">{{ 'post_your_question' | translate }}</a></h4>
+  </div>
+  <div class="question-answer">
+    <ul *ngIf="questionAnswers?.length">
+      <li *ngFor="let qna of questionAnswers; let i = index">
+        <div class="question-box">
+          <h5>{{ 'q' | translate }}{{ i + 1 }}</h5>
+          <h6 class="font-weight-bold que">{{ qna?.question }}</h6>
+          <ul class="link-dislike-box">
+            <li *ngIf="qna?.consumer_id === (user$ | async)?.id && !qna?.answer">
+              <a href="javascript:void(0)" (click)="isLogin && QuestionModal.openModal(product, qna)">
+                <span><i class="ri-edit-fill"></i></span>
+              </a>
+            </li>
+            <li *ngIf="qna?.answer">
+              <a href="javascript:void(0)" (click)="isLogin && feedback(qna, 'liked')">
+                <span><i class="ri-thumb-up-{{ isLogin ? qna.reaction == 'liked' ? 'fill' : 'line'  : 'fill' }}" [class.theme-color]="qna.reaction == 'liked'"></i> {{ qna.total_likes }}</span>
+              </a>
+            </li>
+            <li *ngIf="qna?.answer">
+              <a href="javascript:void(0)" (click)="isLogin && feedback(qna, 'disliked')">
+                <span><i class="ri-thumb-down-{{ isLogin ? qna.reaction == 'disliked' ? 'fill' : 'line'  : 'fill' }}" [class.theme-color]="qna.reaction == 'disliked'"></i> {{ qna.total_dislikes }}</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="answer-box">
+          <div class="answer-box" *ngIf="qna?.answer">
+            <h5>{{ 'a' | translate }}{{ i + 1 }}</h5>
+            <p class="ans">{{ qna?.answer }} </p>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <app-no-data
+      [class]="'no-data-added'"
+      [text]="'no_question_posted_yet'"
+      [description]="'there_are_currently_question_product'"
+      *ngIf="!questionAnswers?.length">
+    </app-no-data>
+  </div>
+</ng-template>
+<app-question-modal #questionModal></app-question-modal>

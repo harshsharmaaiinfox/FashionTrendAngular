@@ -1,0 +1,26 @@
+<div class="theme-form search-box" *ngIf="brands.length > 5">
+    <input type="text" placeholder="{{'search_text' | translate}}" [(ngModel)]="searchText" class="form-control">
+</div>
+<ul class="category-list custom-padding custom-height" *ngIf="brands?.length">
+    <li *ngFor="let brand of brands | filter: searchText:''">
+        <div class="form-check ps-0 m-0 category-list-box">
+            <input class="checkbox_animated" type="checkbox" 
+                id="category-{{brand?.id}}"
+                [value]="brand?.slug"
+                [checked]="checked(brand?.slug!)"
+                (change)="applyFilter($event)">
+            <label class="form-check-label" for="brand-{{brand?.id}}">
+                <span class="name">{{ brand?.name }}</span>
+            </label>
+        </div>
+    </li>
+</ul>
+<div *ngIf="(brands | filter: searchText:'').length === 0" class="search-not-found-box">
+    <h5>No results found.</h5>
+</div>
+<!-- No Data -->
+<app-no-data
+  [class]="'no-data-added bg-light'"
+  [text]="'no_category_found'"
+  *ngIf="!brands?.length">
+</app-no-data>

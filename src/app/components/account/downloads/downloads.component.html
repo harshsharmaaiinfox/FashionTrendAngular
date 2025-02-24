@@ -1,0 +1,52 @@
+<div class="title-header">
+    <div class="d-flex align-items-center">
+        <h5>{{ 'Downloads' | translate }}</h5>
+    </div>
+</div>
+<div class="download-detail dashboard-bg-box">
+    <form>
+        <div class="input-group download-form">
+            <input type="text" class="form-control" placeholder="{{'Search your Download' | translate}}" [formControl]="term">
+            <button class="btn theme-bg-color text-light" type="button" (click)="search()">Search</button>
+        </div>
+    </form>
+    <div class="download-table" *ngIf="(download$ | async)?.data?.length">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>{{ 'Image' | translate }}</th>
+                        <th class="table-name">{{ 'Name' | translate }}</th>
+                        <th>{{ 'Action' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of (download$ | async)?.data let i = index">
+                        <td>
+                            <img src="{{ data.item_image }}" class="img-fluid" alt="image">
+                        </td>
+                        <td class="table-name">{{ data.item_name }}</td>
+                        <td>
+                            <div ngbDropdown class="d-inline-block" container="body" placement="bottom-end">
+                                <button type="button" class="btn dropdown-toggle" ngbDropdownToggle>
+                                    {{ 'Download' | translate }}
+                                </button>
+                                <div ngbDropdownMenu class="download-dropdown-menu">
+                                    <button ngbDropdownItem (click)="downloadFiles(data.id)" *ngIf="data.can_download_file">{{'all_files' | translate}} &amp; {{'documentation' | translate}}</button>
+                                    <button ngbDropdownItem (click)="downloadLicense(data.id)" *ngIf="data.can_download_license">{{'license_certificate' | translate}} &amp; {{"purchase_code" | translate}}</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<app-no-data
+    [class]="'no-data-added'"
+    [image]="'assets/svg/empty-items.svg'"
+    [text]="'No item found'"
+    [description]="'No Orders have yet'"
+    *ngIf="!(download$ | async)?.data?.length">
+</app-no-data>

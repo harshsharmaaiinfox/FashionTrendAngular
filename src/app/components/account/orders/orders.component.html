@@ -1,0 +1,47 @@
+<div class="title-header">
+    <div class="d-flex align-items-center">
+        <h5>{{ 'My Orders' | translate }}</h5>
+    </div>
+</div>
+<div class="total-box mt-0" *ngIf="(order$ | async)?.data?.length">
+    <div class="wallet-table mt-0">
+        <div class="table-responsive">
+            <table>
+                <tbody>
+                    <tr>
+                        <th>{{ 'Order_number'  | translate }}</th>
+                        <th>{{ 'Date'  | translate }}</th>
+                        <th>{{ 'Amount'  | translate }}</th>
+                        <th>{{ 'Payment Status'  | translate }}</th>
+                        <th>{{ 'Payment Method'  | translate }}</th>
+                        <th>{{ 'Option'  | translate }}</th>
+                    </tr>
+                    <tr *ngFor="let order of (order$ | async)?.data let i = index">
+                        <td><span class="fw-bolder">#{{order.order_number}}</span></td>
+                        <td>{{ order?.created_at | date: 'dd MMM yyyy hh:mm:a' }}</td>
+                        <td>{{ order?.total | currencySymbol }} </td>
+                        <td><div class="status-{{order?.payment_status?.toLowerCase()}}"><span>{{ order?.payment_status | titleCase }}</span></div></td>
+                        <td>
+                            {{ order?.payment_method?.toUpperCase() }}
+                        </td>
+                        <td><a [routerLink]="['/account/order/details', order.order_number]"><i class="ri-eye-line"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <nav class="custome-pagination" *ngIf="(order$ | async)?.data?.length">
+        <app-pagination
+            [total]="(order$ | async)?.total || 0"
+            [currentPage]="filter['page']"
+            [pageSize]="filter['paginate']"
+            (setPage)="setPaginate($event)">
+        </app-pagination>
+    </nav>
+</div>
+<app-no-data [class]="'no-data-added'"
+    [image]="'assets/svg/empty-items.svg'"
+    [text]="'No Orders Found'"
+    [description]="'No Orders have yet'"
+    *ngIf="!(order$ | async)?.data?.length">
+</app-no-data>

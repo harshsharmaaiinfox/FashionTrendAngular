@@ -1,0 +1,16 @@
+<div class="cookie-bar-box" [class.d-none]="!cookies">
+  <div class="cookie-box">
+      <div class="cookie-image">
+          <img src="assets/images/cookie-bar.png" class="blur-up lazyloaded" alt="cookie">
+          <h2>{{ 'cookies' | translate }}!</h2>
+      </div>
+      <div class="cookie-contain">
+          <h5 class="text-content">{{ 'we_use_cookies_to_make_your_experience_better' | translate }}</h5>
+      </div>
+  </div>
+
+  <div class="button-group">
+      <button class="btn privacy-button">{{ 'privacy_policy' | translate }}</button>
+      <button class="btn ok-button" (click)="acceptCookies(false)">{{ 'ok' | translate }}</button>
+  </div>
+</div>

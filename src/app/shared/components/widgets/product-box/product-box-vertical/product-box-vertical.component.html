@@ -1,0 +1,19 @@
+<div class="offer-product">
+    <a [routerLink]="['/product/', product.slug]" class="offer-image">
+        <img [src]="product.product_thumbnail
+                ? product.product_thumbnail.original_url
+                : 'assets/images/product.png'" alt="product">
+    </a>
+    <div class="offer-detail">
+        <div>
+            <a [routerLink]="['/product/', product.slug]" class="text-title">
+                <h6 class="name">{{ product.name }}</h6>
+            </a>
+            <span *ngIf="product.unit">{{ product.unit }}</span>
+            <div class="vertical-price">
+                <h5 class="price theme-color">{{ product.sale_price | currencySymbol }}</h5>
+                <del class="text-content" *ngIf="product.discount">{{ product.price | currencySymbol }}</del>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+ <!-- Footer Section Start -->
+ <div class="section-t-space footer-section-2 footer-section-4">
+    <img [src]="data?.footer ?  (storageURL +  data?.footer?.bg_image) : 'assets/images/footer-bg.jpg'" class="footer-image img-fluid" alt="">
+    <div class="container-fluid-lg">
+        <div class="footer-newsletter section-b-space">
+            <div class="newsletter-detail">
+                <div *ngIf="data?.footer" [innerHTML]="getText(data?.footer?.title || '')"></div>
+                <h5>{{ data?.footer?.sub_title }}</h5>
+                <div class="input-box input-group">
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="{{'enter_your_email'  | translate}}" [formControl]="email">
+                    <app-button [id]="'subscribe'" [class]="'sub-btn'" [spinner]="true" [iconClass]="'fa-solid fa-arrow-right icon'" (click)="submit()">
+                        <span>{{ 'Subscribe' | translate }}</span>
+                        <i class="fa-solid fa-arrow-right icon"></i>
+                    </app-button>
+                </div>
+                <div class="input-box mt-1">
+                    <div class="invalid-feedback" *ngIf="email.touched && email.errors?.['required']">
+                        {{ 'email_is_required' | translate }}
+                    </div>
+                    <div class="invalid-feedback mt-1" *ngIf="email.touched && email.errors?.['email']">
+                        {{ 'invalid_email' | translate }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <app-basic-footer [data]="data" [footer]="footer"></app-basic-footer>
+    </div>
+</div>
+<!-- Footer Section End -->

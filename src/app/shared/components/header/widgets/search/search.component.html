@@ -1,0 +1,123 @@
+<!-- Search Basic Style -->
+<div class="search-bg-overlay" [class.show]="isOpenResult" (click)="focusInput(false)"></div>
+<div class="input-group" *ngIf="style == 'basic'">
+  <app-button
+    [class]="'btn location-button'"
+    [id]="'category_btn'"
+    [spinner]="false"
+    [type]="'button'"
+    *ngIf="style == 'basic'">
+   <select class="form-select locat-name" id="selectedCategory"  [formControl]="selectedCategory">
+      <option value="" selected  >{{ 'All Category' | translate }}</option>
+      <ng-container *ngFor="let category of categories">
+        <option [ngValue]="category?.id">{{ category.name }}</option>
+      </ng-container>
+    </select>
+  </app-button>
+  <div class="search-suggestion-wrap">
+    <input type="search" class="form-control" placeholder="{{'Search for Products, Brand and More ' | translate}}" [formControl]="term" (input)="onInputChange()" (click)="focusInput(true)" (keydown.enter)="onEnterKey()">
+    <app-search-dropdown 
+      [term]="term.value || ''" 
+      [selectedCategory]="selectedCategory.value || ''"
+      [products]="filteredResults"
+      [categories]="filteredCategory"
+      [selectedResultIndex]="selectedResultIndex"
+      [isOpenResult]="isOpenResult">
+    </app-search-dropdown>
+    <app-button [type]="'button'" [class]="'btn'" [spinner]="false" [id]="'basic_search_btn'" (click)="redirectToSearch()">
+      <i class="ri-search-line"></i>
+    </app-button>
+  </div>
+</div>
+
+<!-- Search Basic Style -->
+<div class="input-group" *ngIf="style == 'berlin'">
+  <a href="javascript:void(0)" class="btn" (click)="toggleSearchBox()">
+      <i class="ri-search-line"></i>
+  </a>
+</div>
+
+<!-- Search Classic Style -->
+<div class="searchbar-box-2 input-group d-xl-flex d-none" *ngIf="style == 'classic'" (clickOutside)="focusInput(false)">
+    <app-button [type]="'button'" [class]="'btn search-icon'" [spinner]="false" [id]="'classic_search_btn'" (click)="redirectToSearch()">
+      <i class="ri-search-line"></i>
+    </app-button>
+    <input type="search" class="form-control" placeholder="{{'search_text' | translate}}" [formControl]="term" (input)="onInputChange()"  (click)="focusInput(true)" (keydown.enter)="onEnterKey()">
+    <app-search-dropdown 
+      [term]="term.value || ''" 
+      [selectedCategory]="selectedCategory.value || ''"
+      [products]="filteredResults"
+      [categories]="filteredCategory"
+      [selectedResultIndex]="selectedResultIndex"
+      [isOpenResult]="isOpenResult">
+    </app-search-dropdown>
+    <app-button [type]="'button'" [class]="'btn search-button'" [spinner]="false" [id]="'classic_search_text_btn'" (click)="redirectToSearch()">
+      {{ 'search' | translate }}
+    </app-button>
+</div>
+
+<!-- Search Standard Style -->
+
+<div *ngIf="style == 'standard'" (clickOutside)="focusInput(false)">
+    <input type="search" class="form-control" placeholder="{{'search_product_delivered_your_door' | translate}}" [formControl]="term" (input)="onInputChange()" (click)="focusInput(true)" (keydown.enter)="onEnterKey()">
+    <app-search-dropdown 
+      [term]="term.value || ''" 
+      [selectedCategory]="selectedCategory.value || ''"
+      [products]="filteredResults"
+      [categories]="filteredCategory"
+      [selectedResultIndex]="selectedResultIndex"
+      [isOpenResult]="isOpenResult"
+      >
+    </app-search-dropdown>
+    <app-button [type]="'button'" [class]="'btn search-button'" [spinner]="false" [id]="'standard_search_btn'" (click)="redirectToSearch()">
+      <i class="ri-search-line"></i>
+    </app-button>
+</div>
+
+<!-- Search Full -->
+
+<div class="search-full" [class.open]="show">
+    <div class="input-group">
+      <span class="input-group-text">
+          <i class="ri-search-line font-light"></i>
+      </span>
+      <input type="text" class="form-control search-type" placeholder="{{ 'search_text' | translate }}" [formControl]="term" (input)="onInputChange()" (click)="focusInput(true)" (keydown.enter)="onEnterKey()">
+      <span class="input-group-text close-search" (click)="toggleSearchBox()">
+          <i class="ri-close-line"></i>
+      </span>
+      <app-search-dropdown 
+      [term]="term.value || ''" 
+      [selectedCategory]="selectedCategory.value || ''"
+      [products]="filteredResults"
+      [categories]="filteredCategory"
+      [selectedResultIndex]="selectedResultIndex"
+      [isOpenResult]="isOpenResult"
+      >
+    </app-search-dropdown>
+    </div>
+</div>
+
+<ng-container *ngIf="style === 'category_search'">
+  <div class="input-group">
+    <input type="search" class="form-control" placeholder="{{'im_searching_for' | translate}}" 
+    [formControl]="term" (click)="focusInput(true)" 
+    (keydown.enter)="onEnterKey()">
+    <div class="input-group-text">
+      <select class="form-select " id="selectedCategory" [formControl]="selectedCategory">
+          <option ngValue="">{{ 'select_category' | translate }}</option>
+          <ng-container *ngFor="let category of categories">
+              <option [ngValue]="[category?.id]">{{ category.name }}</option>
+          </ng-container>
+      </select>
+    </div>
+    <app-search-dropdown 
+      [term]="term.value || ''" 
+      [selectedCategory]="selectedCategory.value || ''"
+      [products]="filteredResults"
+      [categories]="filteredCategory"
+      [selectedResultIndex]="selectedResultIndex"
+      [isOpenResult]="isOpenResult"
+      >
+    </app-search-dropdown>
+  </div>
+</ng-container>

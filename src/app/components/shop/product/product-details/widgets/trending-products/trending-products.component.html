@@ -1,0 +1,10 @@
+<div class="pt-25" *ngIf="relatedProducts?.length">
+    <div class="category-menu">
+        <h3>{{ 'trending_products' | translate  }}</h3>
+        <ul class="product-list border-0 p-0 sidebar-product d-flex">
+            <li *ngFor="let product of relatedProducts | slice:0:4">
+              <app-product-box [product]="product" [style]="'vertical'"></app-product-box>
+            </li>
+        </ul>
+    </div>
+</div>

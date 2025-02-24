@@ -1,0 +1,75 @@
+<div class="setting-box" (clickOutside)="closeDropdown()">
+  <app-button
+    [class]="'btn setting-button'"
+    [id]="'toggle_btn'"
+    [type]="'button'"
+    [spinner]="false"
+    (click)="toggle()">
+    <i [ngClass]="open ? 'ri-close-fill' : 'ri-settings-3-fill' "></i>
+  </app-button>
+  <div class="theme-setting-2" [class.active]="open">
+      <div class="theme-box">
+          <ul>
+              <li>
+                  <div class="setting-name">
+                      <h4>{{ 'color' | translate }}</h4>
+                  </div>
+                  <div class="theme-setting-button color-picker">
+                      <form class="form-control">
+                          <label for="colorPick" class="form-label mb-0">{{ 'theme_color' | translate }}</label>
+                          <input type="color" [(ngModel)]="themeOptionService.theme_color" name="Background" (change)="customizeThemeColor($event, '--theme-color')" class="form-control form-control-color">
+                          <input type="color" [(ngModel)]="themeOptionService.secondary_color" name="secondary_color" (change)="customizeThemeColor($event, '--theme-color2')" class="form-control form-control-color">
+                      </form>
+                  </div>
+              </li>
+
+              <li>
+                  <div class="setting-name">
+                      <h4>{{ 'dark' | translate }}</h4>
+                  </div>
+                  <div class="theme-setting-button">
+                    <app-button
+                      [class]="mode === 'dark' ? 'btn btn-2 unline' : 'btn btn-2 outline'"
+                      [id]="'dark_btn'"
+                      [type]="'button'"
+                      [spinner]="false"
+                      (click)="layoutMode('dark')">
+                      {{ 'dark' | translate }}
+                    </app-button>
+                    <app-button
+                      [class]="mode === 'light' ? 'btn btn-2 unline' : 'btn btn-2 outline'"
+                      [id]="'light_btn'"
+                      [type]="'button'"
+                      [spinner]="false"
+                      (click)="layoutMode('light')">
+                      {{ 'light' | translate }}
+                    </app-button>
+                  </div>
+              </li>
+              <li>
+                  <div class="setting-name">
+                      <h4>{{ 'rtl' | translate }}</h4>
+                  </div>
+                  <div class="theme-setting-button rtl">
+                      <app-button
+                        [class]="value === 'ltr' ? 'btn btn-2 unline' : 'btn btn-2 outline'"
+                        [id]="'ltr_btn'"
+                        [type]="'button'"
+                        [spinner]="false"
+                        (click)="layout('ltr')">
+                        {{ 'ltr' | translate }}
+                      </app-button>
+                      <app-button
+                        [class]="value === 'rtl' ? 'btn btn-2 unline' : 'btn btn-2 outline'"
+                        [id]="'rtl_btn'"
+                        [type]="'button'"
+                        [spinner]="false"
+                        (click)="layout('rtl')">
+                        {{ 'rtl' | translate }}
+                      </app-button>
+                  </div>
+              </li>
+          </ul>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+<section class="log-in-section background-image-2 section-b-space">
+    <div class="container-fluid-lg w-100">
+        <div class="row">
+            <div class="col-xxl-6 col-xl-5 col-lg-6 d-lg-block d-none ms-auto">
+                <div class="image-contain">
+                    <img src="assets/images/inner-page/log-in.png" class="img-fluid" alt="login">
+                </div>
+            </div>
+            <div class="col-xxl-4 col-xl-5 col-lg-6 col-sm-8 mx-auto">
+                <app-alert></app-alert>
+                <div class="log-in-box">
+                    <div class="log-in-title">
+                        <h3>{{ 'Welcome To' | translate }} {{ (setting$ | async)?.general?.site_name }}</h3>
+                        <h4>{{ 'Login Your Account' | translate }}</h4>
+                    </div>
+                    <div class="input-box">
+                        <form class="row g-4" [formGroup]="form" (ngSubmit)="submit()">
+                            <div class="col-12">
+                                <div class="form-floating log-in-form">
+                                    <input type="email" class="form-control" id="email" id="email" formControlName="email" placeholder="{{ 'Email Address' | translate}}">
+                                    <label for="email">{{ 'Email Address' | translate}}</label>
+                                    <div *ngIf="form.controls['email'].touched && form.controls['email'].errors?.['required']" class="invalid-feedback">
+                                        {{ 'Email Is Required' | translate }}
+                                    </div>
+                                    <div *ngIf="form.controls['email'].touched && form.controls['email'].errors?.['email']" class="invalid-feedback">
+                                        {{ 'Invalid Email' | translate }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating theme-form-floating log-in-form">
+                                    <input type="password" class="form-control" id="password" formControlName="password" placeholder="{{ 'Password' | translate }}">
+                                    <label for="password">{{ 'Password' | translate }}</label>
+                                    <div *ngIf="form.controls['password'].touched && form.controls['password'].errors?.['required']" class="invalid-feedback">
+                                        {{ 'Password Is Required' | translate }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12" *ngIf="reCaptcha">
+                                <re-captcha formControlName="recaptcha"> </re-captcha>
+                                <div *ngIf="form.controls['recaptcha']?.touched && form.controls['recaptcha']?.errors?.['required']"
+                                    class="invalid-feedback">
+                                    {{ 'ReCaptcha is Required' | translate }}
+                                  </div>
+                              </div>
+                            <div class="col-12">
+                                <div class="forgot-box">
+                                    <div class="form-check ps-0 m-0 remember-box">
+                                        <input class="checkbox_animated check-box" type="checkbox" id="remeberme">
+                                        <label class="form-check-label" for="remeberme">{{ 'Remember Me' | translate }}</label>
+                                    </div>
+                                    <a [routerLink]="['/auth/forgot-password']" class="forgot-password">{{ 'Forgot Password' | translate }}?</a>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <app-button [id]="'login_btn'">{{ 'Login' | translate }}</app-button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="other-log-in">
+                        <h6>{{ 'OR'| translate}}</h6>
+                    </div>
+                    <div class="sign-up-box">
+                        <h4>{{ "Dont Have An Account"| translate}}?</h4>
+                        <a [routerLink]="['/auth/register']">{{ 'Sign up'| translate}}</a>
+                    </div>
+                    @if((setting$ | async)?.activation?.login_number){
+                        <a [routerLink]="['/auth/login-with-number']" class="number-btn"><i class="ri-smartphone-line"></i> {{'Login With Mobile Number' | translate}}</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

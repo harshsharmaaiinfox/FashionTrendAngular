@@ -1,0 +1,9 @@
+<app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+<section class="section-b-space ckeditor-content">
+    <div class="container">
+        <app-skeleton-page *ngIf="pageService?.skeletonLoader else content"></app-skeleton-page>
+        <ng-template #content>
+            <div [innerHTML]="(selectedPage$ | async)?.content"></div>
+        </ng-template>
+    </div>
+</section>

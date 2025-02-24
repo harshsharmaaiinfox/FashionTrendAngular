@@ -1,0 +1,49 @@
+<div class="left-sidebar-box">
+    <app-skeleton-blog [type]="'sidebar'" *ngIf="blogService.skeletonLoader else content"></app-skeleton-blog>
+    <ng-template #content>
+        <div class="accordion left-accordion-box" ngbAccordion>
+            <div class="accordion-item" ngbAccordionItem [collapsed]="false">
+                <h2 class="accordion-header" ngbAccordionHeader>
+                    <button class="accordion-button" type="button" ngbAccordionButton>
+                        {{ 'recent_posts' | translate }}
+                    </button>
+                </h2>
+                <div class="accordion-collapse collapse" ngbAccordionCollapse>
+                    <div class="accordion-body pt-0" ngbAccordionBody>
+                        <ng-template>
+                            <app-recent-post [blogs]="(resentBlog$ | async) || []"></app-recent-post>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item" ngbAccordionItem [collapsed]="false">
+                <h2 class="accordion-header" ngbAccordionHeader>
+                    <button class="accordion-button" type="button" ngbAccordionButton>
+                        {{ 'categories' | translate }}
+                    </button>
+                </h2>
+                <div ngbAccordionCollapse class="accordion-collapse collapse">
+                    <div class="accordion-body pt-0" ngbAccordionBody>
+                        <ng-template>
+                            <app-blog-category [data]="(category$ | async)?.data || []"></app-blog-category>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item" ngbAccordionItem [collapsed]="false">
+                <h2 class="accordion-header" ngbAccordionHeader>
+                    <button class="accordion-button" type="button" ngbAccordionButton>
+                        {{ 'tags' | translate }}
+                    </button>
+                </h2>
+                <div ngbAccordionCollapse class="accordion-collapse collapse">
+                    <div class="accordion-body pt-0" ngbAccordionBody>
+                        <ng-template>
+                            <app-blog-tag [tags]="(tag$ | async)?.data || []"></app-blog-tag>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>

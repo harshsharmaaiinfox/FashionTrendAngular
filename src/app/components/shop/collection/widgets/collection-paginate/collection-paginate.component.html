@@ -1,0 +1,8 @@
+<nav class="custome-pagination" *ngIf="(product$ | async)?.data?.length">
+    <app-pagination 
+        [total]="totalItems" 
+        [currentPage]="+filter['page']" 
+        [pageSize]="+filter['paginate']"
+        (setPage)="setPaginate($event)">
+    </app-pagination>
+</nav>

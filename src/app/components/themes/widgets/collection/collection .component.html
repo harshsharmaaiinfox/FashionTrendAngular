@@ -1,0 +1,23 @@
+<div class="slider-4-1 ratio_65 no-arrow product-wrapper">
+  <owl-carousel-o [options]="bannerSlider">
+    <ng-container carouselSlide *ngFor="let bundles of data">
+      <ng-container *ngIf="bundles?.status">
+        <ng-template carouselSlide>
+          <div>
+            <div class="product-slider">
+                <app-image-link class="b-cl" [image]="bundles" [bgImage]="false"></app-image-link>
+                <div class="product-slider-detail">
+                  <div>
+                    <a href="javascript:void(0)" class="d-block">
+                      <h3 class="text-title">{{ bundles?.title }}</h3>
+                    </a>
+                    <h5>{{ bundles?.sub_title }}</h5>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </ng-template>
+      </ng-container>
+    </ng-container>
+  </owl-carousel-o>
+</div>

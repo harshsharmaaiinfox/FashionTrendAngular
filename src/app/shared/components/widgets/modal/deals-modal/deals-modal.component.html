@@ -1,0 +1,42 @@
+<ng-template #dealsModal let-modal>
+  <div class="modal-content">
+      <div class="modal-header">
+          <div>
+              <h5 class="modal-title w-100" id="deal_today">{{ 'Deal Today' | translate }}</h5>
+              <p class="text-content">{{ 'Recommended Deals For You' | translate }}</p>
+          </div>
+          <app-button [type]="'button'" [class]="'btn btn-close'" [id]="'close_deal_modal_btn'" (click)="modal.dismiss('Cross click')">
+              <i class="ri-close-line"></i>
+          </app-button>
+      </div>
+      <div class="modal-body">
+        <div class="deal-offer-box" *ngIf="products?.length">
+          <ul class="deal-offer-list">
+            <li class="list-1" *ngFor="let product of products">
+                <div class="deal-offer-contain">
+                    <a [routerLink]="['/product/', product?.slug]" class="deal-image" (click)="closeModal()">
+                        <img [src]="product?.product_thumbnail ?
+                                    product?.product_thumbnail?.original_url :
+                                    'assets/images/product.png'" alt="product">
+                    </a>
+                    <a [routerLink]="['/product/', product?.slug]" class="deal-contain">
+                        <h5 class="fw-semibold">{{ product?.name }}</h5>
+                        <h6>
+                            {{ product.sale_price | currencySymbol }}
+                            <del *ngIf="product.discount">{{ product.price | currencySymbol }}</del>
+                            <span *ngIf="product.unit">{{ product.unit }}</span>
+                        </h6>
+                    </a>
+                </div>
+            </li>
+          </ul>
+        </div>
+        <!-- No Data -->
+        <app-no-data
+            [class]="'no-data-added bg-light'"
+            [text]="'No Product Found'"
+            *ngIf="!products?.length">
+        </app-no-data>
+      </div>
+  </div>
+</ng-template>

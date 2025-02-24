@@ -1,0 +1,53 @@
+<ng-container *ngIf="!product?.is_external else isExternalProduct">
+    <app-button [id]="'add-to-cart'+product.id"
+        [class]="cartItem && cartItem.quantity > 0 ? 'btn btn-add-cart addcart-button active' : 'btn btn-add-cart addcart-button'"
+        [iconClass]="iconClass"
+        [spinner]="false"
+        (click)="product.type === 'classified' ? productDetailModal.openModal() : addToCart(product, 1)"
+        *ngIf="product.stock_status == 'in_stock' else outStock">
+        {{ text | translate  }}
+    </app-button>
+    <ng-template #outStock>
+        <app-button [id]="'out-of-stock'+product.id"
+            [class]="'btn btn-add-cart addcart-button'"
+            [spinner]="false"
+            [iconClass]="iconClass"
+            [disabled]="true">
+            {{ (text ? 'out_of_stock' : '') | translate  }}
+        </app-button>
+    </ng-template>
+    <ng-container *ngIf="cartItem && cartItem.quantity > 0">
+        <div class="cart_qty qty-box" [class.open]="cartItem && cartItem.quantity > 0">
+            <div class="input-group">
+                <app-button
+                    [id]="'qty-left-minus'+product.id"
+                    [spinner]="false"
+                    [class]="'qty-left-minus'"
+                    (click)="addToCart(product, -1)">
+                    <i class="ri-subtract-line"></i>
+                </app-button>
+                <input class="form-control input-number qty-input" type="text" name="quantity"
+                    value="{{cartItem && cartItem.quantity ? cartItem.quantity : cartItem}}"
+                    readonly>
+                <app-button
+                    [id]="'qty-right-plus'+product.id"
+                    [spinner]="false"
+                    [class]="'qty-left-plus'"
+                    (click)="addToCart(product, 1)">
+                    <i class="{{ iconClass ? iconClass : 'ri-add-fill' }}"></i>
+                </app-button>
+            </div>
+        </div>
+    </ng-container>
+</ng-container>
+<ng-template #isExternalProduct>
+    <app-button [id]="'add-to-cart'+product.id"
+        [class]="'btn btn-add-cart addcart-button'"
+        [iconClass]="'ri-add-line'"
+        [spinner]="false"
+        (click)="externalProductLink(product.external_url)">
+        {{ (product.external_button_text ? product.external_button_text : 'Buy Now') | translate }}
+    </app-button>
+</ng-template>
+<app-product-detail-modal #productDetailModal [product]="product"></app-product-detail-modal>
+<app-variation-modal #variationModal></app-variation-modal>

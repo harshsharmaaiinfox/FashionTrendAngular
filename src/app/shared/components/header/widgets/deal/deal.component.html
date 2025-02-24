@@ -1,0 +1,14 @@
+<!-- Deal Basic Style -->
+<app-button [class]="'btn deal-button'" [id]="'basic_deal_btn'" [spinner]="false"  (click)="DealsModal.openModal()" *ngIf="style == 'basic'">
+  <i class="ri-flashlight-line"></i>
+  <span>{{ 'Deal Today' | translate }}</span>
+</app-button>
+<!-- Deal Standard Style -->
+<a class="btn theme-bg-color ms-3 fire-button" (click)="DealsModal.openModal()" *ngIf="style == 'standard'">
+  <div class="fire">
+      <img src="assets/images/icon/hot-sale.png" class="img-fluid" alt="hot-sale">
+  </div>
+  <span>{{ 'hot_deals' | translate }}</span>
+</a>
+<!-- Deal Modal -->
+<app-deals-modal #dealsModal [products]="dealProducts"></app-deals-modal>

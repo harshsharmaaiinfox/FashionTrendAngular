@@ -1,0 +1,82 @@
+<app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+<section class="blog-section section-b-space">
+    <div class="container-fluid-lg">
+        <div class="row g-4">
+            <div class="col-xxl-9 col-xl-8 col-lg-7"
+                [class.order-lg-2]="sidebar === 'left_sidebar'"
+                [class]="sidebar === 'no_sidebar' ?
+                        'col-xxl-12 col-xl-12 col-lg-12' : 'col-xxl-9 col-xl-8 col-lg-7'">
+                <ng-container *ngIf="blogService?.skeletonLoader else blogContent">
+                    <div class="row g-4">
+                        <div [class]="style === 'list_view' ? 'col-12 list_view' : 'col-xxl-4 col-sm-6'"
+                            *ngFor="let item of skeletonItems">
+                            <app-skeleton-blog></app-skeleton-blog>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-template #blogContent>
+                    <div class="row g-4" [class.ratio_65]="style === 'list_view'" *ngIf="(blog$ | async)?.data?.length; else noData">
+                        <div [class]="style === 'list_view' ? 'col-12' : 'col-xxl-4 col-sm-6'"
+                            *ngFor="let blog of (blog$ | async)?.data">
+                            <div class="blog-box" [class.blog-list]="style === 'list_view'"  [ngClass]="blog?.is_sticky === 1 ? 'sticky-blog-box' : ''">
+                                <div class="blog-label-tag" *ngIf="blog?.is_featured">
+                                    <span>{{ 'featured' | translate }}</span>
+                                </div>
+                                <div class="blog-image">
+                                    <a [routerLink]="['/blog/', blog?.slug]">
+                                        <img [src]="blog?.blog_thumbnail?.original_url
+                                            ? blog?.blog_thumbnail?.original_url
+                                            : 'assets/images/blog.png'" [alt]="blog?.title">
+                                    </a>
+                                </div>
+                                <div class="blog-contain blog-contain-2" [class.blog-contain-2]="style === 'list_view'">
+                                    <div class="blog-label">
+                                        <span class="time">
+                                            <i class="ri-time-line"></i>
+                                            <span>{{ blog?.created_at | date: 'dd MMM yyyy hh:mm:a'}}</span>
+                                        </span>
+                                        <span class="super" *ngIf="(themeOption$ | async)?.blog?.blog_author_enable">
+                                            <i class="ri-user-line"></i>
+                                            <span>{{ blog?.created_by?.name }}</span>
+                                        </span>
+                                    </div>
+                                    <a [routerLink]="['/blog/', blog?.slug]">
+                                        <h3>{{ blog?.title }}</h3>
+                                    </a>
+                                    <p [innerHTML]="blog.description | summary:200" *ngIf="blog?.description"></p>
+                                    <a [routerLink]="['/blog/', blog?.slug]" class="blog-button" *ngIf="(themeOption$ | async)?.blog?.read_more_enable">
+                                        {{ 'read_more' | translate }} <i class="ri-arrow-right-fill"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+                <nav class="custome-pagination" *ngIf="(blog$ | async)?.data?.length && !blogService.skeletonLoader">
+                    <app-pagination
+                        [total]="totalItems"
+                        [currentPage]="filter['page']"
+                        [pageSize]="filter['paginate']"
+                        (setPage)="setPaginate($event)">
+                    </app-pagination>
+                </nav>
+                <ng-template #noData>
+                  <app-no-data
+                    [class]="'no-data-added'"
+                    [image]="'assets/svg/empty-items.svg'"
+                    [text]="'no_blogs_found'"
+                    [description]="'not_find_any_blogs_matching_search_criteria'"
+                    *ngIf="!(blog$ | async)?.data?.length">
+                  </app-no-data>
+                </ng-template>
+            </div>
+            <div class="col-xxl-3 col-xl-4 col-lg-5"
+                [class.order-lg-1]="sidebar === 'left_sidebar'"
+                [class]="sidebar === 'no_sidebar' ? 'd-none' : ''">
+                <div class="left-sidebar-box">
+                   <app-blog-sidebar></app-blog-sidebar>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

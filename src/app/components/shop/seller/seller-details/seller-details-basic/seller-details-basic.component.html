@@ -1,0 +1,42 @@
+<section class="section-b-space shop-section" id="filtered_products">
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div class="col-xxl-3 col-lg-4">
+                <div class="left-box">
+                    <app-collection-sidebar [filter]="filter">
+                        <div class="vendor-detail-box">
+                            <img class="shop-roof" *ngIf="(themeOptions$ | async)?.seller?.store_image_url" [src]="this.storageURL + (themeOptions$ | async)?.seller?.store_image_url" alt="seller">
+                            <div class="vendor-name vendor-bottom">
+                                <div class="vendor-logo">
+                                    <app-seller-store-logo [store]="store"></app-seller-store-logo>
+                                    <div>
+                                        <app-seller-store-name [store]="store"></app-seller-store-name>
+                                        <app-seller-store-rating [store]="store"></app-seller-store-rating>
+                                    </div>
+                                </div>
+                                
+                                <app-seller-store-description [store]="store"></app-seller-store-description>
+                                <ul class="vendor-detail-list">
+                                    <li *ngIf="!store?.hide_vendor_phone && store.vendor">
+                                        <i class="ri-smartphone-line"></i>
+                                        <h5>+{{ store.vendor.country_code }}  {{ store.vendor.phone }}</h5>
+                                    </li>
+                                    <li *ngIf="!store?.hide_vendor_email && store.vendor">
+                                        <i class="ri-mail-line"></i>
+                                        <h5>
+                                            <a href="mailto:{{store.vendor.email}}">{{ store.vendor.email }}</a>
+                                        </h5>
+                                    </li>
+                                </ul>
+                            </div>
+                            <app-seller-store-social-links [store]="store"></app-seller-store-social-links>
+                        </div>
+                    </app-collection-sidebar>
+                </div>
+            </div>
+            <div class="col-xxl-9 col-lg-8">
+                <app-collection-products [filter]="filter"></app-collection-products>
+            </div>
+        </div>
+    </div>
+</section>

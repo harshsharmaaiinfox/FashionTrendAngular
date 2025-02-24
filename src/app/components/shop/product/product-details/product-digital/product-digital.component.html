@@ -1,0 +1,131 @@
+<!-- Product Left Sidebar Start -->
+<div class="container-fluid-lg">
+    <div class="row g-sm-4 g-3">
+        <div class="col-xl-8 col-lg-7 wow fadeInUp">
+            <div class="product-left-box">
+                <div class="row g-sm-4 g-3">
+                    <div class="col-12 wow fadeInUp">
+                        <div class="position-relative">
+                            <div class="theme-option-box">
+                                <div class="theme-image-option">
+                                    <img [src]="product.product_thumbnail ? product.product_thumbnail.original_url : 'assets/images/product.png'"
+                                        class="img-fluid blur-up w-100 h-100" [alt]="product.name">
+                                    <ng-container *ngIf="product.product_thumbnail">
+                                        <div class="icon-btn-group">
+                                            <ng-container *ngIf="product.product_thumbnail && videType.includes(product?.product_thumbnail?.mime_type!)">
+                                                <button class="theme-image-icon btn btn-md"
+                                                        (click)="VideoPlayModal.openModal(product.product_thumbnail!, 'video')">
+                                                        <i class="ri-play-line"></i>
+                                                </button>
+                                            </ng-container>
+                                            <ng-container *ngIf="product.product_thumbnail && audioType.includes(product?.product_thumbnail?.mime_type!)">
+                                                <button class="theme-image-icon btn btn-md"
+                                                        (click)="VideoPlayModal.openModal(product.product_thumbnail!, 'audio')">
+                                                        <i class="ri-headphone-line"></i>
+                                                </button>
+                                            </ng-container>
+
+                                            <ng-container *ngIf="product.product_galleries &&  product.product_galleries.length > 0">
+                                                <button class="theme-image-icon btn btn-md"
+                                                        (click)="VideoPlayModal.openModal(product.product_galleries, 'img')">
+                                                    <i class="ri-image-2-line"></i>
+                                                    <span class="ms-2">{{ 'preview_image' | translate }}</span>
+                                                </button>
+                                            </ng-container>
+                                            <ng-container *ngIf="product.preview_type === 'url' && product.preview_url; else video">
+                                                <a class="theme-image-icon btn btn-md" href="{{ product.preview_url }}" target="_blank"><i class="ri-share-box-line"></i><span class="ms-2">{{'live_preview' | translate}}</span></a>
+                                            </ng-container>
+                                            <ng-template #video>
+                                                <ng-container *ngIf="product.preview_type === 'video'; else audio">
+                                                    <button class="theme-image-icon btn btn-md"
+                                                    (click)="VideoPlayModal.openModal(product.preview_video_file!, product.preview_type)">
+                                                    <i class="ri-play-line"></i>
+                                                    <span class="ms-2">{{'preview_video' | translate}}</span>
+                                                </button>
+                                            </ng-container>
+                                            </ng-template>
+                                            <ng-template #audio>
+                                                <ng-container *ngIf="product.preview_type === 'audio'">
+                                                    <button class="theme-image-icon theme-icon-btn"
+                                                        (click)="VideoPlayModal.openModal(product.preview_audio_file!, product.preview_type)">
+                                                        <i class="ri-play-line"></i>
+                                                    </button>
+                                                </ng-container>
+                                            </ng-template>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                                 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <app-product-details-tabs [product]="product"></app-product-details-tabs>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-5 wow fadeInUp vendor-right-box">
+            <div class="right-box-contain">
+                <div class="main-right-box-contain">
+                    <div class="vendor-box">
+                        <app-vendor-contain [store]="product.store!"></app-vendor-contain>
+                        <div class="vendor-detail">
+                            <p>{{product.short_description}}</p>
+                        </div>
+                    </div>
+                    <app-product-contain [product]="product" [option]="option"></app-product-contain>
+
+                    <div class="buy-box">
+                        <a href="javascript:void(0)" (click)="addToWishlist(product)">
+                            <i class="ri-heart-{{product.is_wishlist ? 'fill' : 'line' }}" [class.theme-color]="product.is_wishlist"></i>
+                            <span>{{ 'add_to_wishlist' | translate }}</span>
+                        </a>
+                        <a href="javascript:void(0)" (click)="addToCompare(product.id)">
+                            <i class="ri-shuffle-line"></i>
+                            <span>{{ 'add_to_compare' | translate }}</span>
+                        </a>
+                    </div>
+                    <div class="pickup-box">
+                        <div class="product-title">
+                            <h4>{{ 'assets_information' | translate }}</h4>
+                        </div>
+                        <div class="product-info">
+                            <ul class="product-info-list product-info-list-2">
+                                <li>
+                                    {{ 'created' | translate }} :
+                                    <a href="javascript:void(0)">
+                                        {{ product.created_at | date: 'dd MMM yyyy' }}
+                                    </a>
+                                </li>
+                                <li *ngIf="product.updated_at">
+                                    {{ 'last_update' | translate }} :
+                                    <a href="javascript:void(0)">
+                                        {{ product.updated_at | date: 'dd MMM yyyy' }}
+                                    </a>
+                                </li>
+                                <li *ngIf="product.tags.length" class="d-flex align-items-center">
+                                    <span>{{ 'tags' | translate }} :</span>
+                                    <ul class="tag-list">
+                                        <li *ngFor="let tag of product.tags">
+                                            <a href="javascript:void(0)">{{ tag.name }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-container *ngIf="product?.wholesales?.length">
+                <div class="pt-4">
+                    <div class="right-box-contain">
+                        <app-product-wholesale [product]="product"></app-product-wholesale>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+<!-- Product Left Sidebar End -->
+<app-video-play-modal #videoPlayModal></app-video-play-modal>

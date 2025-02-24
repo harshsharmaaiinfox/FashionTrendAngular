@@ -1,0 +1,15 @@
+<div class="accordion-body pt-0" >
+    <div class="product-tags-box">
+        <ul>
+            <li *ngFor="let tag of tags">
+                <a [routerLink]="['/blogs']" [queryParams]="{tag: tag?.slug}">{{ tag?.name }}</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- No Data -->
+<app-no-data
+  [class]="'no-data-added bg-light'"
+  [text]="'no_tag_found'"
+  *ngIf="!tags?.length">
+</app-no-data>

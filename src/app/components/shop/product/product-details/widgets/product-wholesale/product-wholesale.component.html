@@ -1,0 +1,20 @@
+<table class="table mt-2 mb-4 modal-table">
+    <thead>
+        <tr>
+            <th class="border-top-0">{{ 'Min QTY' | translate }}</th>
+            <th class="border-top-0">{{ 'Max QTY' | translate }}</th>
+            <th class="border-top-0">
+                {{ (product?.wholesale_price_type == 'fixed' ? 'Unit Price' : 'Percentage' ) | translate }}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let wholesale of product?.wholesales">
+            <td>{{ wholesale.min_qty }}</td>
+            <td>{{ wholesale.max_qty }}</td>
+            <td>
+                {{ (product?.wholesale_price_type == 'fixed'? (wholesale.value | currencySymbol) : wholesale.value +'% Off') }}
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,19 @@
+<div class="media recently-purchase" [class.show]="popup_enable ? show : popup_enable" *ngIf="product">
+    <img [src]="product.product_thumbnail ?
+                product.product_thumbnail.original_url :
+                'assets/images/product.png'" class="media-height" alt="product">
+    <div class="media-body">
+        <div>
+            <div class="title d-block mb-0">
+                {{ 'Someone Recently Purchased' | translate }}
+            </div>
+            <a [routerLink]="['/product/', product.slug]">
+                <span class="product-name">
+                    {{ product.name }}
+                </span>
+            </a>
+            <small class="timeAgo">{{ min }} {{ 'Minutes ago' | translate }}</small>
+        </div>
+    </div>
+    <a href="javascript:void(0)" (click)="closePopup()" class="close-popup ri-close-fill"></a>
+</div>

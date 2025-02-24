@@ -1,0 +1,17 @@
+<ul class="category-list custom-padding">
+    <li *ngFor="let number of numbers; let i = index">
+        <div class="form-check ps-0 m-0 category-list-box">
+            <input class="checkbox_animated" type="checkbox"
+                id="rating-{{numbers[numbers.length-i-1]}}"
+                [value]="numbers[numbers.length-i-1]"
+                [checked]="checked(numbers[numbers.length-i-1].toString())"
+                (change)="applyFilter($event)">
+            <div class="form-check-label">
+            <div class="product-rating">
+                <ngb-rating [rate]="numbers[numbers.length-i-1]"></ngb-rating>
+            </div>
+            <span class="text-content">({{numbers[numbers.length-i-1]}} {{ 'star' | translate }})</span>
+            </div>
+        </div>
+    </li>
+</ul>

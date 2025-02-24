@@ -1,0 +1,22 @@
+<ng-template #confirmationModal let-modal>
+    <div class="modal-body">
+        <i class="ri-question-line icon-box wo-bg"></i>
+        <h5 class="modal-title">{{ 'confirmation' | translate }}</h5>
+        <p>{{ 'Are You Sure You Want To Proceed' | translate }}?</p>
+        <div class="button-box">
+            <app-button
+                [class]="'btn btn-md fw-bold btn-theme-outline'"
+                [spinner]="false"
+                [id]="'confirm_no_btn'"
+                (click)="modal.dismiss('Cancel')">
+                {{ 'NO' | translate }}
+            </app-button>
+            <app-button
+                [class]="'btn theme-bg-color btn-md fw-bold text-light'"
+                [id]="'confirm_yes_btn'"
+                (click)="confirm()">
+                {{ 'YES' | translate }}
+            </app-button>
+        </div>
+    </div>
+</ng-template>

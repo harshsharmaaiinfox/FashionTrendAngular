@@ -1,0 +1,14 @@
+<div class="pickup-box">
+    <div class="product-title">
+        <h4>{{ 'Product Information' | translate }}</h4>
+    </div>
+    <div class="product-info">
+        <ul class="product-info-list product-info-list-2">
+            <li *ngIf="product?.sku">{{ 'sku' | translate }}: {{ product?.sku }}</li>
+            <li *ngIf="product?.unit">{{ 'unit' | translate }}: {{ product?.unit }}</li>
+            <li *ngIf="product?.sku">{{ 'weight' | translate }}: {{ product?.weight }} {{ 'gms' | translate }}</li>
+            <li *ngIf="product?.stock_status">{{ 'stock_status' | translate }}: {{ product?.stock_status! | titleCase }}</li>
+            <li *ngIf="product?.quantity! > 0">{{ 'quantity' | translate }}: {{ product?.quantity }} {{ 'items_left' | translate }}</li>
+        </ul>
+    </div>
+</div>

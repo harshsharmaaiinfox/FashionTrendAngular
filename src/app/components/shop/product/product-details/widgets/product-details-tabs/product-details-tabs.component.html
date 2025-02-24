@@ -1,0 +1,30 @@
+<div class="product-section-box mt-0">
+    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav nav-tabs custom-nav">
+            <li ngbNavItem="description">
+                <a ngbNavLink>{{ 'Description' | translate }}</a>
+                <ng-template ngbNavContent>
+                    <div class="product-description more-less-box" [class.more]="showMore" >
+                        <div *ngIf="product?.description" class="nav-desh ckeditor-content" id="description" #description
+                            [innerHTML]="getTrustedHtml(product?.description)">
+                        </div>
+                        <button class="btn more-lest-btn" (click)="seeMore()" *ngIf="height > 500 || width < 768">
+                            {{ (!showMore ? 'show_more' : 'show_less') | translate }}
+                            <i class="ri-arrow-down-s-line"></i></button>
+                    </div>
+                </ng-template>
+            </li>
+            <li ngbNavItem="review" *ngIf="!product?.is_external">
+                <a ngbNavLink>{{ 'Review' | translate }}</a>
+                <ng-template ngbNavContent>
+                    <app-product-review [product]="product" [reviews]="(review$ | async)?.data || []"></app-product-review>
+                </ng-template>
+            </li>
+            <li ngbNavItem="questions_answers">
+            <a ngbNavLink>{{ 'Q/A' | translate }}</a>
+            <ng-template ngbNavContent>
+                <app-questions-answers [product]="product!" [questionAnswers]="(question$ | async)?.data || []"></app-questions-answers>
+            </ng-template>
+        </li>
+    </ul>
+  <div [ngbNavOutlet]="nav" class="custom-tab"></div>
+</div>

@@ -1,0 +1,103 @@
+<div class="product-bg-image" [ngStyle]="{'background-image': 'url(' + (storageURL + data?.image_url) + ')'}" *ngIf="deals.length">
+  <div class="product-title product-warning">
+      <h2>{{ data?.title }}</h2>
+  </div>
+  <div class="product-box-4 product-box-3 rounded-0">
+      <div class="deal-box" *ngIf="data?.label">
+          <div class="circle-box">
+              <div class="shape-circle">
+                  <img src="assets/images/svg/circle.svg" alt="circle">
+                  <div class="shape-text">
+                      <h6>{{ data?.label }}</h6>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="top-selling-slider product-arrow">
+           
+        <owl-carousel-o [options]="dealSlider">
+          <ng-container *ngFor="let deal of deals">
+            <ng-template carouselSlide *ngIf="deal?.status && !!deal.remainingTime">
+                <div>
+                    <div class="product-image">
+                        <a href="javascript:void(0)">
+                            <img [src]="deal?.product?.product_thumbnail?.original_url" class="img-fluid product-image" [alt]="deal?.product?.name">
+                        </a>
+                        <ul class="option">
+                            <li data-bs-toggle="tooltip" data-bs-placement="top" title="Quick View">
+                                <a href="javascript:void(0)" [routerLink]="['/product/', deal?.product?.slug]">
+                                  <i class="ri-eye-line"></i>
+                                </a>
+                            </li>
+                            <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                <a href="javascript:void(0)" class="notifi-wishlist" (click)="addToWishlist(deal.product)">
+                                  <i class="ri-heart-{{deal?.product?.is_wishlist ? 'fill' : 'line'}}"  [class.theme-color]="deal?.product?.is_wishlist" ></i>
+                                </a>
+                            </li>
+                            <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
+                                <a href="javascript:void(0)" (click)="addToCompare(deal.product.id)">
+                                  <i class="ri-refresh-line"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="product-detail text-center">
+                        <ul class="product-rating justify-content-center">
+                          <ngb-rating [rate]="deal?.product?.rating_count || 0"></ngb-rating>
+                        </ul>
+                        <a href="javascript:void(0)">
+                            <h3 class="name w-100 mx-auto text-center">
+                                {{ deal?.product?.name }}
+                            </h3>
+                        </a>
+                        <h3 class="price theme-color d-flex justify-content-center">
+                            {{ deal?.product?.sale_price! | currencySymbol }}<del class="delete-price">{{ deal?.product?.price! | currencySymbol }}</del>
+                        </h3>
+                        <div class="progress custom-progressbar">
+                          <div class="progress-bar" [ngStyle]="{ width: (deal?.product?.quantity! * 100) / 10+'%' }" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <h5 class="text-content">{{ 'sold' | translate }} : <span class="text-dark">{{ deal?.product?.quantity }} {{ 'items' | translate }}</span>
+                          <span class="ms-auto text-content">{{ 'hurry_up_offer_end_in' | translate }}</span></h5>
+                        <div class="timer timer-2 ms-0 my-4" id="clockdiv-1" *ngIf="deal.remainingTime.seconds >= 0; else offer_close">
+                            <ul class="d-flex justify-content-center">
+                                <li>
+                                    <div class="counter">
+                                        <div class="days">
+                                            <h6 >{{ deal?.remainingTime?.days }}</h6>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="counter">
+                                        <div class="hours">
+                                            <h6>{{ deal?.remainingTime?.hours }}</h6>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="counter">
+                                        <div class="minutes">
+                                          <h6>{{ deal?.remainingTime?.minutes }}</h6>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="counter">
+                                        <div class="seconds">
+                                          <h6>{{ deal?.remainingTime?.seconds }}</h6>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <ng-template #offer_close>
+                          <h2 class="mt-3">{{(deal.remainingTime.seconds < 0 ? 'offer_closed' : '') | translate }}</h2>
+                        </ng-template>
+                    </div>
+                </div>
+              </ng-template>
+            </ng-container>
+        </owl-carousel-o>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,147 @@
+<app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+
+<!-- About Section Start -->
+<section class="saller-poster-section" *ngIf="data?.seller?.about?.status">
+  <div class="container-fluid-lg">
+    <div class="row">
+      <div class="col-12" *ngIf="data?.seller?.about?.image_url">
+        <div class="poster-box">
+          <div class="poster-image">
+            <img [src]="this.storageURL + data?.seller?.about?.image_url" class="img-fluid" [alt]="data?.seller?.about?.title">
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="seller-title h-100 d-flex align-items-center">
+          <div>
+            <h2>{{ data?.seller?.about?.title }}</h2>
+            <p>{{ data?.seller?.about?.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- About Section End -->
+
+<!-- Service Section Start -->
+<section class="become-service section-b-space" *ngIf="data?.seller?.services?.status">
+  <div class="container-fluid-lg">
+      <div class="row g-md-4 g-3">
+          <div class="col-xxl-3 col-lg-4 col-sm-6">
+              <div class="service-box">
+                  <div class="service-svg" *ngIf="data?.seller?.services?.service_1?.image_url">
+                    <img [src]="this.storageURL +  data?.seller?.services?.service_1?.image_url" class="img-fluid" [alt]="data?.seller?.services?.service_1?.title">
+                  </div>
+                  <div class="service-detail">
+                      <h4>{{ data?.seller?.services?.service_1?.title }}</h4>
+                      <p>{{ data?.seller?.services?.service_1?.description }}</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-xxl-3 col-lg-4 col-sm-6">
+              <div class="service-box">
+                  <div class="service-svg" *ngIf="data?.seller?.services?.service_2?.image_url">
+                    <img [src]="this.storageURL + data?.seller?.services?.service_2?.image_url" class="img-fluid" [alt]="data?.seller?.services?.service_2?.title">
+                  </div>
+                  <div class="service-detail">
+                    <h4>{{ data?.seller?.services?.service_2?.title }}</h4>
+                    <p>{{ data?.seller?.services?.service_2?.description }}</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-xxl-3 col-lg-4 col-sm-6">
+              <div class="service-box">
+                  <div class="service-svg" *ngIf="data?.seller?.services?.service_3?.image_url">
+                    <img [src]="this.storageURL + data?.seller?.services?.service_3?.image_url" class="img-fluid" [alt]="data?.seller?.services?.service_3?.title">
+                  </div>
+                  <div class="service-detail">
+                    <h4>{{ data?.seller?.services?.service_3?.title }}</h4>
+                    <p>{{ data?.seller?.services?.service_3?.description }}</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-xxl-3 col-lg-4 col-sm-6">
+              <div class="service-box">
+                  <div class="service-svg" *ngIf="data?.seller?.services?.service_4?.image_url">
+                    <img [src]="this.storageURL + data?.seller?.services?.service_4?.image_url" class="img-fluid" [alt]="data?.seller?.services?.service_4?.image_url">
+                  </div>
+                  <div class="service-detail">
+                    <h4>{{ data?.seller?.services?.service_4?.title }}</h4>
+                    <p>{{ data?.seller?.services?.service_4?.description }}</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- Service Section End -->
+
+<!-- Business Section Start -->
+<section class="business-section section-b-space" *ngIf="data?.seller?.steps?.status">
+    <div class="container-fluid-lg">
+        <div class="vendor-title mb-5">
+            <h5>{{ data?.seller?.steps?.title }}</h5>
+        </div>
+        <div class="business-contain">
+            <div class="row g-xl-4 g-3">
+                <div class="col-xl-4 col-sm-6">
+                    <div class="business-box">
+                        <div>
+                            <div class="business-number">
+                                <h2>{{ '1' | translate }}</h2>
+                            </div>
+                            <div class="business-detail">
+                                <h4>{{ data?.seller?.steps?.step_1?.title }}</h4>
+                                <p>{{ data?.seller?.steps?.step_1?.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-sm-6">
+                    <div class="business-box">
+                        <div>
+                            <div class="business-number">
+                                <h2>{{ '2' | translate }}</h2>
+                            </div>
+                            <div class="business-detail">
+                              <h4>{{ data?.seller?.steps?.step_2?.title }}</h4>
+                              <p>{{ data?.seller?.steps?.step_2?.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-sm-6">
+                    <div class="business-box">
+                        <div>
+                            <div class="business-number">
+                                <h2>{{ '3' | translate }}</h2>
+                            </div>
+                            <div class="business-detail">
+                              <h4>{{ data?.seller?.steps?.step_3?.title }}</h4>
+                              <p>{{ data?.seller?.steps?.step_3?.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Business Section End -->
+
+<!-- Selling Section Start -->
+<section class="selling-section section-b-space" *ngIf="data?.seller?.start_selling?.status">
+    <div class="container-fluid-lg">
+        <div class="vendor-title">
+            <h5>{{ data?.seller?.start_selling?.title }}</h5>
+            <p>{{ data?.seller?.start_selling?.description }}</p>
+            <a href="{{data?.general?.seller_register_url}}" class="btn btn-animation theme-bg-color d-inline-block mt-3" 
+              *ngIf="data?.general?.seller_register_url">{{ 'start_selling' | translate }}
+            </a>
+        </div>
+    </div>
+</section>
+<!-- Selling Section End -->

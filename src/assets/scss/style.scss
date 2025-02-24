@@ -1,0 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+body {
+    font-family: "Outfit", serif !important;
+}
+
+.theme-color-1 {
+  --theme-color: #d99f46;
+}
+
+.theme-color-2 {
+  --theme-color: #0baf9a;
+}
+
+.theme-color-3 {
+  --theme-color: #239698;
+}
+
+.theme-color-4 {
+  --theme-color: #6262a6;
+}
+
+.theme-color-5 {
+  --theme-color: #417394;
+}
+
+// utils
+@import "utils/mixin/animation";
+@import "utils/mixin/common";
+@import "utils/mixin/breakpoints";
+
+// components
+@import "components/accordion";
+@import "components/alert";
+@import "components/breadscrumb";
+@import "components/button";
+@import "components/card";
+@import "components/cookie_bar";
+@import "components/confetti";
+@import "components/counter";
+@import "components/country-flag";
+@import "components/form";
+@import "components/label";
+@import "components/loader";
+@import "components/modal";
+@import "components/nav-tabs";
+@import "components/pagination";
+@import "components/ratio";
+@import "components/slider";
+@import "components/tab";
+@import "components/tap-to-top";
+@import "components/theme-setting";
+@import "components/timer";
+@import "components/title";
+@import "components/tooltip";
+
+// Base
+@import "base/reset";
+@import "base/typography";
+
+// Layout
+@import "layout/banner";
+@import "layout/blog";
+@import "layout/brand";
+@import "layout/category";
+@import "layout/footer";
+@import "layout/header";
+@import "layout/home";
+@import "layout/item";
+@import "layout/nav";
+@import "layout/newsletter";
+@import "layout/offer";
+@import "layout/product";
+@import "layout/review";
+@import "layout/service";
+@import "layout/select2";
+
+// Pages
+@import "pages/coming-soon";
+@import "pages/inner_pages";
+@import "pages/checkout";
+@import "pages/offer";
+@import "pages/pos";
+@import "pages/shop_page";
+@import "pages/product_page";
+@import "pages/user-dashboard";
+
+// Themes
+@import "themes/dark";
+@import "themes/rtl";
+
+.user-dashboard-section .dashboard-left-sidebar .user-nav-pills .logout-cls .btn {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 10px;
+}
+header .top-nav .navbar-top .middle-box .search-box .input-group button {
+  background-color: #000000;
+  color: #ffffff;
+  height: 51px;
+  padding: 14px 20px;
+  border-radius: 5px;
+  border: 1px solid #000000;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+footer.section-t-space {
+  margin-top: 30px;
+}
+footer .sub-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px dashed #c1c1c1;
+}
+.btn-animation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: white;
+  border-radius: 5px;
+  font-weight: 600;
+  background: transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  background: #ff6b6b;
+  background: linear-gradient(90deg, #1d1d22 0%, #2a2d2d 100%);
+  border: none;
+  z-index: 0;
+}
+
+.title-flex-2 {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+header .top-nav {
+  background: #867969;
+}
+
+
+
+@media(min-width:1200px){
+  header .top-nav .navbar-top .rightside-box .right-side-menu .right-side:last-child {
+    padding-right: 15px;
+  }
+  
+  header .top-nav .navbar-top {
+    flex-direction: row-reverse  !important;
+  }
+  
+  header .top-nav .navbar-top .rightside-box .right-side-menu {
+    flex-direction: row-reverse  !important;
+  }
+}
+footer .main-footer .address {
+  margin-top:0px !important;
+}
+
+footer .main-footer .footer-logo .footer-logo-contain {
+ margin-top:0px !important;
+}
+
+header .top-nav {
+  padding: 10px 0  !important;
+}
+
+header.active .sticky-header {
+  background-color: #867969;
+}
+
+header .navbar.navbar-expand-xl .navbar-nav .nav-item > a {
+  color: #ffffff  !important;
+}
+header .top-nav .navbar-top .rightside-box .right-side-menu .right-side.search-icon a {
+  color: #fff !important;
+}
+
+header .top-nav .navbar-top .rightside-box .right-side-menu .right-side .header-wishlist i {
+  color: #fff !important;
+}
+
+
+header .top-nav .navbar-top .rightside-box .right-side-menu .right-side .header-wishlist i {
+  color: #fff !important;
+}
+
+
+header .delivery-login-box .delivery-detail h6, header .delivery-login-box .delivery-detail .h6 {
+  color: #fff !important;
+}
+
+.delivery-detail h5{
+  color: #fff !important;
+}
+
+.footer-title h4{
+  color: #000 !important;
+}
+.footer-contain a {
+  color: #ffffff !important;
+}
+.reserve h6{
+  color: #000 !important;
+}
+.footer-contact h6{
+  color: #fff !important;
+}
+.footer-contact i{
+  color: #fff !important;
+}
+.footer-contact h5{
+  color: #fff !important;
+}
+.product-left-box img{
+  width: 100% !important;
+}
+.product-left-box .ng-star-inserted {
+  width: 100%;
+}
+
+// Sub Paisa
+$border-radius: 4px;
+
+@mixin with-border($radius: $border-radius, $border-color: black) {
+  border: 1px solid $border-color;
+  border-radius: $radius;
+}
+
+.my-graph-component {
+  @include with-border($border-radius, blue);
+
+  filter: drop-shadow(2px 4px 6px black);
+  background-color: #1eb4d1;
+  border: 1px solid #198aa2;
+  display: inline-block;
+  user-select: none;
+  padding: 20px;
+
+  .comp-props {
+    color: white;
+
+    .increase-button {
+      @include with-border($border-radius, #3e3e3e);
+      background-color: white;
+      margin-left: 40px;
+      padding: 4px 6px;
+      cursor: pointer;
+      color: black;
+
+      &:hover {
+        filter: drop-shadow(2px 4px 6px black);
+      }
+    }
+  }
+
+  .comp-state {
+    color: yellow;
+    margin-top: 20px;
+  }
+}
+
+.checkout-section-2 .left-sidebar-checkout .checkout-detail-box>ul>li .checkout-box .checkout-detail .payment-option img {
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  left: 140px;
+  right: auto;
+  width: 100px;
+}

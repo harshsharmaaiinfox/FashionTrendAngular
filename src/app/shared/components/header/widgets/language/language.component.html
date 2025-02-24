@@ -1,0 +1,38 @@
+<!-- Language Basic Style -->
+<div *ngIf="style == 'basic'" (clickOutside)="hideDropdown()">
+  <app-button
+    [class]="'btn dropdown-toggle'"
+    [type]="'button'"
+    [id]="'open_dropdown_basic_btn'"
+    [spinner]="false"
+    (click)="openDropDown()">
+    <span><div class="iti-flag {{ selectedLanguage.icon }}"></div> {{ selectedLanguage.language }}</span>
+  </app-button>
+  <ul class="dropdown-menu dropdown-menu-end language-dropdown" [class.show]="active" >
+      <li *ngFor="let language of languages">
+          <a class="dropdown-item" href="javascript:void(0)" (click)="selectLanguage(language)">
+            <div class="iti-flag {{ language.icon }}"></div>
+            <span>{{ language.language }}</span>
+          </a>
+      </li>
+  </ul>
+</div>
+<!-- Language Standard Style -->
+<div *ngIf="style == 'standard'" (clickOutside)="hideDropdown()">
+    <app-button
+      [class]="'dropdown-toggle'"
+      [type]="'button'"
+      [id]="'open_dropdown_standard_btn'"
+      [spinner]="false"
+      (click)="openDropDown()">
+      <span><div class="iti-flag {{ selectedLanguage.icon }}"></div> {{ selectedLanguage.language }}</span> <i class="ri-arrow-{{ active ? 'up' : 'down' }}-s-line"></i>
+    </app-button>
+    <ul class="dropdown-menu" [class.show]="active">
+        <li *ngFor="let language of languages">
+            <a class="dropdown-item" href="javascript:void(0)" (click)="selectLanguage(language)">
+              <div class="iti-flag {{ language.icon }}"></div>
+              <span>{{ language.language }}</span>
+            </a>
+        </li>
+    </ul>
+</div>

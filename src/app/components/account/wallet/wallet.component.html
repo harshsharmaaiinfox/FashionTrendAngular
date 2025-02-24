@@ -1,0 +1,58 @@
+<div class="title-header">
+    <div class="d-flex align-items-center">
+        <h5>{{ 'my wallet' | translate }}</h5>
+    </div>
+</div>
+<div class="total-box mt-0" *ngIf="(wallet$ | async)?.transactions?.data?.length">
+    <div class="row">
+        <div class="col-12">
+            <div class="totle-contain wallet-bg">
+                <div class="wallet-point-box">
+                    <img src="assets/images/svg/wallet.svg" alt="wallet">
+                    <div class="totle-detail">
+                        <h5>{{ 'wallet balance'| translate}}</h5>
+                        <h3>{{ ((wallet$ | async) ? (wallet$ | async)?.balance! : 0) | currencySymbol }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wallet-table">
+        <h4 class="user-dashboard-title">{{ 'transactions' | translate }}</h4>
+        <div class="table-responsive">
+            <table>
+                <tbody>
+                    <tr>
+                        <th>{{ 'date'| translate}}</th>
+                        <th>{{ 'Amount'| translate}}</th>
+                        <th>{{ 'Remark'| translate}}</th>
+                        <th>{{ 'Status'| translate}}</th>
+                    </tr>
+                    <tr *ngFor="let transaction of (wallet$ | async)?.transactions?.data let i = index">
+                        <td>{{ transaction?.created_at | date: 'dd MMM yyyy hh:mm:a' }}</td>
+                        <td>{{ transaction?.amount | currencySymbol }}</td>
+                        <td>{{ transaction?.detail }}</td>
+                        <td>
+                            <div class="status-{{transaction?.type}}"><span>{{ transaction?.type | titleCase }}</span></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <nav class="custome-pagination" *ngIf="(wallet$ | async)?.transactions?.data?.length">
+        <app-pagination
+            [total]="(wallet$ | async)?.transactions?.total || 0"
+            [currentPage]="filter['page']"
+            [pageSize]="filter['paginate']"
+            (setPage)="setPaginate($event)">
+        </app-pagination>
+    </nav>
+</div>
+<app-no-data
+    [class]="'no-data-added'"
+    [image]="'assets/svg/empty-items.svg'"
+    [text]="'No Transaction Found'"
+    [description]="'No Wallet Detected'"
+    *ngIf="!(wallet$ | async)?.transactions?.data?.length">
+</app-no-data>

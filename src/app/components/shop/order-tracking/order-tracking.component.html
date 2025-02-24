@@ -1,0 +1,46 @@
+<app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+<section class="log-in-section background-image-2 section-b-space">
+    <div class="container-fluid-lg w-100">
+        <div class="row">
+            <div class="col-xxl-6 col-xl-5 col-lg-6 d-lg-block d-none ms-auto">
+                <div class="image-contain">
+                    <img src="assets/images/inner-page/order-tracking.svg" class="img-fluid" alt="order-tracking">
+                </div>
+            </div>
+            <div class="col-xxl-4 col-xl-5 col-lg-6 col-sm-8 mx-auto">
+                <app-alert></app-alert>
+                <div class="log-in-box">
+                    <div class="log-in-title">
+                        <h3>{{ 'order_tracking' | translate }}</h3>
+                        <p>{{ 'order_tracking_description' | translate }}</p>
+                    </div>
+                    <div class="input-box">
+                        <form class="row g-4" [formGroup]="form" (ngSubmit)="submit()">
+                            <div class="col-12">
+                                <div class="form-floating theme-form-floating log-in-form">
+                                    <input type="text" class="form-control" id="order_number" formControlName="order_number"  placeholder="{{ 'order_number' | translate }}">
+                                    <label for="order_number">{{ 'order_number' | translate }}</label>
+                                </div>
+                                <div *ngIf="form.controls['order_number'].touched && form.controls['order_number'].errors?.['required']" class="invalid-feedback">
+                                    {{ 'order_number_is_required' | translate }}
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating theme-form-floating log-in-form">
+                                    <input type="email" class="form-control" id="email" formControlName="email_or_phone" placeholder="{{ 'enter_email_or_phone' | translate }}">
+                                    <label for="email">{{ 'enter_email_or_phone' | translate }}</label>
+                                </div>
+                                <div *ngIf="form.controls['email_or_phone'].touched && form.controls['email_or_phone'].errors?.['required']" class="invalid-feedback">
+                                    {{ 'email_or_phone_is_required' | translate }}
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <app-button [id]="'track_btn'">{{ 'track' | translate }}</app-button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

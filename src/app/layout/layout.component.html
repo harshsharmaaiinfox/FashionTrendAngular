@@ -1,0 +1,22 @@
+<!-- Top Progress Loader -->
+<ngx-loading-bar class="loader-bg" [includeSpinner]="true" [height]="'3px'"></ngx-loading-bar>
+
+<!-- Main Loader -->
+<app-loader *ngIf="themeOptionService.preloader"></app-loader>
+
+<!-- Layout Partial -->
+<app-header [logo]="setLogo().header_logo"></app-header>
+<router-outlet></router-outlet>
+<app-footer [footer]="setLogo().footer"></app-footer>
+
+<!-- Widgets -->
+<!-- <app-recent-purchase-popup></app-recent-purchase-popup> -->
+<app-sticky-cart *ngIf="(themeOption$ | async)?.general?.cart_style == 'cart_mini'"></app-sticky-cart>
+<app-sticky-compare></app-sticky-compare>
+<div class="theme-option">
+  <!-- <app-theme-customizer></app-theme-customizer> -->
+  <app-back-to-top *ngIf="(themeOption$ | async)?.general?.back_to_top_enable"></app-back-to-top>
+</div>
+
+<app-newsletter-modal *ngIf="(themeOption$ | async)?.popup?.news_letter?.is_enable"></app-newsletter-modal>
+<app-exit-modal it-modal *ngIf="exit && (themeOption$ | async)?.popup?.exit?.is_enable"></app-exit-modal>

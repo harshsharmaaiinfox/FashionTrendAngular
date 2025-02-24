@@ -1,0 +1,15 @@
+<div class="product-title">
+    <h2 class="name">{{ product.name }}</h2>
+    <ul class="title-content-list">
+        <li>
+            <h6 class="content">{{'by' | translate}} <a [routerLink]="['/seller/store', product.store?.slug]">{{ product.store?.store_name }}</a></h6>
+        </li>
+        <li *ngIf="product.orders_count">
+            <h6 class="content">
+                <i class="ri-shopping-cart-line"></i>
+                {{ product.orders_count }} {{'sales' | translate}}
+            </h6>
+        </li>
+    </ul>
+    <p>{{ product.short_description }}</p>
+</div>

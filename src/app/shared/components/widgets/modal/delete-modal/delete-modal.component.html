@@ -1,0 +1,22 @@
+<ng-template #deleteModal let-modal>
+    <div class="modal-body">
+        <i class="ri-delete-bin-line icon-box"></i>
+        <h5 class="modal-title">{{ 'delete_item' | translate }}?</h5>
+        <p>{{ 'delete_text' | translate }} </p>
+        <div class="button-box">
+            <app-button 
+                [class]="'btn btn-theme-outline btn-md fw-bold'" 
+                [spinner]="false"
+                [id]="'delete_no_btn'"
+                (click)="modal.dismiss('Cancel')">
+                {{ 'no' | translate }}
+            </app-button>
+            <app-button
+                [class]="'btn theme-bg-color btn-md fw-bold text-light'"
+                [id]="'delete_yes_btn'"
+                (click)="delete()">
+                {{ 'yes' | translate }}
+            </app-button>
+        </div>
+    </div>
+</ng-template>

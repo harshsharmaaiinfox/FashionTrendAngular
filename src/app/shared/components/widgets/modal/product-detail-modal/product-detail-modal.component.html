@@ -1,0 +1,194 @@
+<ng-template #productDetailModal let-modal>
+    <div class="modal-content">
+        <div class="modal-header p-0">
+            <app-button [type]="'button'" [class]="'btn btn-close'" [id]="'product_detail_close_modal_btn'"
+                [spinner]="false" (click)="modal.dismiss('Cross click')">
+                <i class="ri-close-line"></i>
+            </app-button>
+        </div>
+        <div class="modal-body">
+            <div class="row g-sm-4 g-2">
+                <div class="col-lg-6">
+                    <div class="view-image-slider">
+                        <owl-carousel-o [options]="productMainThumbSlider" #owlCar>
+                            <ng-container *ngFor="let image of product?.product_galleries; index as i">
+                                <ng-template carouselSlide [id]="image.id.toString()">
+                                    <div class="slider-image mian-slider-box">
+                                        <ng-container *ngIf="videType.includes(image.mime_type); else audio">
+                                            <video class="w-100" controls>
+                                                <source [src]="image ? image.original_url : ''"
+                                                    [type]="image.mime_type">
+                                            </video>
+                                        </ng-container>
+                                        <ng-template #audio>
+                                            <ng-container *ngIf="audioType.includes(image.mime_type); else img">
+                                                <div class="slider-main-img">
+                                                    <audio controls>
+                                                        <source [src]="image ? image.original_url : ''"
+                                                            [type]="image.mime_type">
+                                                    </audio>
+                                                </div>
+                                            </ng-container>
+                                        </ng-template>
+                                        <ng-template #img>
+                                            <img [src]="image ? image.original_url
+                                        : 'assets/images/product.png'" class="img-fluid" [alt]="product.name">
+                                        </ng-template>
+                                    </div>
+                                </ng-template>
+                            </ng-container>
+                        </owl-carousel-o>
+                    </div>
+                    <ng-container *ngIf="!product?.product_galleries?.length">
+                        <div class="col-12">
+                            <div class="slider-image">
+                                <img [src]="product.product_thumbnail ?
+                                            product.product_thumbnail.original_url :
+                                            'assets/images/product.png'" class="img-fluid" [alt]="product.name">
+                            </div>
+                        </div>
+                    </ng-container>
+                    <div class="col-12" *ngIf="product?.product_galleries?.length">
+                        <div class="bottom-slider-image left-slider no-arrow slick-top">
+                            <owl-carousel-o [options]="productThumbSlider">
+                                <ng-container *ngFor="let image of product?.product_galleries;">
+                                    <ng-template carouselSlide [id]="image.id.toString()">
+                                        <div>
+                                            <div class="slider-image"
+                                                [class.active]="image.id.toString() == activeSlide.toString()">
+                                                <ng-container *ngIf="videType.includes(image.mime_type); else audio">
+                                                    <i class="ri-video-line"></i>
+                                                    <video width="130" height="130"
+                                                        (click)="owlCar.to(activeSlide = image.id.toString())">
+                                                        <source [src]="image ? image.original_url : ''"
+                                                            [type]="image.mime_type">
+                                                    </video>
+                                                </ng-container>
+                                                <ng-template #audio>
+                                                    <ng-container *ngIf="audioType.includes(image.mime_type); else img">
+                                                        <button (click)="owlCar.to(activeSlide = image.id.toString())">
+                                                            <i class="ri-music-2-line"></i>
+                                                        </button>
+                                                    </ng-container>
+                                                </ng-template>
+                                                <ng-template #img>
+                                                    <img [src]="image ? image.original_url
+                                                                : 'assets/images/product.png'" class="img-fluid"
+                                                        [alt]="product.name"
+                                                        (click)="owlCar.to(activeSlide = image.id.toString())">
+                                                </ng-template>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </ng-container>
+                            </owl-carousel-o>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="right-sidebar-modal">
+                        <h4 class="title-name">{{ selectedVariation ? selectedVariation.name : product.name }}</h4>
+                        <h4 class="price">
+                            {{ (selectedVariation ? selectedVariation.sale_price : product.sale_price) | currencySymbol }}
+                            <del *ngIf="selectedVariation ? selectedVariation.discount : product.discount">
+                                {{ (selectedVariation ? selectedVariation.price : product.price) | currencySymbol }}
+                            </del>
+                            <label class="modal-label"
+                                *ngIf="selectedVariation ? selectedVariation.discount : product.discount">
+                                {{ (selectedVariation ? selectedVariation.discount : product.discount) }}%
+                                {{ 'off' | translate }}
+                            </label>
+                        </h4>
+                        <div class="product-rating">
+                            <ngb-rating [rate]="product.rating_count"></ngb-rating>
+                            <div class="fs-14 ms-2">{{ product.reviews_count }} {{ 'review' | translate }}</div>
+                        </div>
+                        <div class="product-detail mb-2">
+                            <h4>{{ 'product_details' | translate }}:</h4>
+                            <p [innerHTML]="product.short_description"></p>
+                        </div>
+                        <div class="pickup-box">
+                            <div class="product-info">
+                                <ul class="product-info-list product-info-list-2">
+                                    <li *ngIf="product.sku">{{ 'sku' | translate }}: {{ product.sku }}</li>
+                                    <li *ngIf="product.stock_status">{{ 'stock_status' | translate }}:
+                                        {{ product.stock_status! | titleCase }}</li>
+                                    <li *ngIf="product.quantity > 0">{{ 'quantity' | translate }}:
+                                        {{ product.quantity }} {{ 'items_left' | translate }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <ng-container *ngIf="product.wholesales?.length">
+                            <table class="table mt-2 mb-4 modal-table">
+                                <thead>
+                                    <tr>
+                                        <th class="border-top-0">{{ 'Min QTY' | translate }}</th>
+                                        <th class="border-top-0">{{ 'Max QTY' | translate }}</th>
+                                        <th class="border-top-0">
+                                            {{ (product.wholesale_price_type == 'fixed' ? 'Unit Price' : 'Percentage' ) | translate }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let wholesale of product.wholesales">
+                                        <td>{{ wholesale.min_qty }}</td>
+                                        <td>{{ wholesale.max_qty }}</td>
+                                        <td>{{ (product.wholesale_price_type == 'fixed'? (wholesale.value | currencySymbol) : wholesale.value +'% Off') }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h4>{{ 'Total Price:' | translate }} <span
+                                    class="theme-color">{{ totalPrice | currencySymbol }}</span></h4>
+                        </ng-container>
+                        <div class="selection-section mt-3" *ngIf="product.attributes?.length">
+                            <app-variant-attributes [product]="product" [attributes]="product.attributes || []"
+                                [owlCar]="owlCar" (selectVariation)="selectVariation($event!)">
+                            </app-variant-attributes>
+                        </div>
+                        <div class="modal-button">
+                            <div class="modal-qty" *ngIf="!product?.is_external">
+                                <div class="input-group">
+                                    <app-button [class]="'btn qty-left-minus'" [id]="'add-to-cart'+product.id"
+                                        [spinner]="false" (click)="updateQuantity(-1)">
+                                        <i class="ri-subtract-fill"></i>
+                                    </app-button>
+                                    <input class="form-control input-number qty-input" type="text" name="quantity"
+                                        value="{{productQty}}" readonly>
+                                    <app-button [class]="'btn qty-left-minus'" [id]="'qty-left-minus'+product.id"
+                                        [spinner]="false" (click)="updateQuantity(1)">
+                                        <i class="ri-add-line"></i>
+                                    </app-button>
+                                </div>
+                            </div>
+                            <ng-container *ngIf="!product?.is_external else isExternalProduct">
+                                <app-button [id]="'addcartDetailsbtnVariation'+product.id"
+                                    [class]="'btn theme-bg-color view-button icon text-white fw-bold btn-md'"
+                                    (click)="addToCart(product)"
+                                    *ngIf="((selectedVariation && selectedVariation.status && selectedVariation.quantity >= productQty) || (!selectedVariation && product.quantity >= productQty)) else outStock">
+                                    <i class="ri-shopping-cart-line me-1"></i> {{ 'Add To Cart' | translate }}
+                                </app-button>
+                                <ng-template #outStock>
+                                    <app-button
+                                        [class]="'btn theme-bg-color view-button icon text-white fw-bold btn-md'"
+                                        [id]="'cartDetailsbtnOs'+product.id" [spinner]="false" [disabled]="true">
+                                        {{
+                                            ((selectedVariation && selectedVariation.status && selectedVariation.quantity < productQty || (!selectedVariation && product.quantity < productQty)) ? 'out_of_stock'
+                                            : 'Add To Cart') | translate }}
+                                    </app-button>
+                                </ng-template>
+                            </ng-container>
+                            <ng-template #isExternalProduct>
+                                <app-button [id]="'externalBtn'+product.id"
+                                    [class]="'btn btn-md fw-bold icon text-white theme-bg-color'"
+                                    (click)="externalProductLink(product.external_url)">
+                                    {{ (product.external_button_text ? product.external_button_text : 'buy_now') | translate }}
+                                </app-button>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

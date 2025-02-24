@@ -1,0 +1,51 @@
+<div class="show-button">
+    <div class="filter-button-group mt-0" *ngIf="filter['layout'] !== 'collection_offcanvas_filter' && filter['layout'] !== 'collection_no_sidebar'">
+        <div class="filter-button d-inline-block d-lg-none">
+            <a (click)="openFilter(true)"><i class="ri-filter-2-fill"></i> {{ 'filter_menu' | translate }}</a>
+        </div>
+    </div>
+    <div class="top-filter-menu m-0">
+        <div class="category-dropdown">
+            <a href="javascript:void(0)" class="filter-offcanvas-title" (click)="openOffCanvasMenu()"
+                *ngIf="filter && filter['layout'] == 'collection_offcanvas_filter'">
+                <i class="ri-filter-2-fill"></i> {{ 'filter_menu' | translate }}
+            </a>
+            <h5 class="text-content">{{ 'sort_by'| translate}} :</h5>
+            <div class="dropdown">
+                <select2 class="custom-select"
+                    [displaySearchStatus]="'hidden'"
+                    [placeholder]="'Sort'"
+                    [value]="filter['sortBy']"
+                    [data]="sorting ? sorting : []"
+                    (update)="sortByFilter($event)">
+                </select2>
+            </div>
+        </div>
+        <div class="grid-option d-none d-md-block">
+            <ul>
+                <li class="three-grid" [class.active]="selectedGrid == 'collection_3_grid'">
+                    <a href="javascript:void(0)" (click)="grid('collection_3_grid')">
+                        <img src="assets/svg/grid-3.svg" alt="sort">
+                    </a>
+                </li>
+                <li class="grid-btn d-xxl-inline-block d-none" [class.active]="selectedGrid == 'collection_4_grid'">
+                    <a href="javascript:void(0)" (click)="grid('collection_4_grid')">
+                        <img src="assets/svg/grid-4.svg" class="d-lg-inline-block d-none" alt="sort">
+                        <img src="assets/svg/grid.svg" class="img-fluid d-lg-none d-inline-block" alt="sort">
+                    </a>
+                </li>
+                <li class="grid-btn d-xxl-inline-block d-none" [class.active]="selectedGrid == 'collection_5_grid'">
+                  <a href="javascript:void(0)" (click)="grid('collection_5_grid')">
+                      <img src="assets/svg/grid-5.svg" class="d-lg-inline-block d-none" alt="sort">
+                      <img src="assets/svg/grid.svg" class="img-fluid d-lg-none d-inline-block" alt="sort">
+                  </a>
+              </li>
+                <li class="list-btn" [class.active]="selectedGrid == 'collection_list_view'">
+                    <a href="javascript:void(0)" (click)="grid('collection_list_view')">
+                        <img src="assets/svg/list.svg" alt="sort">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

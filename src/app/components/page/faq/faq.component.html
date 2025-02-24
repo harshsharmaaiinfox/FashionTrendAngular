@@ -1,0 +1,48 @@
+<app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+<section class="faq-box-contain section-b-space" *ngIf="(faq$ | async )?.data?.length">
+  <div class="container">
+    <app-skeleton-page *ngIf="pageService?.skeletonLoader else content"></app-skeleton-page>
+    <ng-template #content>
+      <div class="row">
+        <div class="col-xl-5">
+          <div class="faq-contain">
+            <h2>{{ 'frequently_asked_questions' | translate }}</h2>
+            <p>{{ 'you_can_find_out_more_searching' | translate }}</p>
+          </div>
+        </div>
+        <div class="col-xl-7">
+          <div class="faq-accordion">
+            <div class="accordion" ngbAccordion [closeOthers]="true">
+              <div ngbAccordionItem class="accordion-item" *ngFor="let faq of (faq$ | async )?.data; let i = index"
+                [collapsed]="i !== 0">
+                <h2 class="accordion-header" ngbAccordionHeader>
+                  <button class="accordion-button" type="button" ngbAccordionButton>
+                    {{ faq.title }}
+                    <i class="ri-arrow-down-s-line"></i>
+                  </button>
+                </h2>
+                <div ngbAccordionCollapse class="accordion-collapse collapse">
+                  <div ngbAccordionBody>
+                    <ng-template>
+                      <div class="accordion-body">
+                        <p>{{ faq.description }}</p>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</section>
+
+<!-- No Data -->
+<app-no-data 
+  [class]="'no-data-added collection-no-data'" [image]="'assets/svg/no-product.svg'"
+  [text]="'no_faq_found'"
+  [description]="'inform_you_that_the_faq__currently_unavailable'"
+  *ngIf="(faq$ | async )?.data?.length && pageService?.skeletonLoader">
+</app-no-data>

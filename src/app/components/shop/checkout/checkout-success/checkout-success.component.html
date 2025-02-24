@@ -1,0 +1,20 @@
+<app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+<section class="checkout-section-2 section-b-space" id="mySubPaisa">
+    <div class="container-fluid-lg">
+        <h3>Thank you for placing the Order</h3>
+        <p></p>
+        <h4>Our team will verify the payment status and proceed with your order accordingly.</h4>
+        <div _ngcontent-ng-c642440284="" class="empty-cart">
+            <img style="max-height: 200px;" _ngcontent-ng-c642440284="" alt="no-data" class="img-fluid" src="assets/svg/tracking/out-for-delivery.svg">
+        </div>
+
+        <app-button
+            [class]="'btn left-dashboard-show btn-animation btn-md fw-bold d-block mb-4'"
+            [type]="'button'"
+            [id]="'show_menu'"
+            (click)="goToHome()"
+            [spinner]="false">
+            {{ 'Continue Shopping' }}
+        </app-button>
+    </div>
+</section>

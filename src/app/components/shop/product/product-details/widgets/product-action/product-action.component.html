@@ -1,0 +1,27 @@
+<ng-container *ngIf="!product?.is_external && product.status">
+  <div class="progress-sec" *ngIf="product?.quantity && product.quantity <= 10">
+    <div class="left-progressbar">
+      <h6>{{ 'please_hurry_only' | translate }} {{ product.quantity }} {{ 'left_in_stock' | translate }}</h6>
+      <div class="progress"
+        [ngClass]="{ 'danger-progress': product.quantity <= 2, 'warning-progress': product.quantity >= 3 && product.quantity <= 7 }"
+        role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar progress-bar-striped progress-bar-animated"
+          [ngStyle]="{ width: (product.quantity * 100) / 10+'%' }"></div>
+      </div>
+    </div>
+  </div>
+  <div class="size-delivery-info" *ngIf="product.size_chart_image || (policy && product.is_return)">
+    <a href="javascript:void(0)" (click)="SizeChartModal.openModal(product.size_chart_image)" *ngIf="product.size_chart_image">
+      <i class="ri-ruler-line"></i> {{ 'size_chart' | translate }}
+    </a>
+    <a href="javascript:void(0)" (click)="DeliveryReturnModal.openModal(policy)" *ngIf="policy && product.is_return">
+      <i class="ri-truck-line"></i> {{ 'delivery_return' | translate }}
+    </a>
+    <a href="javascript:void(0)" (click)="QuestionModal.openModal(product)" *ngIf="policy && product.is_return">
+      <i class="ri-questionnaire-line"></i> {{ 'ask_a_question' | translate }}
+    </a>
+  </div>
+  <app-size-chart-modal #sizeChartModal></app-size-chart-modal>
+  <app-delivery-return-modal #deliveryReturnModal></app-delivery-return-modal>
+  <app-question-modal #questionModal></app-question-modal>
+</ng-container>

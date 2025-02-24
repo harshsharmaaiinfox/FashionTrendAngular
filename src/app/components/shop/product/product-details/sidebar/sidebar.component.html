@@ -1,0 +1,8 @@
+<div class="right-sidebar-box">
+    <app-store-information [store]="product.store" *ngIf="product.store"></app-store-information>
+    <app-trending-products *ngIf="(themeOptions$ | async)?.product?.is_trending_product"></app-trending-products>
+    <app-product-banner 
+        [image]="(themeOptions$ | async)?.product?.banner_image_url" 
+        *ngIf="(themeOptions$ | async)?.product?.banner_enable && (themeOptions$ | async)?.product?.banner_image_url">
+    </app-product-banner>
+</div>

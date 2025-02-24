@@ -1,0 +1,63 @@
+<app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+<section class="search-section">
+  <div class="container-fluid-lg">
+      <div class="row">
+          <div class="col-xxl-6 col-xl-8 mx-auto">
+              <div class="title d-block text-center">
+                  <h2>{{ 'search_for_products' | translate }}</h2>
+                  <span class="title-leaf">
+                      <svg class="icon-width">
+                          <use xlink:href="../assets/svg/leaf.svg#leaf"></use>
+                      </svg>
+                  </span>
+              </div>
+              <div class="search-box">
+                  <div class="input-group">
+                      <input type="text" class="form-control" [formControl]="search">
+                      <app-button
+                        [class]="'btn theme-bg-color text-white m-0'"
+                        [type]="'button'"
+                        [id]="'search-btn'"
+                        [spinner]="false"
+                        (click)="searchProduct()">
+                        {{ 'search' | translate }}
+                      </app-button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<section class="section-b-space">
+  <div class="container-fluid-lg">
+      <div
+      [ngClass]="{ 
+        'full_border': (themeOption$ | async)?.product?.full_border,
+        'product_img_bg': (themeOption$ | async)?.product?.image_bg,
+        'full_bg': (themeOption$ | async)?.product?.product_box_bg,
+        'product_border': (themeOption$ | async)?.product?.product_box_border }">
+        <div [class]="gridClass">
+          <ng-container *ngIf="productService.skeletonLoader else productContent">
+              <app-skeleton-product-box *ngFor="let item of skeletonItems"></app-skeleton-product-box>
+          </ng-container>
+          <ng-template #productContent>
+            <div class="col" *ngFor="let product of products">
+              <div class="search-product product-wrapper">
+                <div>
+                  <app-product-box [product]="product" [style]="'horizontal'"></app-product-box>
+                </div>
+              </div>
+          </div>
+          </ng-template>
+        </div>
+      </div>
+      <app-no-data
+        [class]="'no-data-added collection-no-data'"
+        [image]="'assets/svg/no-product.svg'"
+        [text]="'Sorry Cant Find Products Looking'"
+        [description]="'Please Check Misspelt Something Searching Other Way'"
+        *ngIf="!products?.length && !productService.skeletonLoader">
+      </app-no-data>
+  </div>
+</section>

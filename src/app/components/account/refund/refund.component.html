@@ -1,0 +1,42 @@
+<div class="title-header">
+    <div class="d-flex align-items-center">
+        <h5>{{ 'Refund' | translate }}</h5>
+    </div>
+</div>
+<div class="total-box mt-0" *ngIf="(refund$ | async)?.data?.length">
+    <div class="wallet-table mt-0 refund-table">
+        <table>
+            <tbody>
+                <tr>
+                    <th>{{ 'Order' | translate }}</th>
+                    <th>{{ 'Status' | translate }}</th>
+                    <th class="reason-table">{{ 'Reason' | translate }}</th>
+                    <th>{{ 'Created At' | translate }}</th>
+                </tr>
+                <tr *ngFor="let refund of (refund$ | async)?.data let i = index">
+                    <td><span class="fw-bolder">#{{ refund?.order?.order_number }}</span></td>
+                    <td>
+                        <div class="status-{{refund?.status}}"><span>{{ refund?.status | titleCase }}</span></div>
+                    </td>
+                    <td class="reason-table">{{ refund?.reason }}</td>
+                    <td>{{ refund?.created_at | date: 'dd MMM yyyy' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <nav class="custome-pagination" *ngIf="(refund$ | async)?.data?.length">
+        <app-pagination
+            [total]="(refund$ | async)?.total || 0"
+            [currentPage]="filter['page']"
+            [pageSize]="filter['paginate']"
+            (setPage)="setPaginate($event)">
+        </app-pagination>
+    </nav>
+</div>
+<app-no-data
+    [class]="'no-data-added'"
+    [image]="'assets/svg/empty-items.svg'"
+    [text]="'No Refunds Found'"
+    [description]="'You Have No Refunds yet'"
+    *ngIf="!(refund$ | async)?.data?.length">
+</app-no-data>

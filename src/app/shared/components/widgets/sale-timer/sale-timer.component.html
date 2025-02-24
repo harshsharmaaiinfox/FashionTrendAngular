@@ -1,0 +1,40 @@
+<div class="time deal-timer product-deal-timer mx-md-0 mx-auto" *ngIf="remainingTime">
+  <div class="product-title" *ngIf="title">
+      <h4>{{ 'hurry_up_sales_ends_in' | translate }}</h4>
+  </div>
+  <ul>
+    <li>
+        <div class="counter d-block">
+            <div class="days d-block">
+                <h5>{{ remainingTime.days }}</h5>
+            </div>
+            <h6>{{ 'days' | translate }}</h6>
+        </div>
+    </li>
+    <li>
+        <div class="counter d-block">
+            <div class="hours d-block">
+                <h5>{{ remainingTime.hours }}</h5>
+            </div>
+            <h6>{{ 'hours' | translate }}</h6>
+        </div>
+    </li>
+    <li>
+        <div class="counter d-block">
+            <div class="minutes d-block">
+                <h5>{{ remainingTime.minutes }}</h5>
+            </div>
+            <h6>{{ 'min' | translate }}</h6>
+        </div>
+    </li>
+    <li>
+        <div class="counter d-block">
+            <div class="seconds d-block">
+                <h5>{{ remainingTime.seconds }}</h5>
+            </div>
+            <h6>{{ 'sec' | translate }}</h6>
+        </div>
+    </li>
+  </ul>
+</div>
+

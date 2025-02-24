@@ -1,0 +1,24 @@
+<ng-template #exitModal let-modal>
+  <div class="modal-header p-0">
+    <app-button [class]="'btn btn-close'" [spinner]="false" [id]="'profile_modal_close_btn'"
+      (click)="modal.dismiss('Cross click')">
+      <i class="ri-close-line"></i>
+    </app-button>
+  </div>
+  <div class="modal-box">
+    <div class="modal-image">
+      <img [src]="themeOption.popup.news_letter.image_url ? (storageURL + themeOption.popup.news_letter.image_url) : 'assets/images/newsletter/dummy.png'" class="img-fluid" alt="newsletter">
+    </div>
+    <div class="modal-content">
+      <div>
+        <img [src]="themeOption.logo.header_logo.original_url" class="modal-logo" alt="logo" *ngIf="themeOption.logo.header_logo else text">
+        <ng-template #text>
+            <h4>{{ themeOption.general.site_title ? themeOption.general.site_title : 'Logo' }}</h4>
+        </ng-template>
+        <h2 class="text-title">{{ themeOption.popup.exit.title }}</h2>
+        <h5>{{ themeOption.popup.exit.sub_title }}</h5>
+        <p>{{ themeOption.popup.exit.description }}</p>
+      </div>
+    </div>
+  </div>
+</ng-template>

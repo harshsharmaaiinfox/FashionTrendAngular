@@ -1,0 +1,35 @@
+<div class="button-item" *ngIf="(cartItem$ | async)?.length">
+  <app-button
+    [class]="'item-btn btn text-white'"
+    [id]="'open_cart_btn'"
+    [type]="'button'"
+    [spinner]="false"
+    (click)="openCart(true)">
+    <i class="ri-shopping-cart-2-line"></i>
+  </app-button>
+</div>
+<div class="item-section" [class.active]="isOpen && (cartItem$ | async)?.length">
+  <app-button
+    [class]="'close-button'"
+    [id]="'close_cart_btn'"
+    [type]="'button'"
+    [spinner]="false"
+    (click)="openCart(false)">
+    <i class="ri-close-line"></i>
+  </app-button>
+  <h6>
+    <i class="ri-shopping-cart-2-line"></i>
+    <span>{{ (cartItem$ | async)?.length }} {{ 'items' | translate }}</span>
+  </h6>
+  <ul class="items-image">
+    <li *ngFor="let item of (cartItem$ | async) | slice:0:2">
+      <img [src]="item?.variation && item?.variation?.variation_image
+                ? item?.variation?.variation_image?.original_url
+                : item?.product?.product_thumbnail
+                ? item?.product?.product_thumbnail?.original_url
+                : 'assets/images/product.png'" alt="product">
+    </li>
+    <li *ngIf="(cartItem$ | async)?.length! > 2">+{{ (cartItem$ | async)?.length! - 2 }}</li>
+  </ul>
+  <a [routerLink]="['/cart']" class="btn item-button btn-sm fw-bold">{{ (cartTotal$ | async)! | currencySymbol }}</a>
+</div>

@@ -1,0 +1,179 @@
+ <!-- Home Section Start -->
+ <section class="home-search-full pt-0 gradient-home">
+     <div class="container-fluid p-0">
+         <div class="row m-0">
+             <div class="col-12 p-0">
+                 <div class="slider-animate">
+                     <div>
+                         <div class="home-contain rounded-0 p-0"
+                             [ngStyle]="{'background-image': 'url(' + (storageURL + data?.content?.home_banner?.main_banner?.image_url) + ')'}"
+                             class="home-contain rounded-0 p-0" alt="Background Image">
+                             <div class="skeleton-banner-xl">
+                                 <div class="skeleton-text-wrap">
+                                     <span class="placeholder col-7"></span>
+                                     <span class="placeholder col-5"></span>
+                                     <span class="placeholder col-4"></span>
+                                     <span class="placeholder col-6"></span>
+                                 </div>
+                             </div>
+                             <div class="home-detail p-center text-center home-overlay position-relative">
+                                 <div>
+                                     <div class="content">
+                                         <h1>{{ data?.content?.home_banner?.main_banner?.title }}</h1>
+                                         <h3>{{ data?.content?.home_banner?.main_banner?.sub_title }}</h3>
+                                         <div class="search-box input-group"
+                                             *ngIf="data?.content?.home_banner?.main_banner?.search_enable">
+                                             <app-box-search [style]="'category_search'"></app-box-search>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </section>
+ <!-- Home Section End -->
+
+ <!-- Feature category section end -->
+ <section class="feature-category-panel pt-0" *ngIf="data?.content?.categories_icon_list?.status">
+     <div class="container-fluid-lg">
+         <div class="row justify-content-center">
+             <div class="col-sm-9 position-relative">
+                 <div>
+                     <div
+                         class="category-skeleton feature-panel-slider row row-cols-xl-6 row-cols-lg-5 row-cols-md-4 row-cols-sm-3 row-cols-2">
+                         <div>
+                             <div class="cate-box">
+                                 <span class="placeholder-text"></span>
+                                 <span class="placeholder-text w-75 mt-3"></span>
+                             </div>
+                         </div>
+                         <div>
+                             <div class="cate-box">
+                                 <span class="placeholder-text"></span>
+                                 <span class="placeholder-text w-75 mt-3"></span>
+                             </div>
+                         </div>
+                         <div class="d-sm-inline-block d-none">
+                             <div class="cate-box">
+                                 <span class="placeholder-text"></span>
+                                 <span class="placeholder-text w-75 mt-3"></span>
+                             </div>
+                         </div>
+                         <div class="d-md-inline-block d-none">
+                             <div class="cate-box">
+                                 <span class="placeholder-text"></span>
+                                 <span class="placeholder-text w-75 mt-3"></span>
+                             </div>
+                         </div>
+                         <div class="d-lg-inline-block d-none">
+                             <div class="cate-box">
+                                 <span class="placeholder-text"></span>
+                                 <span class="placeholder-text w-75 mt-3"></span>
+                             </div>
+                         </div>
+                         <div class="d-xl-inline-block d-none">
+                             <div class="cate-box">
+                                 <span class="placeholder-text"></span>
+                                 <span class="placeholder-text w-75 mt-3"></span>
+                             </div>
+                         </div>
+                     </div>
+                     <app-theme-categories [style]="'horizontal'" [theme]="'cairo'" [sliderOption]="categorySlider"
+                         [categoryIds]="data?.content?.categories_icon_list?.category_ids || []">
+                     </app-theme-categories>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </section>
+ <!-- Feature category section end -->
+
+ <!-- Product Section Start -->
+ <section class="product-section" *ngIf="data?.content?.products_list_1?.status">
+     <div class="container-fluid-lg">
+         <app-title [title]="data?.content?.products_list_1?.title" [style]="'simple'">
+         </app-title>
+         <app-theme-product [productIds]="data?.content?.products_list_1?.product_ids || []" [style]="'horizontal'"
+             [showItem]="showProductBox"></app-theme-product>
+     </div>
+ </section>
+ <!-- Product Section End -->
+
+ <!-- Category Section Start -->
+ <section class="category-panel section-b-space m-0" *ngIf="data?.content?.categories_icon_list_2?.status">
+     <div class="container-fluid-lg">
+         <app-title [title]="data?.content?.categories_icon_list_2?.title" [style]="'simple'">
+         </app-title>
+         <app-theme-categories [categoryIds]="data?.content?.categories_icon_list_2?.category_ids || []"
+             [sliderOption]="categorySlider" [style]="'cairo_classic'">
+         </app-theme-categories>
+     </div>
+ </section>
+ <!-- Category Section End -->
+
+ <!-- feature section start -->
+ <section class="featured-sec section-b-space" *ngIf="data?.content?.slider_product?.status"
+     [ngStyle]="{'background-image': 'url(' + (storageURL + data?.content?.slider_product?.image_url) + ')'}">
+     <div class="container-fluid-lg">
+         <div class="row g-sm-4 g-3">
+             <div class="col-xxl-3 col-lg-4">
+                 <div class="feature-title">
+                     <div>
+                         <h2>{{data?.content?.slider_product?.title}}</h2>
+                         <p>{{ data?.content?.slider_product?.description }}</p>
+                         <button class="btn theme-bg-color text-light mt-sm-4 mt-3">{{ 'view_all' | translate }} <i
+                                 data-feather="arrow-right"></i></button>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-xxl-9 col-lg-8">
+                 <app-theme-product [productIds]="data?.content?.slider_product?.product_ids || []" [slider]="true"
+                     [style]="'horizontal'" [sliderOption]="productSlider">
+                 </app-theme-product>
+             </div>
+         </div>
+     </div>
+ </section>
+ <!-- feature section end -->
+
+ <!-- Top Seller start -->
+ <ng-container *ngIf="data?.content?.seller?.status">
+     <section>
+         <div class="container-fluid-lg">
+             <app-title [title]="data?.content?.seller?.title" [style]="'simple'"></app-title>
+             <app-top-seller [sellerIds]="data?.content?.seller?.store_ids || []"></app-top-seller>
+         </div>
+     </section>
+ </ng-container>
+ <!-- Top Seller End -->
+
+ <!-- Product Section Start -->
+ <section class="product-section" *ngIf="data?.content?.categories_products?.status && data?.content?.categories_products?.category_ids?.length">
+     <app-category-product-filter [data]="data?.content" [grid]="showProductBox"></app-category-product-filter>
+ </section>
+ <!-- Product Section End -->
+
+ <!-- Blog Section Start -->
+ <section class="section-b-space" *ngIf="data?.content?.featured_blogs?.status">
+     <div class="container-fluid-lg">
+         <app-title [title]="data?.content?.featured_blogs?.title" [style]="'simple'">
+         </app-title>
+         <app-blog [blogIds]="data?.content?.featured_blogs?.blog_ids || []" [sliderOption]="bannerSlider"
+             [description]="true">
+         </app-blog>
+     </div>
+ </section>
+ <!-- Blog Section End -->
+
+ <!-- Brand Section start -->
+ <section class="brand-effect pt-0 section-b-space"
+     *ngIf="data?.content?.brands?.brand_ids && data?.content?.brands?.status">
+     <div class="container-fluid-lg">
+         <app-brand [brandIds]="data?.content?.brands?.brand_ids || []"></app-brand>
+     </div>
+ </section>
+ <!-- Brand Section end -->

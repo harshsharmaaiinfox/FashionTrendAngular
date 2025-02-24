@@ -1,0 +1,3 @@
+<app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+<app-seller-details-basic [store]="(store$ | async)!" [filter]="filter" *ngIf="layout == 'basic_store_details'"></app-seller-details-basic>
+<app-seller-details-classic [store]="(store$ | async)!" [filter]="filter" *ngIf="layout == 'classic_store_details'"></app-seller-details-classic>

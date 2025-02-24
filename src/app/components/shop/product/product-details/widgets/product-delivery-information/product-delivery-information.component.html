@@ -1,0 +1,13 @@
+<div class="delivery-info" *ngIf="product?.estimated_delivery_text || (product?.return_policy_text && product?.is_return)">
+    <div class="product-title">
+        <h4>{{ 'delivery_details' | translate }}</h4>
+    </div>
+    <ul>
+        <li *ngIf="product?.estimated_delivery_text">
+            <i class="ri-truck-line"></i> {{ product?.estimated_delivery_text }}
+        </li>
+        <li *ngIf="product?.return_policy_text">
+            <i class="ri-arrow-left-right-line"></i> {{ product?.return_policy_text }}
+        </li>
+    </ul>
+</div>

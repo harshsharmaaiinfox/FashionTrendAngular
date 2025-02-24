@@ -1,0 +1,67 @@
+<div class="container-fluid-lg">
+    <div class="main-footer section-b-space">
+        <div class="row g-md-4 g-3">
+
+
+            <div class="col-xl-2 col-lg-2 col-sm-3"
+            (click)="toggle('useful_link')">
+            <div class="footer-title" [class.show]="active['useful_link']">
+                <h4>{{ 'Useful Links' | translate }}</h4>
+            </div>
+            <div class="footer-contain">
+                <!-- <app-footer-links [links]="data?.footer?.useful_link || []"></app-footer-links> -->
+                 <ul>
+                    <li><a href="/privacy-policy">Privacy Policy</a></li>
+                    <li><a href="/term-condition">Terms and Conditions</a></li>
+                    <li><a href="/shipping-delivery">Shipping + delivery</a></li>
+                    <li><a href="/return-exchange">Return + Exchange</a></li>
+                    <li><a href="/page/about-us">About Us</a></li>
+                 </ul>
+                <!-- No Data -->
+                <app-no-data [class]="'no-data-footer'" [text]="'no_link_found'" *ngIf="!data?.footer?.useful_link?.length"></app-no-data>
+            </div>
+        </div>
+        <div class="col-xl-2 col-sm-3"
+            (click)="toggle('help_center')">
+            <div class="footer-title" [class.show]="active['help_center']">
+                <h4>{{ 'Help Center' | translate }}</h4>
+            </div>
+            <div class="footer-contain">
+                <app-footer-links [links]="data?.footer?.help_center || []"></app-footer-links>
+                <!-- No Data -->
+                <app-no-data [class]="'no-data-footer'" [text]="'no_link_found'" *ngIf="!data?.footer?.help_center?.length"></app-no-data>
+            </div>
+        </div>
+       
+        <div class="col-xl-4 col-lg-4 col-sm-6">
+            <div class="footer-logo">
+                <!-- <app-footer-logo [data]="data" [footer]="footer"></app-footer-logo> -->
+                <app-footer-about [data]="data"></app-footer-about>
+            </div>
+        </div>
+
+            <div class="col-xl-3 col-lg-4 col-sm-6"
+                *ngIf="data?.footer?.support_email ||
+                    data?.footer?.support_number ||
+                    data?.footer?.play_store_url ||
+                    data?.footer?.app_store_url">
+                <div class="footer-title contact-title">
+                    <h4>{{ 'Contact Us' | translate }}</h4>
+                </div>
+                <app-footer-contact [data]="data"></app-footer-contact>
+            </div>
+            
+          
+          
+        </div>
+    </div>
+    <div class="sub-footer section-small-space">
+        <div class="reserve" *ngIf="data?.footer?.footer_copyright">
+            <app-footer-copyright [data]="data"></app-footer-copyright>
+        </div>
+        <!-- <div class="payment"> 
+            <app-footer-payment-options></app-footer-payment-options>
+        </div> -->
+        <app-footer-social-links [data]="data" *ngIf="data?.footer?.social_media_enable"></app-footer-social-links>
+    </div>
+</div>

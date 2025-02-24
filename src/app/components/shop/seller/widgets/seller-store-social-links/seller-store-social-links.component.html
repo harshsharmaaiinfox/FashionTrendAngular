@@ -1,0 +1,30 @@
+<div class="vendor-share" *ngIf="store.facebook || store?.twitter || store?.instagram || store?.youtube || store?.pinterest">
+    <h5>{{ 'follow_us' | translate }} :</h5>
+    <ul>
+        <li *ngIf="store.facebook">
+            <a href="{{ store.facebook }}" target="_blank">
+                <i class="ri-facebook-fill"></i>
+            </a>
+        </li>
+        <li *ngIf="store?.twitter">
+            <a href="{{ store.twitter }}" target="_blank">
+                <i class="ri-twitter-fill"></i>
+            </a>
+        </li>
+        <li *ngIf="store?.instagram">
+            <a href="{{ store.instagram }}" target="_blank">
+                <i class="ri-instagram-fill"></i>
+            </a>
+        </li>
+        <li *ngIf="store?.youtube">
+            <a href="{{ store.youtube }}" target="_blank">
+                <i class="ri-youtube-fill"></i>
+            </a>
+        </li>
+        <li *ngIf="store?.pinterest">
+            <a href="{{ store.pinterest }}" target="_blank">
+                <i class="ri-pinterest-fill"></i>
+            </a>
+        </li>
+    </ul>
+</div>

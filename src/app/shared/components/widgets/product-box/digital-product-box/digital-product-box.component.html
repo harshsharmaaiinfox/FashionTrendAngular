@@ -1,0 +1,53 @@
+ <div class="product-theme-box">
+    <div class="label-tag" *ngIf="product.is_trending || product.is_sale_enable || product.is_featured " >
+        <span>{{ (product.is_sale_enable ? 'sale' : product.is_featured ? 'featured' : product.is_trending ? 'trending' : '' ) | translate }} </span>
+        <i class="ri-flashlight-line"></i>
+    </div>
+    <div class="img-box ratio_50">
+        <a href="javascript:void(0)" [routerLink]="['/product', product.slug]" [queryParams]="themeOptionService.isDigitalProductBox ? { layout: 'product_digital' } : {}">
+            <img [src]="product.product_thumbnail ?
+                product.product_thumbnail.original_url : 
+                'assets/images/product.png'"
+                class="bg-img img-fluid">
+        </a>
+        <a href="javascript:void(0)" *ngIf="!close" class="heart-icon" [class.theme-color]="product.is_wishlist" (click)="addToWishlist(product)">
+            <i class="ri-heart-{{product.is_wishlist ? 'fill' : 'line' }}"></i>
+        </a>
+        <div class="product-header-top" *ngIf="close">
+          <app-button
+            [class]="'btn wishlist-button close_button'"
+            [spinner]="false"
+            [id]="'close_btn'"
+            (click)="removeWishlist(product.id)"
+            >
+              <i class="ri-close-line"></i>
+          </app-button>
+        </div>
+    </div>
+    <div class="content-box">
+        <div class="top-content">
+            <a [routerLink]="['product', product.slug]" [queryParams]="themeOptionService.isDigitalProductBox ? { layout: 'product_digital' } : {}">
+                <h5>{{ product.name }}</h5>
+            </a>
+            <div class="product-rating d-block">
+                <h6 *ngIf="product.store">{{ 'by' | translate }} <a [routerLink]="['/seller/store/', product.store.slug]"> {{ product.store.store_name }}</a>
+                    {{ 'in' | translate }} <a [routerLink]="['/collections/']" [queryParams]="{ category: product.categories[0].slug }" *ngIf="product.categories.length">{{ product.categories[0].name }}</a>
+                </h6>
+                <p>{{ product.short_description }}</p>
+                <ngb-rating [rate]="product.rating_count"></ngb-rating>
+
+            </div>
+        </div>
+        <div class="bottom-content">
+            <div>
+                <span>{{product.orders_count}} {{ 'sales' | translate }}</span>
+                <h5 class="price">{{ product.sale_price | currencySymbol }}</h5>
+                
+            </div>
+            <div class="btn-grp">
+                <app-product-cart-button [product]="product" [text]="''" [iconClass]="'ri-shopping-cart-line'"></app-product-cart-button>
+                <a class="btn" href="javascrit:(void)" [routerLink]="['/product', product.slug]" [queryParams]="themeOptionService.isDigitalProductBox ? { layout: 'product_digital' } : {}">{{"preview" | translate}}</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="slider-bank-3 arrow-slider slick-height">
+  <owl-carousel-o [options]="customOptionsItem3">
+    <ng-container carouselSlide *ngFor="let offer of offers">
+      <ng-container *ngIf="offer?.status">
+        <ng-template carouselSlide>
+          <div>
+            <div class="bank-offer">
+              <div class="bank-header">
+                <div class="bank-right w-100">
+                  <img [src]="storageURL + offer.image_url" class="img-fluid" [alt]="offer.coupon_code">
+                </div>
+              </div>
+
+                <div class="bank-footer">
+                  <h4>{{ 'code' | translate }} :
+                    <input class="form-control" type="text" [name]="offer.coupon_code" [(ngModel)]="offer.coupon_code">
+                  </h4>
+                  <app-button [type]="'button'" [class]="'bank-coupon btn'" [id]="'coupon_btn'" [spinner]="false" (click)="copyFunction(offer.coupon_code)">{{'copy_code' | translate}}</app-button>
+                </div>
+            </div>
+          </div>
+        </ng-template>
+      </ng-container>
+    </ng-container>
+  </owl-carousel-o>
+</div>

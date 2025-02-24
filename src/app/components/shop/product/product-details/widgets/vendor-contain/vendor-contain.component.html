@@ -1,0 +1,14 @@
+<div class="vendor-contain">
+    <div class="vendor-image" *ngIf="store?.store_logo else storeTextLogo">
+        <img [src]="store.store_logo.original_url" [alt]="store.store_name">
+    </div>
+    <ng-template #storeTextLogo>
+        <h2 class="vendor-text">{{ store.store_name.charAt(0)!.toString().toUpperCase() }}</h2>
+    </ng-template>
+    <div class="vendor-name">
+        <a href="javascript:void(o)" [routerLink]="['/seller/store/', store.slug]">
+            <h5 class="fw-500">{{ store.store_name }} <span><i class="ri-star-fill"></i>({{store.rating_count.toFixed(1) || 0}})</span></h5>
+          </a>
+          <a [routerLink]="['/seller/store/', store.slug]" class="store-btn">{{ 'go_to_store' | translate }} <i class="ri-arrow-right-line"></i></a>
+    </div>
+</div>

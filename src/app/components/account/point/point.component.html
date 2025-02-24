@@ -1,0 +1,62 @@
+<div class="title-header">
+    <div class="d-flex align-items-center">
+        <h5>{{ 'Points' | translate }}</h5>
+    </div>
+</div>
+<div class="total-box mt-0" *ngIf="(point$ | async)?.transactions?.data?.length">
+    <div class="row">
+        <div class="col-12">
+            <div class="totle-contain wallet-bg">
+                <div class="wallet-point-box">
+                    <img src="assets/images/svg/coin.svg" alt="coin" class="img-fluid">
+                    <div class="totle-detail">
+                        <h5>{{ 'Total Points'| translate}}</h5>
+                        <h3>{{ ((point$ | async) ? (point$ | async)?.balance : 0) }}</h3>
+                    </div>
+                </div>
+                <div class="point-ratio">
+                    <h3 class="counter">
+                        <i class="ri-information-line me-2"></i>
+                        {{ '1_point'| translate}} = {{ (1 / (setting$ | async)?.wallet_points?.point_currency_ratio!) | currencySymbol }} {{ 'Balance'| translate}}
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wallet-table">
+        <h4 class="user-dashboard-title">{{ 'Transactions'| translate}}</h4>
+        <table>
+            <tbody>
+                <tr>
+                    <th>{{ 'Date'| translate}}</th>
+                    <th>{{ 'Points'| translate}}</th>
+                    <th>{{ 'Remark'| translate}}</th>
+                    <th>{{ 'Status'| translate}}</th>
+                </tr>
+                <tr *ngFor="let transaction of (point$ | async)?.transactions?.data let i = index">
+                    <td>{{ transaction?.created_at | date: 'dd MMM yyyy hh:mm:a' }}</td>
+                    <td>{{ transaction?.amount }} </td>
+                    <td>{{ transaction?.detail }}</td>
+                    <td>
+                        <div class="status-{{transaction?.type}}"><span>{{ transaction?.type | titleCase }}</span></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <nav class="custome-pagination" *ngIf="(point$ | async)?.transactions?.data?.length">
+        <app-pagination 
+            [total]="(point$ | async)?.transactions?.total || 0" 
+            [currentPage]="filter['page']"
+            [pageSize]="filter['paginate']" 
+            (setPage)="setPaginate($event)">
+        </app-pagination>
+    </nav>
+</div>
+<app-no-data
+    [class]="'no-data-added'"
+    [image]="'assets/svg/empty-items.svg'"
+    [text]="'no_transaction_found'"
+    [description]="'You_have_not_earned_yet'"
+    *ngIf="!(point$ | async)?.transactions?.data?.length">
+</app-no-data>

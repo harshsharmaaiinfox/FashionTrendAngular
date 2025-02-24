@@ -1,0 +1,6 @@
+<app-basic-header [data]="(themeOption$ | async)" [logo]="logo" [sticky]="sticky" *ngIf="style == 'basic_header'" [class]="(path ? path : (activeTheme$ | async)) == 'cairo' && (activeTheme$ | async) == 'cairo' ? 'header-gradient' : '' "></app-basic-header>
+<app-classic-header [data]="(themeOption$ | async)" [logo]="logo" [sticky]="sticky" *ngIf="style == 'classic_header'" [class]="(path ? path : (activeTheme$ | async)) == 'cairo' && (activeTheme$ | async) == 'cairo' ?'header-gradient' : '' "></app-classic-header>
+<app-standard-header [data]="(themeOption$ | async)" [logo]="logo" [sticky]="sticky" *ngIf="style == 'standard_header'" [class]="(path ? path : (activeTheme$ | async)) == 'cairo' && (activeTheme$ | async) == 'cairo' ? 'header-gradient' : '' "></app-standard-header>
+<app-minimal-header [data]="(themeOption$ | async)" [logo]="logo" [sticky]="sticky" *ngIf="style == 'minimal_header'" [class]="(path ? path : (activeTheme$ | async)) == 'cairo' && (activeTheme$ | async) == 'cairo' ? 'header-gradient' : '' "></app-minimal-header>
+<app-mobile-menu></app-mobile-menu>
+ 

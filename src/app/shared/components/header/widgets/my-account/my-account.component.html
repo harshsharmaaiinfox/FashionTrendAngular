@@ -1,0 +1,42 @@
+<!-- My Account Basic Style -->
+<div *ngIf="style == 'basic'">
+    <div class="delivery-login-box">
+        <div class="delivery-icon">
+            <i class="ri-user-line" *ngIf="!(isAuthenticated$ | async) else profile"></i>
+            <ng-template #profile>
+                <div class="user-box">
+                    <img [src]="(user$ | async)?.profile_image?.original_url" class="img-fluid" alt="profile"
+                        *ngIf="(user$ | async)?.profile_image && (user$ | async)?.profile_image?.original_url else placeholder">
+                    <ng-template #placeholder>
+                        <h3>{{ (user$ | async)?.name?.charAt(0)?.toString()?.toUpperCase() }}</h3>
+                    </ng-template>
+                </div>
+            </ng-template>
+        </div>
+        <div class="delivery-detail">
+            <h6>{{ 'Hi' | translate }}, {{ ((isAuthenticated$ | async) ? (user$ | async)?.name : 'Guest' | translate) }}</h6>
+            <h5>{{ 'My Account' | translate }}</h5>
+        </div>
+    </div>
+    <div class="onhover-div onhover-div-login">
+        <ul class="user-box-name">
+            <li class="product-box-contain" *ngIf="!(isAuthenticated$ | async)">
+                <a [routerLink]="['/auth/login']">{{ 'Login' | translate }}</a>
+            </li>
+            <li class="product-box-contain" *ngIf="!(isAuthenticated$ | async)">
+                <a [routerLink]="['/auth/register']">{{ 'Register' | translate }}</a>
+            </li>
+            <li class="product-box-contain" *ngIf="(isAuthenticated$ | async)">
+                <a [routerLink]="['/account/dashboard']"><i class="ri-user-line me-2"></i> {{ 'My Account' | translate }}</a>
+            </li>
+            <li class="product-box-contain" *ngIf="(isAuthenticated$ | async)">
+                <a href="javascript:void(0)" (click)="confirmationModal.openModal()"><i class="ri-logout-box-r-line me-2"></i> {{ 'Logout' | translate }}</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<app-confirmation-modal
+    #confirmationModal
+    (confirmed)="logout()">
+</app-confirmation-modal>

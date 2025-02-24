@@ -1,0 +1,10 @@
+<div class="filter-title" *ngIf="filters?.length">
+    <h2>{{ 'filters' | translate }}</h2>
+    <a href="javascript:void(0)" (click)="clear()">{{ 'clear_all' | translate }}</a>
+</div>
+<ul *ngIf="filters.length">
+    <li *ngFor="let filter of filters">
+        <a href="javascript:void(0)">{{filter | titleCase}}</a>
+        <i class="ri-close-line close-icon" (click)="remove(filter)"></i>
+    </li>
+</ul>

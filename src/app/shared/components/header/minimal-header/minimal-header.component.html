@@ -1,0 +1,51 @@
+<header [class.active]="stick && sticky" class="{{!stick && sticky ? class : ''}}">
+    <app-topbar [data]="data" *ngIf="data?.header?.page_top_bar_enable"></app-topbar>
+    <div class="top-nav top-header sticky-header">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="navbar-top">
+                        <app-navbar-menu-button (activeMenu)="toggle($event)" [show]="active"></app-navbar-menu-button>
+                        <app-logo [data]="data" [logo]="logo"></app-logo>
+                        <div class="header-nav-middle">
+                            <div class="main-nav navbar navbar-expand-xl navbar-light navbar-sticky">
+                                <div class="offcanvas offcanvas-collapse order-xl-2" [class.show]="active">
+                                    <div class="offcanvas-header navbar-shadow">
+                                        <h5>{{ 'menu' | translate }}</h5>
+                                        <app-button [class]="'btn-close lead'" [type]="'button'" [id]="'close_btn'"
+                                            [spinner]="false" (click)="toggle(false)">
+                                            <i class="ri-close-fill"></i>
+                                        </app-button>
+                                    </div>
+                                    <div class="offcanvas-body">
+                                        <app-menu></app-menu>
+                                    </div>
+                                </div>
+                                <div class="offcanvas-backdrop fade" *ngIf="active" [class.show]="active" (click)="toggle(false)"></div>
+                            </div>
+                        </div>
+
+                        <div class="rightside-box">
+                            <ul class="right-side-menu">
+                                <li class="right-side search-icon search-full-icon d-inline-block">
+                                    <app-box-search [style]="'berlin'"></app-box-search>
+                                </li>
+                                <li class="right-side">
+                                    <app-header-wishlist [style]="'basic'"></app-header-wishlist>
+                                </li>
+                                <li class="right-side d-md-inline-block d-none">
+                                    <div class="onhover-dropdown header-badge">
+                                        <app-header-cart [style]="'basic'"></app-header-cart>
+                                    </div>
+                                </li>
+                                <li class="right-side onhover-dropdown">
+                                    <app-my-account [style]="'basic'"></app-my-account>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

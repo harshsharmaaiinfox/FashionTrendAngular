@@ -1,0 +1,47 @@
+<section class="section-b-space shop-section" id="filtered_products">
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div class="col-xxl-3 col-lg-4">
+                <div class="left-box">
+                    <app-collection-sidebar [filter]="filter"></app-collection-sidebar>
+                </div>
+            </div>
+            <div class="col-xxl-9 col-lg-8">
+                <div class="vendor-detail-box-2">
+                    <div class="row g-sm-4 g-3">
+                        <div class="col-xxl-2 col-md-3">
+                            <div class="vendor-logo">
+                                <app-seller-store-logo [store]="store"></app-seller-store-logo>
+                            </div>
+                        </div>
+                        <div class="col-xxl-8 col-md-6">
+                            <div class="vendor-name p-center-left">
+                                <div>
+                                    <div class="vendor-list-name">
+                                        <app-seller-store-name [store]="store"></app-seller-store-name>
+                                        <div class="product-rating vendor-rating">
+                                            <app-seller-store-rating [store]="store"></app-seller-store-rating>
+                                        </div>
+                                    </div>
+                                    <app-seller-store-description [store]="store"></app-seller-store-description>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-2 col-md-3">
+                            <div class="share-contact">
+                                <div>
+                                    <app-seller-store-social-links [store]="store"></app-seller-store-social-links>
+                                    <div class="vendor-contect">
+                                        <h5>{{ 'if_you_any_query' | translate }}?</h5>
+                                        <a [routerLink]="['/contact-us']" class="btn btn-sm btn-animation">{{ 'contact_us' | translate }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <app-collection-products [filter]="filter"></app-collection-products>
+            </div>
+        </div>
+    </div>
+</section>

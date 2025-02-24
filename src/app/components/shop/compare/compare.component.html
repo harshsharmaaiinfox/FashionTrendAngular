@@ -1,0 +1,137 @@
+<app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+<section class="compare-section section-b-space">
+  <div class="container-fluid-lg">
+    <div class="row g-0" [class.compare-row]="(compareItems$ | async)?.length">
+      <ng-container *ngIf="compareService.skeletonLoader else content">
+        <div class="col skeleton-compare" *ngFor="let item of skeletonItems">
+          <div class="compare-part">
+            <div class="img-section">
+              <div>
+                <div class="compare-img"></div>
+              </div>
+              <a href="javascript:void(0)" tabindex="0">
+                <h5 class="placeholder col-6"></h5>
+              </a>
+            </div>
+            <div class="detail-part">
+              <div class="title-detail">
+                <h5 class="placeholder col-3"></h5>
+              </div>
+              <div class="inner-detail">
+                <p class="placeholder col-1"></p>
+              </div>
+            </div>
+            <div class="detail-part">
+              <div class="title-detail">
+                <h5 class="placeholder col-1"></h5>
+              </div>
+              <div class="inner-detail">
+                <p class="placeholder col-2"></p>
+              </div>
+            </div>
+            <div class="detail-part">
+              <div class="title-detail">
+                <h5 class="placeholder col-4"></h5>
+              </div>
+              <div class="inner-detail">
+                <p class="placeholder col-3"></p>
+              </div>
+            </div>
+            <div class="detail-part">
+              <div class="title-detail">
+                <h5 class="placeholder col-1"></h5>
+              </div>
+              <div class="inner-detail">
+                <div class="compare-rating">
+                  <span class="placeholder col-4"></span>
+                </div>
+              </div>
+            </div>
+            <div class="detail-part">
+              <div class="title-detail">
+                <h5 class="placeholder col-1"></h5>
+              </div>
+              <div class="inner-detail">
+                <p class="placeholder col-3"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #content>
+        <div class="col" *ngFor="let product of (compareItems$ | async)">
+          <div class="compare-part">
+            <div class="img-section">
+              <div>
+                <img [src]="product?.product_thumbnail ? product?.product_thumbnail?.original_url : 'assets/images/product.png'"
+                    class="img-fluid"
+                    [alt]="product?.name">
+              </div>
+              <a href="javascript:void(0)">
+                <h5 class="text-title">{{ product?.name }}</h5>
+              </a>
+            </div>
+            <div class="detail-part">
+              <div class="title-detail">
+                <h5>{{ 'discount' | translate }}</h5>
+              </div>
+              <div class="inner-detail">
+                <p>{{ product?.discount ? product?.discount : '-' }}</p>
+              </div>
+            </div>
+            <div class="detail-part">
+              <div class="title-detail">
+                <h5>{{ 'price' | translate }}</h5>
+              </div>
+              <div class="inner-detail">
+                <p>{{product?.sale_price | currencySymbol}}</p>
+              </div>
+            </div>
+            <div class="detail-part">
+              <div class="title-detail">
+                <h5>{{ 'availability' | translate }}</h5>
+              </div>
+              <div class="inner-detail">
+                <p>{{ product?.stock_status | titleCase }}</p>
+              </div>
+            </div>
+            <div class="detail-part">
+              <div class="title-detail">
+                <h5>{{ 'rating' | translate }}</h5>
+              </div>
+              <div class="inner-detail">
+                <div class="compare-rating">
+                  <ngb-rating [rate]="product?.rating_count || 0"></ngb-rating>
+                  <span class="text-content rating-text">({{ product?.reviews_count }} {{ 'review' | translate }})</span>
+                </div>
+              </div>
+            </div>
+            <div class="detail-part">
+              <div class="title-detail">
+                <h5>{{ 'weight' | translate }}</h5>
+              </div>
+              <div class="inner-detail">
+                <p>{{ product?.weight ? product?.weight : "-" }}</p>
+              </div>
+            </div>
+            <div class="btn-part">
+              <button class="btn btn-animation btn-sm" (click)="moveToCart(product)">{{ 'move_to_cart' | translate }}</button>
+            </div>
+            <div class="remove-part">
+              <a href="javascript:void(0)" class="text-content remove_column" (click)="removeCompare(product.id)">
+                <i class="ri-delete-bin-line"></i> {{ 'remove' | translate }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+    <app-no-data
+        [class]="'no-data-added'"
+        [image]="'assets/svg/no-category.svg'"
+        [text]="'no_items_added'"
+        [description]="'nothing_added_to_your_compare_list'"
+        *ngIf="!(compareItems$ | async)?.length && !compareService.skeletonLoader">
+    </app-no-data>
+  </div>
+</section>

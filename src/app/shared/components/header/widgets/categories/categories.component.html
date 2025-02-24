@@ -1,0 +1,14 @@
+<!-- All Categories -->
+<app-button [class]="'dropdown-category'" [id]="'all_categories_btn'" [spinner]="false">
+    <i class="ri-apps-line f-w-600 me-2"></i>
+    <span>{{ 'All Category' | translate }}</span>
+</app-button>
+<div class="category-dropdown">
+    <div class="category-title">
+        <h5>{{ 'Categories' | translate }}</h5>
+        <app-button [type]="'button'" [class]="'btn p-0 close-button text-content'" [id]="'categories_btn'" [spinner]="false">
+            <i class="ri-close-line"></i>
+        </app-button>
+    </div>
+    <app-categories [style]="'dropdown'" [categoryIds]="data?.header?.category_ids || []"></app-categories>
+</div>

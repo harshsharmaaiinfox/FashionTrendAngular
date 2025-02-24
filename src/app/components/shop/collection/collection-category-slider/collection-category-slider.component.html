@@ -1,0 +1,27 @@
+<section>
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div class="col-12">
+                <app-collection-categories
+                    [sliderOption]="categorySlider"
+                    [theme]="'paris'"
+                    [style]="'horizontal'">
+                </app-collection-categories>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section-b-space shop-section" id="filtered_products">
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div class="col-custome-3">
+                <div class="left-box" [class.show]="attributeService.offCanvasMenu">
+                    <app-collection-sidebar [filter]="filter"></app-collection-sidebar>
+                </div>
+            </div>
+            <div class="col-custome-9">
+                <app-collection-products [filter]="filter"></app-collection-products>
+            </div>
+        </div>
+    </div>
+</section>

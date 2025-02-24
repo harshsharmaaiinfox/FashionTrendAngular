@@ -1,0 +1,15 @@
+<ul class="category-list custom-padding custom-height" *ngIf="attribute?.attribute_values?.length">
+    <li *ngFor="let attribute_value of attribute?.attribute_values">
+        <div class="form-check ps-0 m-0 category-list-box">
+            <input class="checkbox_animated" type="checkbox"
+                id="attribute-{{attribute_value?.id}}"
+                [value]="attribute_value?.slug"
+                [checked]="checked(attribute_value?.slug!)"
+                (change)="applyFilter($event)">
+            <label class="form-check-label color-label-box" for="attribute-{{attribute_value?.id}}">
+                <div class="color-box" *ngIf="attribute?.style === 'color'" [ngStyle]="{ 'background-color' : attribute_value?.hex_color }"></div>
+                <span class="name">{{ attribute_value?.value }}</span>
+            </label>
+        </div>
+    </li>
+</ul>

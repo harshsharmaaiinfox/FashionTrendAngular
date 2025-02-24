@@ -1,0 +1,6 @@
+<div class="alert alert-danger login-alert" role="alert" *ngIf="alert['type'] == 'error'">
+   <i class="ri-error-warning-line"></i> {{ alert['message'] }}
+</div>
+<div class="alert alert-success login-alert" role="alert" *ngIf="alert['type'] == 'success'">
+   <i class="ri-check-line"></i>{{ alert['message'] }}
+</div>

@@ -1,0 +1,70 @@
+<ng-template #variationModal let-modal>
+  <div class="modal-header">
+    <app-button [class]="'btn btn-close'" [spinner]="false" [id]="'profile_modal_close_btn'"
+      (click)="modal.dismiss('Cross click')">
+      <i class="ri-close-line"></i>
+    </app-button>
+  </div>
+  <div class="modal-body">
+    <div class="right-box-contain">
+      <h3 class="name">{{ selectedVariation ? selectedVariation.name : product.name }}</h3>
+      <div class="price-rating">
+        <h3 class="theme-color price">
+          {{ (selectedVariation ? selectedVariation.sale_price : product.sale_price) | currencySymbol }}
+          <del class="text-content" *ngIf="selectedVariation ? selectedVariation.discount : product.discount">
+            {{ (selectedVariation ? selectedVariation.price : product.price) | currencySymbol }}
+          </del>
+            <span class="offer-top" *ngIf="selectedVariation ? selectedVariation.discount : product.discount">
+              {{ (selectedVariation ? selectedVariation.discount : product.discount) }}% {{ 'off' | translate }}
+            </span>
+        </h3>
+      </div>
+      <div class="product-package">
+        <app-variant-attributes
+          [product]="item.product"
+          [attributes]="item.product.attributes || []"
+          (selectVariation)="selectVariation($event!)">
+        </app-variant-attributes>
+      </div>
+      <div class="note-box product-package">
+        <div class="cart_qty qty-box product-qty">
+          <div class="input-group">
+            <app-button
+                [class]="'btn qty-left-minus'"
+                [id]="'add-to-cart'+item.product.id"
+                [spinner]="false"
+                (click)="updateQuantity(-1)">
+                <i class="ri-subtract-fill"></i>
+            </app-button>
+            <input class="form-control input-number qty-input" type="text" name="quantity" value="{{productQty}}" readonly>
+            <app-button
+                [class]="'btn qty-left-minus'"
+                [id]="'qty-left-minus'+item.product.id"
+                [spinner]="false"
+                (click)="updateQuantity(1)">
+                <i class="ri-add-line"></i>
+            </app-button>
+          </div>
+        </div>
+        <app-button
+            [id]="'replacecartbtnVariation'+item.product.id"
+            [class]="'btn btn-md cart-button scroll-button text-white'"
+            (click)="replaceCart(item.product)"
+            *ngIf="((selectedVariation && selectedVariation.status && selectedVariation.quantity >= productQty) || (!selectedVariation && product.quantity >= productQty)) else outStock">
+                <i class="ri-shopping-cart-line me-1"></i>  {{ 'update_item' | translate }}
+        </app-button>
+        <ng-template #outStock>
+          <app-button
+              [class]="'btn btn-md cart-button scroll-button text-white'"
+              [id]="'soldoutbtnreplaceproduct'"
+              [spinner]="false"
+              [disabled]="true">
+              <i class="ri-shopping-cart-line me-1"></i>  {{
+                ((selectedVariation && selectedVariation.status && selectedVariation.quantity < productQty || (!selectedVariation && product.quantity < productQty)) ? 'out_of_stock'
+                : 'Add To Cart') | translate }}
+          </app-button>
+      </ng-template>
+      </div>
+    </div>
+  </div>
+</ng-template>

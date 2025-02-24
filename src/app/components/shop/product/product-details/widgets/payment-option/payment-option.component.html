@@ -1,0 +1,12 @@
+<div class="paymnet-option" *ngIf="option?.product?.safe_checkout && product?.safe_checkout">
+    <div class="product-title">
+        <h4>{{ 'Guaranteed Safe Checkout' | translate }}</h4>
+        <img [src]="storageURL + option?.product?.safe_checkout_image" class="img-fluid payment-img"
+            *ngIf="option?.product?.safe_checkout_image">
+    </div>
+</div>
+<div class="secure-site-sec" *ngIf="option?.product?.secure_checkout && product?.secure_checkout">
+    <h4>{{ 'Secure Checkout' | translate }}</h4>
+    <img [src]="storageURL + option?.product?.secure_checkout_image" class="img-fluid payment-img"
+        *ngIf="option?.product?.secure_checkout_image">
+</div>

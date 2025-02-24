@@ -1,0 +1,25 @@
+<app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+<section>
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div class="col-12">
+                <div class="brand-box">
+                    <img [src]="brand.brand_banner && brand.brand_banner.original_url" class="img-fluid w-100" *ngIf="brand.brand_banner && brand.brand_banner.original_url; else name">
+                    <ng-template #name>
+                        <h2>{{ brand.name }}</h2>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+  <section class="section-b-space shop-section" id="filtered_products">
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div class="col-custome-12">
+                <app-collection-products [filter]="filter" [gridCol]="'collection_5_grid'"></app-collection-products>
+            </div>
+        </div>
+    </div>
+  </section>
+  

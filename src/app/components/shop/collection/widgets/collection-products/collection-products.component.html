@@ -1,0 +1,28 @@
+<app-collection-sort [filter]="filter" [gridCol]="gridCol" (setGridClass)="setGridClass($event)"></app-collection-sort>
+<div [ngClass]="{ 
+  'full_border': (themeOption$ | async)?.product?.full_border,
+  'product_img_bg': (themeOption$ | async)?.product?.image_bg,
+  'full_bg': (themeOption$ | async)?.product?.product_box_bg,
+  'product_border': (themeOption$ | async)?.product?.product_box_border }">
+  <div [class]="gridClass">
+    <ng-container *ngIf="productService.skeletonLoader else productContent">
+      <app-skeleton-product-box *ngFor="let item of skeletonItems"></app-skeleton-product-box>
+    </ng-container>
+    <ng-template #productContent>
+      <ng-container *ngFor="let product of (product$ | async)?.data">
+          <app-product-box [product]="product" [class]="'product-box-3'" [style]="'horizontal'"></app-product-box>
+      </ng-container>
+    </ng-template>
+</div>
+<app-no-data
+  [class]="'no-data-added collection-no-data'"
+  [image]="'assets/svg/no-product.svg'"
+  [text]="'Sorry Cant Find Products Looking'"
+  [description]="'Please Check Misspelt Something Searching Other Way'"
+  *ngIf="!(product$ | async)?.data?.length && !productService.skeletonLoader">
+</app-no-data>
+</div>
+<app-collection-paginate
+  [filter]="filter"
+  *ngIf="(product$ | async)?.data?.length && !productService.skeletonLoader">
+</app-collection-paginate>

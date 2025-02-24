@@ -1,0 +1,18 @@
+
+<ul class="category-list custom-padding custom-height">
+    <li *ngFor="let price of prices">
+        <div class="form-check ps-0 m-0 category-list-box">
+            <input class="checkbox_animated" type="checkbox" 
+                id="price-filter{{price?.id}}"
+                [value]="price?.value"
+                [checked]="checked(price?.value!)"
+                (change)="applyFilter($event)">
+            <label class="form-check-label" for="price-filter{{price?.id}}">
+                <span class="name" *ngIf="price?.price else minMaxPrice">{{ price?.text }} {{ price?.price | currencySymbol }}</span>
+                <ng-template #minMaxPrice>
+                    <span class="name">{{ price?.minPrice | currencySymbol }} - {{ price?.maxPrice | currencySymbol }}</span>
+                </ng-template>
+            </label>
+        </div>
+    </li>
+</ul>

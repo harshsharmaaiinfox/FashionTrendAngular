@@ -1,0 +1,5 @@
+<!-- Compare basic Style -->
+<a [routerLink]="['/compare']" class="header-icon">
+    <small class="badge-number badge-light" *ngIf="(compareTotal$ | async)">{{ (compareTotal$ | async) }}</small>
+    <i class="ri-arrow-left-right-line"></i>
+</a>

@@ -1,0 +1,23 @@
+<app-breadcrumb [breadcrumb]="breadcrumb" *ngIf="layout !== 'product_digital';else other"></app-breadcrumb>
+<ng-template #other>
+    <app-breadcrumb-digital [product]="(product$ | async)!"></app-breadcrumb-digital>
+</ng-template>
+<!-- Product Details Layout -->
+<section class="product-section" [class.section-b-space]="!(product$ | async)?.related_products?.length" [class.theme-product-section]="layout === 'product_digital'" >
+    <app-product-digital [product]="(product$ | async)!" [option]="themeOptions$ | async" *ngIf="layout == 'product_digital'"></app-product-digital>
+    <app-product-thumbnail [product]="(product$ | async)!" [option]="themeOptions$ | async" *ngIf="layout == 'product_thumbnail'"></app-product-thumbnail>
+    <app-product-images [product]="(product$ | async)!" [option]="themeOptions$ | async" *ngIf="layout == 'product_images'"></app-product-images>
+    <app-product-slider [product]="(product$ | async)!" [option]="themeOptions$ | async" *ngIf="layout == 'product_slider'"></app-product-slider>
+    <app-product-sticky [product]="(product$ | async)!" [option]="themeOptions$ | async" *ngIf="layout == 'product_sticky'"></app-product-sticky>
+    <app-product-accordion [product]="(product$ | async)!" [option]="themeOptions$ | async" *ngIf="layout == 'product_accordion'"></app-product-accordion>
+</section>
+
+<!-- Related Products -->
+<section class="product-list-section releted-product section-b-space"
+    *ngIf="(product$ | async)?.related_products?.length">
+    <app-related-products [product]="product$ | async"></app-related-products>
+</section>
+
+<!-- Sticky Cart Box Start -->
+<app-sticky-checkout [product]="(product$ | async)!"></app-sticky-checkout>
+<!-- Sticky Cart Box End -->

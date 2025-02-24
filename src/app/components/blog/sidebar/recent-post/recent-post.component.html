@@ -1,0 +1,21 @@
+<div class="recent-post-box">
+    <div class="recent-box" *ngFor="let blog of blogs | slice:0:5">
+        <a [routerLink]="['/blog/', blog?.slug]" class="recent-image">
+            <img [src]="blog?.blog_thumbnail 
+                    ? blog?.blog_thumbnail?.original_url 
+                    : 'assets/images/blog.png'" class="img-fluid" [alt]="blog?.title">
+        </a>
+        <div class="recent-detail">
+            <a [routerLink]="['/blog/', blog?.slug]">
+                <h5 class="recent-name">{{ blog?.title }}</h5>
+            </a>
+            <h6>{{ blog?.created_at | date: 'dd MMM yyyy hh:mm:a' }}</h6>
+        </div>
+    </div>
+</div>
+<!-- No Data -->
+<app-no-data
+  [class]="'no-data-added bg-light'"
+  [text]="'no_blog_found'"
+  *ngIf="!blogs?.length">
+</app-no-data>

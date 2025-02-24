@@ -1,0 +1,218 @@
+<!-- Category Style Vertical -->
+<div class="category-menu section-b-space" *ngIf="style == 'vertical'">
+  <h3>{{ title ? title : 'categories' | translate }}</h3>
+  <ul *ngIf="categories?.length">
+    <li *ngFor="let category of categories">
+      <div class="category-list">
+        <img [src]="category?.category_icon ? category?.category_icon?.original_url : 'assets/images/category.png'"
+          [alt]="category?.name">
+        <h5>
+          <a href="javascript:void(0)" [routerLink]="['/category', category.slug ]">{{ category?.name }}</a>
+        </h5>
+      </div>
+    </li>
+  </ul>
+  <ul *ngIf="!categories?.length">
+    <li>
+      <div class="category-list">
+        <h5>
+          <a href="javascript:void(0)">{{ "no_category_found" | translate }}</a>
+        </h5>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Category Classic Vertical -->
+<div class="shop-left-sidebar" *ngIf="style == 'classic_vertical'">
+  <div class="back-button" (click)="closeCanvasMenu()">
+    <h3>
+      <a href="javascript:vois(0)" class="text-title">
+        <i class="ri-close-fill"></i>
+        <span>{{ 'back' | translate }}</span>
+      </a>
+    </h3>
+  </div>
+  <ul class="nav nav-pills mb-3 custom-nav-tab" *ngIf="categories?.length">
+    <li class="nav-item" *ngFor="let category of categories; let i = index">
+      <app-button
+        [class]="selectedCategorySlug.length && selectedCategorySlug.includes(category.slug!) ? 'nav-link active' : 'nav-link'"
+        [id]="'nav_link_btn'+i" [spinner]="false" (click)="redirectToCollection(category.slug!)">
+        {{ category.name }}
+        <img [src]="category?.category_icon ? category?.category_icon?.original_url : 'assets/images/category.png'"
+          [alt]="category?.name">
+      </app-button>
+    </li>
+  </ul>
+  <app-no-data [class]="'no-data-added bg-light'" [text]="'no_category_found'" *ngIf="!categories?.length">
+  </app-no-data>
+</div>
+
+<!-- Category Style Horizontal -->
+<div class="product-wrapper no-arrow" [class]="'category-slider'" *ngIf="style == 'horizontal'">
+  <owl-carousel-o [options]="sliderOption">
+    <ng-template carouselSlide *ngFor="let category of categories">
+      <div *ngIf="theme == 'paris'">
+        <a href="javascript:void(0)" [routerLink]="['/category', category.slug ]" class="category-box category-dark"
+          [class.active]="selectedCategorySlug.length && selectedCategorySlug.includes(category.slug!)">
+          <img [src]="image ? image : 'assets/images/shape.png'" class="background-image" [alt]="category?.name">
+          <img [src]="category?.category_icon ? category?.category_icon?.original_url : 'assets/images/category.png'"
+            [alt]="category?.name">
+          <h5>{{ category.name }}</h5>
+        </a>
+      </div>
+      <div *ngIf="theme == 'madrid'">
+        <a [routerLink]="['/category', category.slug ]" class="category-box-list d-block">
+          <div  class="category-name">
+            <h4>{{ category.name }}</h4>
+            <h6>{{ category.products_count }} {{ 'items' | translate }}</h6>
+          </div>
+          <div class="category-box-view">
+            <div class="category-img">
+              <img
+                [src]="category?.category_image ? category?.category_image?.original_url : 'assets/images/category.png'"
+                class="img-fluid" [alt]="category?.name">
+            </div>
+            <app-button [class]="'btn shop-button'" [id]="'shop_now_btn'" [spinner]="false">
+              <span>{{ 'shop_now' | translate }}</span>
+              <i class="ri-arrow-right-s-line"></i>
+            </app-button>
+          </div>
+        </a>
+      </div>
+      <div *ngIf="theme == 'rome'">
+        <div class="shop-category-box border-0">
+          <a href="javascript:void(0)" [routerLink]="['/category', category.slug ]" class="circle-1">
+            <img
+              [src]="category?.category_image ? category?.category_image?.original_url : 'assets/images/category.png'"
+              [alt]="category?.name">
+          </a>
+          <div class="category-name">
+            <h6>{{ category.name }}</h6>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </owl-carousel-o>
+  <app-no-data [class]="'no-data-added bg-light'" [text]="'no_category_found'" *ngIf="!categories?.length">
+  </app-no-data>
+</div>
+
+<!-- Category Style classic -->
+<div *ngIf="style == 'classic'">
+  <owl-carousel-o [options]="sliderOption">
+    <ng-template carouselSlide *ngFor="let category of categories">
+      <div>
+        <div class="shop-category-box border-0">
+          <a href="javascript:void(0)" [routerLink]="['/category', category.slug ]" class="circle-1">
+            <img [src]="category?.category_icon ? category?.category_icon?.original_url : 'assets/images/category.png'"
+              [alt]="category?.name">
+          </a>
+          <div class="category-name">
+            <h6>{{ category.name }}</h6>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </owl-carousel-o>
+  <app-no-data [class]="'no-data-added bg-light'" [text]="'no_category_found'" *ngIf="!categories?.length">
+  </app-no-data>
+</div>
+
+<!-- Category Style Filter -->
+<ul class="nav nav-tabs tab-style-color-2 tab-style-color" *ngIf="categories?.length && style == 'filter'">
+  <li class="nav-item">
+    <app-button [class]="!selectedCategoryId ? 'nav-link btn active' : 'nav-link btn' " [spinner]="false"
+      [id]="'all_category'" (click)="selectCategory()">
+      All
+    </app-button>
+  </li>
+  <li class="nav-item" *ngFor="let category of categories">
+    <app-button [class]="selectedCategoryId == category.id ? 'nav-link btn active' : 'nav-link btn' " [spinner]="false"
+      [id]="'category'+category.id" (click)="selectCategory(category.id)">
+      {{category?.name}}
+    </app-button>
+  </li>
+</ul>
+
+<!--- Category Style Dropdown -->
+<ul class="category-list" *ngIf="categories?.length && style == 'dropdown'">
+  <li class="onhover-category-list" *ngFor="let category of categories">
+    <a href="javascript:void(0)" [routerLink]="['/category', category.slug ]" class="category-name">
+      <img [src]="category?.category_icon ? category?.category_icon?.original_url : 'assets/images/category.png'"
+        [alt]="category?.name">
+      <h6>{{ category?.name }}</h6>
+    </a>
+  </li>
+</ul>
+<ul class="category-list" *ngIf="!categories?.length && style == 'dropdown'">
+  <li class="onhover-category-list">
+    <a href="javascript:void(0)" class="category-name">
+      <h6>{{ "no_category_found"  | translate}}</h6>
+    </a>
+  </li>
+</ul>
+
+<!-- Input Category Dropdown -->
+<app-button [class]="'btn location-button'" [id]="'category_btn'" [spinner]="false" [type]="'button'"
+  *ngIf="style == 'input_dropdown'">
+  <select class="form-select locat-name">
+    <option>{{ 'All Category' | translate }}</option>
+    <option *ngFor="let category of categories">
+      {{ category.name }}
+    </option>
+  </select>
+</app-button>
+
+<ng-container *ngIf="theme == 'moscow'">
+  <div class="title">
+    <h2>{{ title }}</h2>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="position-relative">
+        <div class="slider-9 book-category-slider">
+          <owl-carousel-o [options]="sliderOption">
+            <ng-template carouselSlide *ngFor="let category of categories">
+              <div>
+                <a href="javascript:void(0)" [routerLink]="['/category', category.slug ]" class="category-box">
+                  <img
+                    [src]="category?.category_image ? category?.category_image?.original_url : 'assets/images/category.png'"
+                    [alt]="category?.name" class="img-fluid">
+                </a>
+              </div>
+            </ng-template>
+          </owl-carousel-o>
+        </div>
+        <div class="shelf"></div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="theme == 'cairo'">
+  <div class="feature-panel-slider">
+    <owl-carousel-o [options]="sliderOption">
+      <ng-template carouselSlide *ngFor="let category of categories">
+        <a [routerLink]="['/category', category.slug ]" class="cate-box">
+          <span>{{ category.name }}</span>
+        </a>
+      </ng-template>
+    </owl-carousel-o>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="style == 'cairo_classic'">
+  <div class="category-panel-slider no-arrow">
+    <owl-carousel-o [options]="sliderOption">
+      <ng-template carouselSlide *ngFor="let category of categories">
+        <div class="cate-box">
+          <a href="javascript:void(0)" [routerLink]="['/category', category.slug ]">
+            <img [src]="category?.category_icon ? category?.category_icon?.original_url : 'assets/images/category.png'"
+              [alt]="category?.name">
+          </a>
+        </div>
+      </ng-template>
+    </owl-carousel-o>
+  </div>
+</ng-container>

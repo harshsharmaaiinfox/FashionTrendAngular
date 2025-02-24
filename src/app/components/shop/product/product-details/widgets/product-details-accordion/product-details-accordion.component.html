@@ -1,0 +1,48 @@
+
+<div ngbAccordion [closeOthers]="true" class="accordion-box product-section-box mt-0">
+  <div ngbAccordionItem [collapsed]="false">
+    <h2 ngbAccordionHeader>
+      <button ngbAccordionButton>
+        <span>{{ 'Description' | translate }}</span>
+      </button>
+    </h2>
+    <div ngbAccordionCollapse>
+      <div ngbAccordionBody>
+        <ng-template>
+          <div class="product-description">
+            <div class="nav-desh ckeditor-content" [innerHTML]="product?.description">
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div ngbAccordionItem>
+    <h2 ngbAccordionHeader>
+      <button ngbAccordionButton>
+        <span>{{ 'Review' | translate }}</span>
+      </button>
+    </h2>
+    <div ngbAccordionCollapse>
+      <div ngbAccordionBody>
+        <ng-template>
+          <app-product-review [product]="product" [reviews]="(review$ | async)?.data!"></app-product-review>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div ngbAccordionItem>
+    <h2 ngbAccordionHeader>
+      <button ngbAccordionButton>
+        <span>{{ 'Q/A' | translate }}</span>
+      </button>
+    </h2>
+    <div ngbAccordionCollapse>
+      <div ngbAccordionBody>
+        <ng-template>
+          <app-questions-answers [product]="product!" [questionAnswers]="(question$ | async)?.data!"></app-questions-answers>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

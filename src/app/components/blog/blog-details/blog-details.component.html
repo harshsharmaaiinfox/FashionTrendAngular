@@ -1,0 +1,37 @@
+<app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+<section class="blog-section section-b-space">
+    <div class="container-fluid-lg">
+        <div class="row g-sm-4 g-3">
+            <div class="col-xxl-3 col-xl-4 col-lg-5 d-lg-block d-none"
+                [class.order-lg-1]="sidebar === 'right_sidebar'"
+                [ngClass]="sidebar === 'no_sidebar' ? 'd-none' : ''">
+                <app-blog-sidebar></app-blog-sidebar>
+            </div>
+            <div class="col-xxl-9 col-xl-8 col-lg-7 ratio_50">
+                <div class="blog-detail-image rounded-3 mb-4 bg-size" [ngStyle]="{'background-image': 'url('
+                    + ((blog$ | async)?.blog_thumbnail
+                    ? (blog$ | async)?.blog_thumbnail?.original_url
+                    : 'assets/images/blog.png' ) + ')'}">
+                    <div class="blog-image-contain">
+                        <h2>{{ (blog$ | async)?.title }}</h2>
+                        <ul class="contain-comment-list">
+                            <li>
+                                <div class="user-list">
+                                    <i class="ri-user-line"></i>
+                                    <span>{{ (blog$ | async)?.created_by?.name }}</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="user-list">
+                                    <i class="ri-time-line"></i>
+                                    <span>{{ (blog$ | async)?.created_at | date: 'dd MMM yyyy hh:mm:a' }}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="blog-detail-contain ckeditor-content" [innerHTML]="(blog$ | async)?.content"></div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,122 @@
+<div class="tab-pane fade show active">
+    <div class="dashboard-home">
+        <div class="title-header">
+            <div class="d-flex align-items-center">
+                <h5>{{ 'My Dashboard' | translate }}</h5>
+            </div>
+        </div>
+        <div class="dashboard-user-name">
+            <h6 class="text-content">{{ 'Hello' | translate }}, <b class="text-title">{{ (user$ | async)?.name! | titleCase }}</b></h6>
+            <p class="text-content">
+                {{ "Welcome" | translate}}
+            </p>
+        </div>
+        <div class="total-box">
+            <div class="row row-cols-xxl-3 g-sm-4 g-3">
+                <div>
+                    <div class="totle-contain">
+                        <div class="wallet-point-box">
+                            <img src="assets/images/wallet.png" class="img-1 " alt="wallet">
+                            <img src="assets/images/wallet.png" alt="wallet">
+                            <div class="totle-detail">
+                                <h5>{{ 'Balance'| translate}}</h5>
+                                <h3>{{ ((user$ | async)?.wallet ? (user$ | async)?.wallet?.balance : 0) | currencySymbol }}
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="totle-contain">
+                        <div class="wallet-point-box">
+                            <img src="assets/images/coins.png" class="img-1 " alt="coin">
+                            <img src="assets/images/coins.png" alt="coin">
+                            <div class="totle-detail">
+                                <h5>{{ 'Total Points'| translate}}</h5>
+                                <h3>{{ (user$ | async)?.point ? (user$ | async)?.point?.balance : 0 }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="totle-contain">
+                        <div class="wallet-point-box">
+                            <img src="assets/images/package.png" class="img-1" alt="order">
+                            <img src="assets/images/package.png" alt="order">
+                            <div class="totle-detail">
+                                <h5>{{ 'Total Orders'| translate}}</h5>
+                                <h3>{{ (user$ | async)?.orders_count ? (user$ | async)?.orders_count : 0 }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="profile-about dashboard-bg-box">
+            <div class="row">
+                <div class="col-xxl-7">
+                    <div class="dashboard-title mb-3">
+                        <h3>{{ 'Profile Information'| translate}}</h3>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>{{ 'Name'| translate}}:</td>
+                                    <td>{{ (user$ | async)?.name | titleCase }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'Phone'| translate}}:</td>
+                                    <td>
+                                        {{ (user$ | async)?.country_code }} {{ (user$ | async)?.phone }}
+                                    </td>
+                                </tr>
+                                <tr *ngIf="address">
+                                    <td>{{ 'Adress'| translate}}:</td>
+                                    <td>
+                                        {{ address.street }} {{ address.city }}, {{ address.state.name }},
+                                        {{ address.country.name }} {{ address.pincode }}
+                                        
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="dashboard-title mb-3">
+                        <h3>{{ 'Login Details'| translate}}</h3>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>{{ 'Email'| translate}} :</td>
+                                    <td>
+                                        {{ (user$ | async)?.email }}
+                                        <a href="javascript:void(0)" (click)="ProfileModal.openModal()">{{ 'Edit' | translate }}</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'Password'| translate}} :</td>
+                                    <td>
+                                        ●●●●●●
+                                        <a href="javascript:void(0)" (click)="PasswordModal.openModal()">{{ 'Edit' | translate }}</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-xxl-5">
+                    <div class="profile-image">
+                        <img src="assets/images/dashboard.png" class="img-fluid" alt="dashboard-profile">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-edit-profile-modal #profileModal></app-edit-profile-modal>
+<app-change-password-modal #passwordModal></app-change-password-modal>

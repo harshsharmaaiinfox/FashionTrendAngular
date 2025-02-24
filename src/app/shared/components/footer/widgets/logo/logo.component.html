@@ -1,0 +1,10 @@
+<div class="theme-logo">
+    <a [routerLink]="['/']">
+        <img [src]="footer.footer_logo" class="img-fluid" alt="logo" *ngIf="footer?.footer_logo else text">
+        <ng-template #text>
+            <h2 class="f-w-600" *ngIf="data && data?.general">
+                {{ (setting$ | async)?.general ? (setting$ | async)?.general?.site_name : 'Logo Here' }}
+            </h2>
+        </ng-template>
+    </a>
+</div>

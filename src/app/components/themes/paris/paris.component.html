@@ -1,0 +1,249 @@
+<div class="bg-effect">
+  <!-- Home Section Start -->
+  <section class="home-section pt-2" *ngIf="data?.content?.home_banner">
+    <app-theme-home-banner [theme]="'paris'" [data]="data?.content?.home_banner"></app-theme-home-banner>
+  </section>
+  <!-- Home Section End -->
+
+  <!-- Banner Section Start -->
+  <section class="banner-section ratio_60">
+    <app-theme-banner [style]="'horizontal'" [banners]="data?.content?.featured_banners?.banners"></app-theme-banner>
+  </section>
+  <!-- Banner Section End -->
+
+  <!-- Product Section Start -->
+  <section class="product-section">
+    <div class="container-fluid-lg">
+      <div class="row g-sm-4 g-3">
+        <!-- Left Content Start -->
+        <div class="col-xxl-3 col-xl-4 d-none d-xl-block" *ngIf="data?.content?.main_content?.sidebar?.status">
+          <div class="p-sticky">
+            <!-- Sidebar Category Vertical Style -->
+            <ng-container>
+              <app-theme-categories
+                [categoryIds]="data?.content?.main_content?.sidebar?.categories_icon_list?.category_ids || []"
+                [style]="'vertical'">
+              </app-theme-categories>
+            </ng-container>
+
+            <!-- Sidebar Vertical Banner -->
+            <app-theme-banner
+              [class]="'ratio_156 section-t-space'"
+              [style]="'vertical'"
+              [banners]="data?.content?.main_content?.sidebar?.left_side_banners?.banner_1">
+            </app-theme-banner>
+
+            <!-- Sidebar Vertical Banner -->
+            <app-theme-banner
+              [class]="'ratio_medium section-t-space'" [style]="'vertical'"
+              [banners]="data?.content?.main_content?.sidebar?.left_side_banners?.banner_2">
+            </app-theme-banner>
+
+            <!-- Products -->
+            <ng-container *ngIf="data?.content?.main_content?.sidebar?.sidebar_products?.status">
+              <div class="section-t-space">
+                <div class="category-menu">
+                  <h3>{{ data?.content?.main_content?.sidebar?.sidebar_products?.title }}</h3>
+                  <app-theme-product
+                    [style]="'vertical'"
+                    [productIds]="data?.content?.main_content?.sidebar?.sidebar_products?.product_ids || []">
+                  </app-theme-product>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <!-- Left Content End -->
+
+        <!-- Right Content Start -->
+        <div [class]="data?.content?.main_content?.sidebar?.status ? 'col-xxl-9 col-xl-8' : 'col-xxl-12 col-xl-12'">
+
+          <!-- Top Save Today Section Start -->
+          <ng-container *ngIf="data?.content?.main_content?.section1_products?.status">
+            <app-title
+              [title]="data?.content?.main_content?.section1_products?.title"
+              [description]="data?.content?.main_content?.section1_products?.description">
+            </app-title>
+            <div class="section-b-space">
+              <app-theme-product
+                [productIds]="data?.content?.main_content?.section1_products?.product_ids || []"
+                [slider]="true"
+                [sliderOption]="productSlider"
+                [style]="'horizontal'">
+              </app-theme-product>
+            </div>
+          </ng-container>
+          <!-- Top Save Today Section End -->
+
+          <!-- Categories Section Start-->
+          <ng-container *ngIf="data?.content?.main_content?.section2_categories_list?.status">
+            <div>
+              <app-title
+                [title]="data?.content?.main_content?.section2_categories_list?.title"
+                [description]="data?.content?.main_content?.section2_categories_list?.description">
+              </app-title>
+              <app-theme-categories
+                [sliderOption]="categorySlider"
+                [image]="data?.content?.main_content?.section2_categories_list?.image_url!"
+                [categoryIds]="data?.content?.main_content?.section2_categories_list?.category_ids || []"
+                [theme]="'paris'"
+                [style]="'horizontal'">
+              </app-theme-categories>
+            </div>
+          </ng-container>
+          <!-- Categories Section End-->
+
+          <!-- Two Column Banner Section Start-->
+          <ng-container *ngIf="data?.content?.main_content?.section3_two_column_banners?.status">
+            <div class="section-t-space section-b-space">
+              <div class="row g-md-4 g-3">
+                <div class="col-md-6">
+                  <div class="banner-contain hover-effect">
+                    <app-image-link 
+                      [image]="data?.content?.main_content?.section3_two_column_banners?.banner_1"
+                      [bgImage]="false">
+                    </app-image-link>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="banner-contain hover-effect">
+                    <app-image-link 
+                      [image]="data?.content?.main_content?.section3_two_column_banners?.banner_2"
+                      [bgImage]="false">
+                    </app-image-link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <!-- Two Column Banner Section End-->
+              
+
+          <!-- Section Start -->
+          <ng-container *ngIf="data?.content?.main_content?.section4_products?.status">
+            <app-title
+              [title]="data?.content?.main_content?.section4_products?.title"
+              [description]="data?.content?.main_content?.section4_products?.description">
+            </app-title>
+            <div class="section-b-space">
+              <app-theme-product
+                [productIds]="data?.content?.main_content?.section4_products?.product_ids || []"
+                [sliderOption]="productSlider"
+                [slider]="true"
+                [style]="'horizontal'">
+              </app-theme-product>
+            </div>
+          </ng-container>
+          <!-- Section End -->
+
+          <!-- Top Seller start -->
+          <ng-container *ngIf="data?.content?.main_content?.seller?.status">
+            <app-title [title]="data?.content?.main_content?.seller?.title"
+              [description]="data?.content?.main_content?.seller?.description">
+            </app-title>
+              <div class="section-b-space">
+                <app-top-seller [sellerIds]="data?.content?.main_content?.seller?.store_ids || []"></app-top-seller>
+              </div>
+          </ng-container>
+          <!-- Top Seller End -->
+
+          <!-- Coupons Banner Section Start -->
+          <ng-container *ngIf="data?.content?.main_content?.section5_coupons?.status">
+            <div class="section-b-space ratio_12">
+              <app-theme-banner
+                class="sale-banner"
+                [banners]="data?.content?.main_content?.section5_coupons"
+                [style]="'full_width'">
+              </app-theme-banner>
+            </div>
+          </ng-container>
+          <!-- Coupons Banner Section End -->
+
+          <!-- Two Column Banner Section Start -->
+          <ng-container *ngIf="data?.content?.main_content?.section6_two_column_banners?.status">
+            <div class="section-b-space" *ngIf="data?.content?.main_content?.section6_two_column_banners?.status">
+              <div class="row g-md-4 g-3">
+                <div class="col-xxl-8 col-xl-12 col-md-7">
+                  <div class="banner-contain hover-effect">
+                    <app-image-link
+                      [image]="data?.content?.main_content?.section6_two_column_banners?.banner_1"
+                      [bgImage]="false">
+                    </app-image-link>
+                  </div>
+                </div>
+                <div class="col-xxl-4 col-xl-12 col-md-5">
+                  <div class="banner-contain hover-effect">
+                    <app-image-link 
+                      [image]="data?.content?.main_content?.section6_two_column_banners?.banner_2"
+                      [bgImage]="false">
+                    </app-image-link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <!-- Two Column Banner Section End -->
+
+          <!-- Our Best Seller Section Start -->
+          <ng-container *ngIf="data?.content?.main_content?.section4_products?.status">
+            <app-title
+              [title]="data?.content?.main_content?.section7_products?.title"
+              [description]="data?.content?.main_content?.section7_products?.description">
+            </app-title>
+            <app-theme-product
+              [productIds]="data?.content?.main_content?.section7_products?.product_ids || []"
+              [style]="'classic'">
+            </app-theme-product>
+          </ng-container>
+          <!-- Our Best Seller Section End -->
+
+          <!-- Full Width Banner Section Start -->
+          <ng-container *ngIf="data?.content?.main_content?.section8_full_width_banner?.status">
+            <div class="section-b-space section-t-space">
+              <div class="banner-contain hover-effect">
+                <app-image-link 
+                  [image]="data?.content?.main_content?.section8_full_width_banner" 
+                  [bgImage]="false">
+                </app-image-link>
+              </div>
+            </div>
+          </ng-container>
+          <!-- Full Width Banner Section End -->
+
+          <!-- Blogs Section Start -->
+          <ng-container *ngIf="data?.content?.main_content?.section9_featured_blogs?.status">
+            <app-title
+              [title]="data?.content?.main_content?.section9_featured_blogs?.title"
+              [description]="data?.content?.main_content?.section9_featured_blogs?.description">
+            </app-title>
+            <app-blog
+              [blogIds]="data?.content?.main_content?.section9_featured_blogs?.blog_ids || []">
+            </app-blog>
+          </ng-container>
+          <!-- Blogs Section End -->
+        </div>
+        <!-- Right Content End -->
+      </div>
+    </div>
+  </section>
+  <!-- Product Section End -->
+
+  <!-- Brand Section start -->
+  <ng-container *ngIf="data?.content?.brands?.status">
+    <section class="brand-effect" *ngIf="data?.content?.brands?.brand_ids?.length">
+      <div class="container-fluid-lg">
+        <app-brand [brandIds]="data?.content?.brands?.brand_ids || []"></app-brand>
+      </div>
+    </section>
+  </ng-container>
+  <!-- Brand Section end -->
+
+  <!-- Newsletter Section Start -->
+  <ng-container *ngIf="data?.content?.news_letter?.status">
+    <section class="newsletter-section section-b-space">
+      <app-newsletter [data]="data?.content?.news_letter || null"></app-newsletter>
+    </section>
+  </ng-container>
+  <!-- Newsletter Section End -->
+</div>
+ 

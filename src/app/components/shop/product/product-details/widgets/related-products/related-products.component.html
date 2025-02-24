@@ -1,0 +1,14 @@
+<div class="container-fluid-lg" *ngIf="relatedProducts?.length">
+    <app-title [title]="'You May Also Like'"></app-title>
+    <div [ngClass]="{ 'full_border': (themeOption$ | async)?.product?.full_border,
+        'product_img_bg': (themeOption$ | async)?.product?.image_bg,
+        'full_bg': (themeOption$ | async)?.product?.product_box_bg,
+        'product_border': (themeOption$ | async)?.product?.product_box_border }">
+        <div class="row g-sm-3 g-2">
+            <div class="col-xxl-2 col-lg-3 col-md-4 col-6 product-box-contain" 
+            *ngFor="let product of relatedProducts">
+            <app-product-box [product]="product" [class]="'product-box-3'" [style]="'horizontal'"></app-product-box>
+            </div>
+        </div>
+    </div>
+</div>

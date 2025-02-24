@@ -1,0 +1,29 @@
+<app-title
+    [title]="data?.categories_products?.title"
+    [class]="'container-fluid-lg'"
+    [style]="'simple'">
+    <app-theme-categories
+    *ngIf="data?.categories_products?.category_ids?.length"
+    [categoryIds]="data?.categories_products?.category_ids || []"
+    [style]="'filter'"
+    [selectedCategoryId]="selectedCategoryId"
+    (selectedCategory)="selectCategory($event)">
+    </app-theme-categories>
+</app-title>
+
+<div class="container-fluid-lg">
+    <div [ngClass]="[
+    (themeOption$ | async)?.product?.full_border ? 'full_border' : '',
+    (themeOption$ | async)?.product?.image_bg ? 'product_img_bg' : '',
+    (themeOption$ | async)?.product?.product_box_bg ? 'full_bg' : '',
+    (themeOption$ | async)?.product?.product_box_border ? 'product_border' : '']">
+    <div class="row g-sm-4 g-3" [ngClass]="[
+                grid === 4 ? 'row-cols-xl-4 row-cols-md-3 row-cols-2': '',
+                grid === 5 ? 'row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-2': '',
+                grid === 6 ? 'row-cols-xxl-6 row-cols-lg-4 row-cols-md-3 row-cols-2': '']">
+        <ng-container *ngFor="let product of products">
+        <div>
+            <app-product-box [style]="'horizontal'" [product]="product"></app-product-box>
+        </div>
+        </ng-container>
+</div>

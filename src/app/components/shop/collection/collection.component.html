@@ -1,0 +1,9 @@
+<app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+<app-collection-category-slider [filter]="filter" *ngIf="layout == 'collection_category_slider'"></app-collection-category-slider>
+<app-collection-category-sidebar [filter]="filter" *ngIf="layout == 'collection_category_sidebar'"></app-collection-category-sidebar>
+<app-collection-banner [filter]="filter" *ngIf="layout == 'collection_banner'"></app-collection-banner>
+<app-collection-left-sidebar [filter]="filter" *ngIf="layout == 'collection_left_sidebar'"></app-collection-left-sidebar>
+<app-collection-right-sidebar [filter]="filter" *ngIf="layout == 'collection_right_sidebar'"></app-collection-right-sidebar>
+<app-collection-list [filter]="filter" *ngIf="layout == 'collection_3_grid' || layout == 'collection_4_grid' || layout == 'collection_5_grid' || layout == 'collection_list_view'"></app-collection-list>
+<app-collection-offcanvas-filter [filter]="filter" *ngIf="layout == 'collection_offcanvas_filter'"></app-collection-offcanvas-filter>
+<app-collection-no-sidebar  [filter]="filter" *ngIf="layout == 'collection_no_sidebar'"></app-collection-no-sidebar>

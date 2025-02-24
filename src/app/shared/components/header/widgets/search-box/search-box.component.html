@@ -1,0 +1,12 @@
+<!-- Search Basic Style -->
+<div class="delivery-login-box" *ngIf="style == 'basic'">
+  <div class="delivery-icon">
+      <a class="search-box" [routerLink]="['/search']">
+        <i class="ri-search-line"></i>
+      </a>
+  </div>
+</div>
+<!-- Search Classic Style -->
+<a href="javascript:void(0)" class="header-icon search-box search-icon" [routerLink]="['/search']" *ngIf="style == 'classic'">
+  <i class="ri-search-line"></i>
+</a>
