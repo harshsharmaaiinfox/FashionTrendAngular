@@ -78,31 +78,7 @@ export const ThemeMenuOptions: any[] = [
         "banner_image": null,
         "child": []
     },
-    {
-        "id": 164,
-        "title": "About us",
-        "sort": null,
-        "link_type": "link",
-        "mega_menu": 0,
-        "mega_menu_type": "simple",
-        "slug": "about-us",
-        "path": "page/about-us",
-        "badge_text": null,
-        "badge_color": null,
-        "content_item": null,
-        "item_image_id": null,
-        "banner_image_id": null,
-        "parent_id": null,
-        "is_target_blank": 0,
-        "status": 1,
-        "created_by_id": 1,
-        "created_at": "2025-02-05T11:21:31.000000Z",
-        "product_ids": [],
-        "blog_ids": [],
-        "item_image": null,
-        "banner_image": null,
-        "child": []
-    },
+   
     {
         "id": 45,
         "title": "Activewear",
@@ -153,5 +129,29 @@ export const ThemeMenuOptions: any[] = [
         "banner_image": null,
         "child": []
     },
-    
+    {
+        "id": 164,
+        "title": "About us",
+        "sort": null,
+        "link_type": "link",
+        "mega_menu": 0,
+        "mega_menu_type": "simple",
+        "slug": "about-us",
+        "path": "page/about-us",
+        "badge_text": null,
+        "badge_color": null,
+        "content_item": null,
+        "item_image_id": null,
+        "banner_image_id": null,
+        "parent_id": null,
+        "is_target_blank": 0,
+        "status": 1,
+        "created_by_id": 1,
+        "created_at": "2025-02-05T11:21:31.000000Z",
+        "product_ids": [],
+        "blog_ids": [],
+        "item_image": null,
+        "banner_image": null,
+        "child": []
+    },
 ]
