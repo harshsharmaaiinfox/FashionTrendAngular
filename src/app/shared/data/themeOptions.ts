@@ -42,8 +42,8 @@ export const themeOptionsfashionTrends = {
                 "disk": "public",
                 "created_by_id": 1,
                 "created_at": "2025-01-21T07:25:43.000000Z",
-                "asset_url": "../assets/images/trend-vibe.png",
-                "original_url": "../assets/images/trend-vibe.png"
+                "asset_url": "../assets/images/fashiont.png",
+                "original_url": "../assets/images/fashiont.png"
             },
             "footer_logo": {
                 "id": 2153,
@@ -53,8 +53,8 @@ export const themeOptionsfashionTrends = {
                 "disk": "public",
                 "created_by_id": 1,
                 "created_at": "2025-01-21T07:25:43.000000Z",
-                "asset_url": "../assets/images/trend-vibe.png",
-                "original_url": "../assets/images/trend-vibe.png"
+                "asset_url": "../assets/images/fashiont.png",
+                "original_url": "../assets/images/fashiont.png"
             }
         },
         "header": {
