@@ -4,10 +4,12 @@
        <div class="footer-title">
         <h4>Register Address</h4>
        </div>
+      <div class="footer-contain">
         <li *ngIf="data?.footer?.about_address">
             <i class="ri-home-line"></i>
             <a href="https://www.google.com/maps" target="_blank">{{ data?.footer?.about_address }}</a>
         </li>
+      </div>
         <!-- <li *ngIf="data?.footer?.about_email">
             <i class="ri-mail-line"></i>
             <a href="mailto:{{ data?.footer?.about_email }}">{{ data?.footer?.about_email }}</a>
