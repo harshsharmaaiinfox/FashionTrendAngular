@@ -81,12 +81,12 @@ export const ThemeMenuOptions: any[] = [
    
     {
         "id": 45,
-        "title": "Activewear",
+        "title": "Sports Fashion",
         "sort": null,
         "link_type": "link",
         "mega_menu": 1,
         "mega_menu_type": null,
-        "slug": "activewear",
+        "slug": "Sports-fashion",
         "path": "collections?category= activewear",
         "badge_text": null,
         "badge_color": null,
@@ -105,13 +105,46 @@ export const ThemeMenuOptions: any[] = [
         "child": []
     },
     {
+        "id": 67,
+        "title": "Sunglasses",
+        "sort": null,
+        "link_type": "link",
+        "mega_menu": 0,
+        "mega_menu_type": "simple",
+        "slug": "sunglasses",
+        "path": "collections?category=sunglasses",
+        "badge_text": null,
+        "badge_color": null,
+        "content_item": null,
+        "item_image_id": 2019,
+        "banner_image_id": null,
+        "parent_id": null,
+        "is_target_blank": 0,
+        "status": 1,
+        "created_by_id": 1,
+        "created_at": "2025-01-09T23:03:38.000000Z",
+        "product_ids": [],
+        "blog_ids": [],
+        "item_image": {
+            "id": 2019,
+            "name": "charlesdeluvio-1-nx1QR5dTE-unsplash-1-scaled-1",
+            "disk": "public",
+            "mime_type": "image/jpeg",
+            "file_name": "charlesdeluvio-1-nx1QR5dTE-unsplash-1-scaled-1.jpg",
+            "asset_url": "/storage/2019/charlesdeluvio-1-nx1QR5dTE-unsplash-1-scaled-1.jpg",
+            "original_url": "https://api.fashioncarft.com/public/storage/2019/charlesdeluvio-1-nx1QR5dTE-unsplash-1-scaled-1.jpg"
+        },
+        "banner_image": null,
+        "child": []
+    },
+    {
         "id": 42,
-        "title": "Fashion",
+        "title": "Collections",
         "sort": null,
         "link_type": "link",
         "mega_menu": 1,
         "mega_menu_type": null,
-        "slug": "fashion",
+        "slug": "collections",
         "path": "collections?category=fashion",
         "badge_text": null,
         "badge_color": null,
@@ -155,3 +188,5 @@ export const ThemeMenuOptions: any[] = [
         "child": []
     },
 ]
+
+
