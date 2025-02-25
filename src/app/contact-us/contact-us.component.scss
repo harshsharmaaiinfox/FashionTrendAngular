@@ -1,15 +1,15 @@
 .container {
-    width: 70%;
+    width: 100%;
     margin: 50px auto;
     background: #fff;
-    padding: 20px;
+    padding: 40px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
   }
   .contact-details, .contact-form {
-    width: 48%;
+    width: 50%;
   }
   .contact-details h2, .contact-form h2 {
     color: #333;
@@ -43,8 +43,6 @@
   }
   .contact-details p{
         font-size: 17px;
-        padding-bottom: 30px;
-        line-height: 18px;
   }
   @media(max-width:1200px){
     .container{
@@ -66,3 +64,76 @@
     margin: auto;
  }
   }
+
+
+  .contact-box-section .left-sidebar-box .contact-detail .contact-detail-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(2px + 3 * (100vw - 320px) / 1600);
+    align-items: center;
+    background-color: #f8f8f8;
+    padding: calc(15px + .0075*(100vw - 320px)) calc(15px + .0075*(100vw - 320px)) calc(15px + .0075*(100vw - 320px)) calc(30px + 11 * (100vw - 320px) / 1600);
+    position: relative;
+    border-radius: 10px;
+    margin-left: 22px;
+}
+
+.contact-box-section .left-sidebar-box .contact-detail .contact-detail-box .contact-icon {
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  left: -21px;
+  background-color: #867969;
+  border-radius: 7px;
+  display: inherit;
+  color: #fff;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-box-section .left-sidebar-box .contact-detail .contact-detail-box .contact-icon i {
+  line-height: 1;
+  font-size: 18px;
+}
+.contact-box-section .left-sidebar-box .contact-detail .contact-detail-box .contact-detail-title, .contact-box-section .left-sidebar-box .contact-detail .contact-detail-box .contact-detail-contain {
+  width: 100%;
+}
+.contact-box-section .left-sidebar-box .contact-detail .contact-detail-box .contact-detail-title h4, .contact-box-section .left-sidebar-box .contact-detail .contact-detail-box .contact-detail-title .h4 {
+  font-weight: 600;
+  font-size: calc(16px + .00125*(100vw - 320px));
+  margin-top: -2px;
+}
+.contact-box-section .left-sidebar-box .contact-detail .contact-detail-box .contact-detail-title, .contact-box-section .left-sidebar-box .contact-detail .contact-detail-box .contact-detail-contain {
+  width: 100%;
+}
+.contact-box-section .left-sidebar-box .contact-detail .contact-detail-box .contact-detail-contain p {
+  margin: 0 0 -5px;
+  font-size: calc(14px + 1 * (100vw - 320px) / 1600);
+  line-height: 1.5;
+  color: #4a5568;
+}
+.contact-icon{
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  left: -21px;
+  background-color: #867969;
+  border-radius: 7px;
+  display: inherit
+;
+  color: #fff;
+  width: 42px;
+  height: 42px;
+  display: flex
+;
+  align-items: center;
+  justify-content: center;
+}
+.contact-detail-box{
+  position: relative;
+  padding: calc(15px + .0075*(100vw - 320px)) calc(15px + .0075*(100vw - 320px)) calc(15px + .0075*(100vw - 320px)) calc(30px + 11 * (100vw - 320px) / 1600);
+  padding-bottom: 10px;
+}
