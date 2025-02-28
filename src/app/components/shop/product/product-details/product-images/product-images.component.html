@@ -13,7 +13,7 @@
               </ng-template>
             </div>
             <div class="row g-sm-4 g-2">
-              <div class="col-6 col-grid-box" *ngFor="let image of product?.product_galleries; index as i">
+              <div class="col-12 col-grid-box" *ngFor="let image of product?.product_galleries; index as i">
                 <div class="slider-image w-100 h-100 d-flex align-items-center justify-content-center">
                   <ng-container *ngIf="videType.includes(image?.mime_type!); else audio">
                     <i class="ri-video-line"></i>
