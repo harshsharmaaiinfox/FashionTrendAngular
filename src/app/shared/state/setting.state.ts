@@ -65,7 +65,7 @@ export class SettingState {
                 name: 'zyaada_pay',
                 status: true,
                 title: 'Zyaada Pay',
-                icon: './assets/images/zyaada_pay_logo.jpg',
+                // icon: './assets/images/zyaada_pay_logo.jpg',
               },
               {
                 name: 'sub_paisa',
