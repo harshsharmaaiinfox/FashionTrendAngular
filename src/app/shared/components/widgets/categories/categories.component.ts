@@ -37,13 +37,19 @@ export class CategoriesComponent {
       this.selectedCategorySlug = params['category'] ? params['category'].split(',') : [];
     });
     
-    this.category$.subscribe(res => this.categories = res.data.map(category => category ));
+    this.category$.subscribe(res => {
+      this.categories = res.data;
+      console.log(res)
+    } );
 
   }
 
   ngOnChanges() {
     if(this.categoryIds && this.categoryIds.length) {
-      this.category$.subscribe(res => this.categories = res.data.filter(category => this.categoryIds?.includes(category.id)));
+      this.category$.subscribe(res => {
+        this.categories = res.data//.filter(category => this.categoryIds?.includes(category.id));
+        console.log(res)
+      });
     }
   }
 

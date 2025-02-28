@@ -13,6 +13,7 @@ export interface ProductModel extends PaginateModel {
 }
 
 export interface Product {
+    category_name: string;
     highlightedName: string;
     id: number;
     name: string;

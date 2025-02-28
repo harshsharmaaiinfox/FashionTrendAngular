@@ -53,6 +53,7 @@ export class SellerStoreComponent {
     });
 
     this.store$.subscribe(store => {
+      console.log(store);
       const storeIds = store?.data.map(store => store.id);
       if(Array.isArray(storeIds) && storeIds.length){
         this.store.dispatch(new GetStoreProducts({ status: 1, store_ids: storeIds?.join(',')}));
