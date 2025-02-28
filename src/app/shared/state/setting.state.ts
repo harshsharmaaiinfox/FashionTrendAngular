@@ -62,6 +62,7 @@ export class SettingState {
                 icon: './assets/images/sub_paisa.png'
               },
             ];
+            customValue.general.site_name = "Fashion with Trends"
             customValue.payment_methods = customPayments //[result.values.payment_methods[0]];
           }
           ctx.patchState({
