@@ -10,6 +10,20 @@
   .contact-details, .contact-form {
     width: 48%;
   }
+  .contact-form h2{
+    text-align: left  !important;
+  }
+  .contact-details{
+    padding: 30px;
+    background: #86796954;
+    border-radius: 10px;
+  }
+  .contact-details h2{
+   text-align: left  !important;
+  }
+  .contact-details h3{
+    text-align: left  !important;
+   }
   .contact-details h2, .contact-form h2 {
     color: #333;
     text-align: center;
@@ -137,4 +151,28 @@
   display: flex;
   padding-left: 0px;
   gap: 20px;
+}
+.contact-mine {
+  width: 100px !important;
+}
+.contact-detail{
+  margin-top: 20px;
+}
+@media(max-width:768px){
+  .contact-detail-box{
+   
+    flex-direction: column;
+}
+.contact-details, .contact-form {
+  width: 100%;
+  margin-top: 20px;
+}
+.container{
+  width: 100%;
+  padding: 10px;
+  margin: auto;
+}
+.contact-mine[_ngcontent-ng-c2046780838] {
+  width: 40px!important;
+}
 }

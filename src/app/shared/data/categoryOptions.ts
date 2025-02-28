@@ -93,7 +93,7 @@ export const ThemeCategoryOptions = {
       },
       {
           "id": 65,
-          "name": "Kids Wear Fashion",
+          "name": "Kids Fashion",
           "slug": "kids-wear",
           "meta_title": null,
           "meta_description": null,
