@@ -10,25 +10,15 @@
 */
 @font-face {
   font-family: "remixicon";
-  src: url('../fonts/remixicon/remixicon.eot?t=1690730386070');
-  /* IE9*/
-  src: url('../fonts/remixicon/remixicon.eot?t=1690730386070#iefix') format('embedded-opentype'),
-    /* IE6-IE8 */
-    url("../fonts/remixicon/remixicon.woff2?t=1690730386070") format("woff2"),
-    url("../fonts/remixicon/remixicon.woff?t=1690730386070") format("woff"),
-    url('../fonts/remixicon/remixicon.ttf?t=1690730386070') format('truetype'),
-    /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-    url('../fonts/remixicon/remixicon.svg?t=1690730386070#remixicon') format('svg');
-  /* iOS 4.1- */
+  src: url('remixicon.eot?t=1701175860820'); /* IE9*/
+  src: url('remixicon.eot?t=1701175860820#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url("remixicon.woff2?t=1701175860820") format("woff2"),
+  url("remixicon.woff?t=1701175860820") format("woff"),
+  url('remixicon.ttf?t=1701175860820') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('remixicon.svg?t=1701175860820#remixicon') format('svg'); /* iOS 4.1- */
   font-display: swap;
 }
 
-[class^="ri-"], [class*=" ri-"] {
-  font-family: 'remixicon' !important;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 [class^="ri-"], [class*=" ri-"] {
   font-family: 'remixicon' !important;
   font-style: normal;
@@ -2651,3 +2641,4 @@
 .ri-xrp-line:before { content: "\f424"; }
 .ri-xtz-fill:before { content: "\f425"; }
 .ri-xtz-line:before { content: "\f426"; }
+
