@@ -20,7 +20,7 @@
             "allowedCommonJsDependencies": [
               "feather-icons"
             ],
-            "outputPath": "dist/fastkart-frontend-rest",
+            "outputPath": "dist/fashion-store",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [

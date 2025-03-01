@@ -92,7 +92,7 @@ export class RegisterComponent {
     if(this.form.valid) {
       this.store.dispatch(new Register(this.form.value)).subscribe({
           complete: () => {
-            this.router.navigateByUrl('/account/dashboard');
+            this.router.navigateByUrl('/');
           }
         }
       );

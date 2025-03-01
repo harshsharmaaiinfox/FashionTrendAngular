@@ -80,7 +80,7 @@ export class LoginComponent {
             this.store.dispatch(new GetCartItems());
           }
           // Navigate to the intended URL after successful login
-          const redirectUrl = this.authService.redirectUrl || '/account/dashboard';
+          const redirectUrl = this.authService.redirectUrl || '/';
           this.router.navigateByUrl(redirectUrl);
 
           // Clear the stored redirect URL
