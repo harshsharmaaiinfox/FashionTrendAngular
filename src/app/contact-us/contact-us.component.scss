@@ -176,3 +176,18 @@
   width: 40px!important;
 }
 }
+@media(min-width:768px){
+  .contact-icon.contact-main {
+    width: 70px;
+}
+}
+@media(max-width:1200px){
+  .contact-details{
+    margin-top: 20px;
+  }
+}
+@media(min-width:1200px) and (max-width:1460px){
+  .contact-icon.contact-main{
+    width: 85px;
+}
+}
