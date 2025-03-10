@@ -139,7 +139,7 @@ export const ThemeMenuOptions: any[] = [
     },
     {
         "id": 42,
-        "title": "Collections",
+        "title": "Trendy Picks",
         "sort": null,
         "link_type": "link",
         "mega_menu": 1,
