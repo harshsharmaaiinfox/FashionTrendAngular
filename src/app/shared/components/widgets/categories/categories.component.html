@@ -61,8 +61,10 @@
           <h5>{{ category.name }}</h5>
         </a>
       </div>
+  
       <div *ngIf="theme == 'madrid'">
-        <a [routerLink]="['/category', category.slug ]" class="category-box-list d-block">
+        <a [routerLink]="['/collections']" 
+        [queryParams]="{ category: category.slug, sortBy: 'asc' }" class="category-box-list d-block">
           <div  class="category-name">
             <h4>{{ category.name }}</h4>
             <h6>{{ category.products_count }} {{ 'items' | translate }}</h6>
